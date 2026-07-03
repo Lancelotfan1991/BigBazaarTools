@@ -1,0 +1,3747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1d27">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>大巴扎数据查询</title>
+  <link rel="icon" href="https://s.bazaardb.gg/v1/z15.0/ace0375265a76d91b7eea2ab606d7864245ee178@400S.webp">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="https://s.bazaardb.gg/v1/z15.0/ace0375265a76d91b7eea2ab606d7864245ee178@400S.webp">
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #242836;
+      --border: #2e3348;
+      --text: #e4e6f0;
+      --text2: #9499b3;
+      --accent: #6c72cb;
+      --accent2: #48c6a9;
+      --bronze: #cd7f32;
+      --silver: #c0c0c0;
+      --gold: #ffd700;
+      --diamond: #b9f2ff;
+      --legendary: #ff6b6b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px 16px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+      background: linear-gradient(90deg, #e2e8f0, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: rgba(148,163,184,0.7);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .season-selector {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 8px;
+    }
+    .season-selector label {
+      font-size: 11px; color: rgba(148,163,184,0.8);
+    }
+    .season-selector select {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      color: #e2e8f0; border-radius: 8px; padding: 4px 8px; font-size: 12px;
+      outline: none; cursor: pointer;
+    }
+    .season-selector select:active { background: rgba(255,255,255,0.15); }
+
+    /* Hero Selector */
+    .hero-selector {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-selector h2 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .hero-card {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-card:hover,
+    .hero-card:active {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .hero-card.active {
+      border-color: var(--accent2);
+      background: rgba(72, 198, 169, 0.1);
+      box-shadow: 0 0 0 2px rgba(72,198,169,0.2);
+    }
+
+    .hero-card .name-zh {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 1px;
+      line-height: 1.2;
+    }
+
+    .hero-card .name-en {
+      font-size: 9px;
+      color: var(--text2);
+      line-height: 1;
+    }
+
+    .hero-card .data-info {
+      font-size: 9px;
+      color: var(--accent2);
+      margin-top: 3px;
+    }
+
+    .hero-card .data-info.no-data {
+      color: #f39c12;
+    }
+
+    .hero-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 5px;
+      border: 2px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .hero-avatar-placeholder {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--surface2), var(--surface));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+      border: 2px solid var(--border);
+    }
+
+
+    /* Content Area */
+    .content-area {
+      display: none;
+    }
+
+    .content-area.active {
+      display: block;
+    }
+
+    .back-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .back-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .back-btn:active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .data-source {
+      font-size: 11px;
+      color: var(--text2);
+      flex: 1;
+    }
+
+    /* Filters */
+    .filters {
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .filter-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 180px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 8px 10px 8px 32px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+    }
+
+    .filter-label {
+      font-size: 11px;
+      color: var(--text2);
+      font-weight: 500;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 5px 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text2);
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:active {
+      transform: scale(0.95);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .sort-select {
+      padding: 6px 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 12px;
+      background: var(--surface);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .tab {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      border-radius: 6px;
+      transition: all 0.15s;
+      flex: 1;
+      text-align: center;
+    }
+
+    .tab:active {
+      transform: scale(0.97);
+    }
+
+    .tab.active {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .tab .count {
+      display: inline-block;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
+
+    .stats {
+      padding: 8px 12px;
+      background: var(--surface);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      transition: all 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.has-link {
+      cursor: pointer;
+    }
+
+    .card.has-link:hover {
+      border-color: var(--accent);
+    }
+
+    .card.has-link:active {
+      transform: scale(0.99);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 6px;
+    }
+
+    .card-name {
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .card-name small {
+      display: block;
+      font-size: 11px;
+      color: var(--text2);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
+    .badge-tier {
+      color: #fff;
+    }
+
+    .badge-tier.bronze {
+      background: var(--bronze);
+    }
+
+    .badge-tier.silver {
+      background: #808080;
+    }
+
+    .badge-tier.gold {
+      background: #b8960f;
+    }
+
+    .badge-tier.diamond {
+      background: #4a9eb5;
+    }
+
+    .badge-tier.legendary {
+      background: var(--legendary);
+    }
+
+    .badge-size {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    .badge-type {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+    }
+
+    .card-tooltip {
+      font-size: 12px;
+      color: var(--accent2);
+      line-height: 1.5;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-tooltip .tip-type {
+      font-size: 10px;
+      color: var(--text2);
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .card-event-desc {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .card-merch-desc {
+      font-size: 13px;
+      color: var(--accent);
+      margin-top: 6px;
+      padding: 6px 8px;
+      background: rgba(var(--accent-rgb, 59,130,246), 0.08);
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .card-event-opts {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+    .card-event-opts .opt-item {
+      font-size: 12px;
+      color: var(--text2);
+      padding: 4px 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      background: rgba(255,255,255,0.03);
+      transition: background 0.15s;
+    }
+    .card-event-opts .opt-item:hover {
+      background: rgba(255,255,255,0.06);
+    }
+    .card-event-opts .opt-img {
+      width: 32px; height: 32px;
+      border-radius: 4px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .card-event-opts .opt-name {
+      flex: 1;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .card-event-opts .opt-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .card-event-opts .opt-item a:hover {
+      text-decoration: underline;
+    }
+    .card-event-opts .opt-icon {
+      font-size: 14px;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--text2);
+      border: 1px solid var(--border);
+    }
+
+    .card-attrs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 10px;
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 6px;
+    }
+
+    .card-attrs span b {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .card-heroes {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .hero-tag {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .card-ext-link {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      font-size: 11px;
+      color: var(--text2);
+      opacity: 0.4;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface2);
+    }
+
+    .card-icon-wrap {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--surface2);
+    }
+
+    .card-icon-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-icon-fg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-icon-fallback {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      color: var(--text2);
+    }
+
+    #tagFilters {
+      display: none;
+    }
+
+    #tagFilters.show {
+      display: flex;
+    }
+
+    .tag-filter-scroll {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    .updated-toggle {
+      background: rgba(46,204,113,0.1) !important;
+      border-color: rgba(46,204,113,0.3) !important;
+      color: #2ecc71 !important;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .updated-toggle.active {
+      background: rgba(46,204,113,0.25) !important;
+      border-color: #2ecc71 !important;
+      box-shadow: 0 0 8px rgba(46,204,113,0.3);
+    }
+    .card-updated-badge {
+      position: absolute; top: 4px; right: 4px; z-index: 5;
+      background: #2ecc71; color: #000; font-size: 8px; font-weight: 800;
+      padding: 1px 5px; border-radius: 4px; line-height: 14px;
+      pointer-events: none;
+    }
+    .card-new-badge {
+      position: absolute; top: 4px; right: 4px; z-index: 5;
+      background: #e74c3c; color: #fff; font-size: 8px; font-weight: 800;
+      padding: 1px 5px; border-radius: 4px; line-height: 14px;
+      pointer-events: none;
+    }
+
+    .game-data-section {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .game-data-section h2 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .game-data-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .game-data-card {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-data-card:hover,
+    .game-data-card:active {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .game-data-card .gd-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .game-data-card .gd-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .game-data-card .gd-name {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .game-data-card .gd-count {
+      font-size: 10px;
+      color: var(--accent2);
+      margin-top: 2px;
+    }
+
+    .game-data-card.tool-card {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      padding: 12px 14px;
+    }
+
+    .game-data-card.tool-card .gd-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      border-radius: 10px;
+    }
+
+    .game-data-card.tool-sim .gd-icon { background: rgba(108,114,203,0.15); }
+    .game-data-card.tool-mech .gd-icon { background: rgba(59,130,246,0.12); }
+    .game-data-card.tool-board .gd-icon { background: rgba(72,198,169,0.15); }
+
+    .game-data-card.tool-card .gd-name { font-size: 14px; }
+    .game-data-card.tool-card .gd-desc {
+      font-size: 10px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .useful-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .useful-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .useful-link:hover,
+    .useful-link:active {
+      border-color: var(--accent);
+      transform: scale(0.98);
+    }
+
+    .useful-link .ul-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .useful-link .ul-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .useful-link .ul-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .useful-link .ul-desc {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .useful-link .ul-arrow {
+      font-size: 16px;
+      color: var(--text2);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .card-monster-info {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-monster-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--text2);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card-monster-stats .ms-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .card-monster-stats .ms-val {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .mon-board {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px;
+      margin-top: 6px;
+    }
+
+    .mon-board-label {
+      font-size: 10px;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    .mon-board-row {
+      display: flex;
+      gap: 2px;
+      height: 72px;
+    }
+
+    .mon-board-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      cursor: pointer;
+      transition: transform 0.15s;
+      height: 100%;
+    }
+
+    .mon-board-slot:hover {
+      transform: scale(1.05);
+    }
+
+    .mon-board-slot.size-S { width: 10%; }
+    .mon-board-slot.size-M { width: 20%; }
+    .mon-board-slot.size-L { width: 30%; }
+
+    .mon-board-slot .slot-img-wrap {
+      flex: 1;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid var(--border);
+      background-color: var(--surface2);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .mon-board-slot.tier-Bronze .slot-img-wrap { border-color: #a0785a; }
+    .mon-board-slot.tier-Silver .slot-img-wrap { border-color: #b0b8c8; }
+    .mon-board-slot.tier-Gold .slot-img-wrap { border-color: #d4a844; }
+    .mon-board-slot.tier-Diamond .slot-img-wrap { border-color: #6ec6e6; }
+    .mon-board-slot.tier-Legendary .slot-img-wrap { border-color: #c850f0; }
+
+    .mon-board-slot .slot-name {
+      font-size: 9px;
+      color: var(--text2);
+      text-align: center;
+      margin-top: 2px;
+      line-height: 1.2;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+        .card-tier-levels {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border);
+      font-size: 11px;
+    }
+    .card-tier-levels .tl-row {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 3px;
+    }
+    .card-tier-levels .tl-row:last-child { margin-bottom: 0; }
+    .card-tier-levels .tl-tier {
+      flex-shrink: 0;
+      font-weight: 600;
+      min-width: 32px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-align: center;
+      font-size: 10px;
+    }
+    .card-tier-levels .tl-tier.tier-silver { background: #b0b8c833; color: #b0b8c8; }
+    .card-tier-levels .tl-tier.tier-gold { background: #d4a84433; color: #d4a844; }
+    .card-tier-levels .tl-tier.tier-diamond { background: #6ec6e633; color: #6ec6e6; }
+    .card-tier-levels .tl-tier.tier-legendary { background: #c850f033; color: #c850f0; }
+    .card-tier-levels .tl-attrs {
+      color: var(--text2);
+      line-height: 1.4;
+    }
+    .card-tier-levels .tl-attrs b { color: var(--accent2); font-weight: 600; }
+
+    /* Game Mechanics Viewer */
+    .mechanics-viewer {
+      display: none;
+    }
+
+    .mechanics-viewer.active {
+      display: block;
+    }
+
+    .mech-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .mech-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .mech-cat-header:active {
+      background: var(--surface2);
+    }
+
+    .mech-cat-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .mech-cat-title {
+      font-size: 16px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .mech-cat-count {
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    .mech-cat-arrow {
+      font-size: 12px;
+      color: var(--text2);
+      transition: transform 0.3s;
+    }
+
+    .mech-category.open .mech-cat-arrow {
+      transform: rotate(90deg);
+    }
+
+    .mech-cat-body {
+      display: none;
+      padding: 0 12px 12px;
+    }
+
+    .mech-category.open .mech-cat-body {
+      display: block;
+    }
+
+    .mech-topic {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .mech-topic:last-child {
+      margin-bottom: 0;
+    }
+
+    .mech-topic-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mech-topic-content {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .mech-topic-content h4 {
+      font-size: 14px;
+      color: var(--text);
+      margin: 10px 0 4px;
+      font-weight: 600;
+    }
+
+    .mech-topic-content h4:first-child {
+      margin-top: 0;
+    }
+
+    .mech-topic-content ul {
+      padding-left: 18px;
+      margin: 4px 0;
+    }
+
+    .mech-topic-content li {
+      margin-bottom: 3px;
+    }
+
+    .mech-topic-content strong {
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    .mech-topic-content em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .mech-topic-content code {
+      background: var(--surface);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--gold);
+    }
+
+    .mech-topic-content .mech-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0;
+      font-size: 12px;
+    }
+
+    .mech-topic-content .mech-table th,
+    .mech-topic-content .mech-table td {
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .mech-topic-content .mech-table th {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .mech-topic-content .mech-note {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 8px 10px;
+      border-radius: 0 6px 6px 0;
+      margin: 8px 0;
+      font-size: 12px;
+    }
+
+    .load-more {
+      text-align: center;
+      padding: 16px;
+      color: var(--text2);
+      font-size: 13px;
+      grid-column: 1/-1;
+    }
+
+    .load-more .dot-pulse {
+      display: inline-block;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: .4
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text2);
+    }
+
+    .empty .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media(min-width:600px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width:900px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+    }
+
+    .app-footer {
+      text-align: center;
+      padding: 20px 12px 10px;
+      font-size: 11px;
+      color: var(--text2);
+      opacity: 0.6;
+    }
+    .app-footer .footer-data {
+      margin-top: 2px;
+      font-size: 11px;
+    }
+    .app-footer .footer-data a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .app-footer .footer-credit {
+      margin-top: 4px;
+      font-size: 11px;
+    }
+    .app-footer .footer-credit a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .app-footer .footer-credit a:hover {
+      text-decoration: underline;
+    }
+
+    /* Simulator */
+    .sim-viewer {
+      display: none;
+    }
+
+    .sim-viewer.active {
+      display: block;
+    }
+
+    .sim-board {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .sim-board h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .sim-items {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .sim-item-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+
+    .sim-item-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .sim-item-info {
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    .sim-item-quality {
+      display: flex;
+      gap: 3px;
+      margin-top: 6px;
+    }
+
+    .sim-q-btn {
+      padding: 2px 6px;
+      font-size: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--text2);
+      cursor: pointer;
+    }
+
+    .sim-q-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .sim-item-remove {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      font-size: 14px;
+      color: var(--text2);
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .sim-item-remove:hover {
+      opacity: 1;
+      color: #ff6b6b;
+    }
+
+    .sim-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .sim-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .sim-btn:active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .sim-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .sim-btn.primary:active {
+      background: var(--accent2);
+    }
+
+    .sim-add-select {
+      padding: 6px 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+    }
+
+    .sim-duration {
+      padding: 6px 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+      width: 60px;
+    }
+
+    .sim-results {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+
+    .sim-results h3 {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .sim-stat {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .sim-stat:last-child {
+      border-bottom: none;
+    }
+
+    .sim-stat-label {
+      color: var(--text2);
+    }
+
+    .sim-stat-value {
+      font-weight: 600;
+      color: var(--accent2);
+    }
+
+    .sim-timeline {
+      margin-top: 12px;
+    }
+
+    .sim-timeline h4 {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .sim-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+
+    .sim-bar-time {
+      width: 32px;
+      text-align: right;
+      color: var(--text2);
+      flex-shrink: 0;
+    }
+
+    .sim-bar {
+      height: 14px;
+      border-radius: 3px;
+      background: var(--accent);
+      min-width: 1px;
+      transition: width 0.3s;
+    }
+
+    .sim-bar.burn {
+      background: #e67e22;
+    }
+
+    .sim-bar.dmg {
+      background: #e74c3c;
+    }
+
+    .sim-bar-label {
+      font-size: 10px;
+      color: var(--text2);
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+
+    .board-viewer {
+      display: none;
+      padding: 16px;
+    }
+    .board-viewer.active { display: block; }
+    .board-search-area { position: relative; margin-bottom: 16px; }
+    .board-search-input {
+      width: 100%; padding: 10px 14px; border: 2px solid var(--border);
+      border-radius: 8px; background: var(--surface2); color: var(--text);
+      font-size: 14px; box-sizing: border-box;
+    }
+    .board-search-input:focus { outline: none; border-color: var(--accent); }
+    .board-search-results {
+      position: absolute; top: 100%; left: 0; right: 0;
+      max-height: 240px; overflow-y: auto; background: var(--surface2);
+      border: 2px solid var(--border); border-top: none;
+      border-radius: 0 0 8px 8px; z-index: 100; display: none;
+    }
+    .board-search-results.show { display: block; }
+    .board-search-item {
+      padding: 6px 10px; cursor: pointer; display: flex;
+      align-items: center; gap: 8px; border-bottom: 1px solid var(--border);
+    }
+    .board-search-item:hover { background: var(--surface); }
+    .board-search-item .bsi-img {
+      width: 40px; height: 40px; border-radius: 6px; object-fit: cover;
+      flex-shrink: 0; background: var(--surface);
+    }
+    .board-search-item .bsi-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .board-search-item .bsi-row1 { display: flex; align-items: center; gap: 6px; }
+    .board-search-item .bsi-name { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .board-search-item .bsi-tier {
+      font-size: 9px; padding: 1px 5px; border-radius: 3px;
+      font-weight: bold; flex-shrink: 0;
+    }
+    .board-search-item .bsi-row2 { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .board-search-item .bsi-en { color: var(--text2); font-size: 11px; }
+    .board-search-item .bsi-tag {
+      font-size: 9px; padding: 0 4px; border-radius: 3px;
+      background: var(--surface); color: var(--text2); border: 1px solid var(--border);
+    }
+    .board-search-item .bsi-size {
+      font-size: 10px; padding: 1px 6px; border-radius: 4px;
+      font-weight: bold; color: #fff; flex-shrink: 0;
+    }
+    .board-container { margin-bottom: 16px; }
+    .board-slots {
+      display: flex; gap: 2px; background: var(--surface);
+      padding: 4px; border-radius: 8px;
+      position: relative; aspect-ratio: 5 / 1;
+      touch-action: none;
+    }
+    .board-slot {
+      flex: 1; background: var(--surface2);
+      border: 1px dashed var(--border); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--text2); position: relative;
+      flex-direction: column;
+    }
+    .board-slot.occupied { border-style: solid; cursor: pointer; }
+    .board-item-overlay {
+      position: absolute; top: 2px; bottom: 2px;
+      pointer-events: auto; z-index: 2;
+      overflow: hidden; border-radius: 4px; cursor: grab;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      touch-action: none;
+    }
+    .board-item-overlay .bio-img {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; z-index: 0;
+      pointer-events: none;
+      background-size: cover; background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 4px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+    }
+    .board-item-overlay .bio-name {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      font-size: 9px; font-weight: bold; color: #fff;
+      text-align: center; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      background: rgba(0,0,0,0.6); padding: 2px 2px;
+      pointer-events: none;
+    }
+    .board-item-chips {
+      display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px;
+      justify-content: center;
+    }
+    .board-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px; border-radius: 12px;
+      font-size: 11px; font-weight: 500;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text); cursor: default;
+    }
+    .board-chip .chip-img {
+      width: 18px; height: 18px; border-radius: 3px;
+      object-fit: cover;
+    }
+    .board-chip .chip-remove {
+      width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; cursor: pointer;
+      color: var(--text2); background: rgba(255,255,255,0.08);
+      transition: all 0.15s;
+    }
+    .board-chip .chip-remove:hover { color: #e74c3c; background: rgba(231,76,60,0.15); }
+    .board-info-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-top: 8px;
+    }
+    .board-save-btn {
+      padding: 4px 12px; border-radius: 8px;
+      font-size: 12px; font-weight: 500;
+      background: var(--accent); color: #fff;
+      border: none; cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .board-save-btn:hover { opacity: 0.85; }
+    .board-save-btn:active { transform: scale(0.97); }
+    .board-share-btn {
+      padding: 4px 12px; border-radius: 8px;
+      font-size: 12px; font-weight: 500;
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border); cursor: pointer;
+    }
+    .board-share-btn:hover { opacity: 0.85; }
+    .board-share-btn:active { transform: scale(0.97); }
+
+    /* Skill section */
+    .skill-section {
+      margin-top: 16px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .skill-section-title {
+      font-size: 14px; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .skill-list {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: flex-start; min-height: 44px;
+      padding: 4px 0;
+    }
+    .skill-icon-item {
+      position: relative; width: 44px;
+      display: flex; flex-direction: column;
+      align-items: center; flex-shrink: 0;
+      cursor: pointer;
+    }
+    .skill-icon-item .skill-circle {
+      width: 44px; height: 44px;
+      border-radius: 50%; overflow: hidden;
+      border: 2px solid var(--accent);
+    }
+    .skill-icon-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .skill-icon-item .skill-name-label {
+      font-size: 9px; color: var(--text2);
+      margin-top: 2px; text-align: center;
+      max-width: 52px; line-height: 1.1;
+      overflow: hidden; text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .skill-icon-item .skill-remove {
+      position: absolute; top: -2px; right: -2px;
+      width: 16px; height: 16px; border-radius: 50%;
+      font-size: 9px; cursor: pointer; z-index: 2;
+      color: #fff; background: rgba(231,76,60,0.9);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.15s;
+    }
+    .skill-icon-item:hover .skill-remove { opacity: 1; }
+
+    /* Bottom actions */
+    .board-bottom-actions {
+      display: flex; gap: 10px; justify-content: center;
+      margin-top: 16px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Info bubble */
+    .board-info-bubble-backdrop {
+      position: fixed; inset: 0; z-index: 199;
+      background: rgba(0,0,0,0.5);
+      animation: backdropIn 0.15s ease-out;
+    }
+    @keyframes backdropIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .board-info-bubble {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg); border: 2px solid var(--border);
+      border-radius: 14px; padding: 18px; z-index: 200;
+      max-width: 340px; width: 92vw;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      animation: bubbleIn 0.18s ease-out;
+    }
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .bubble-close {
+      position: absolute; top: 8px; right: 10px;
+      font-size: 18px; cursor: pointer; color: var(--text2);
+      width: 24px; height: 24px; display: flex;
+      align-items: center; justify-content: center;
+      border-radius: 50%; transition: all 0.15s;
+      background: transparent; border: none; z-index: 5;
+    }
+    .bubble-close:hover { color: #e74c3c; background: rgba(231,76,60,0.1); }
+    .bubble-header { display: flex; gap: 12px; align-items: center; }
+    .bubble-img {
+      width: 56px; height: 56px; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .bubble-img.skill-img { border-radius: 50%; }
+    .bubble-title { flex: 1; min-width: 0; }
+    .bubble-name { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .bubble-badges { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; align-items: center; }
+    .bubble-badges span {
+      font-size: 10px; padding: 2px 7px; border-radius: 5px; font-weight: 600;
+    }
+    .bubble-size { color: #fff; }
+    .bubble-tier { font-weight: 700; }
+    .bubble-tags { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 6px; }
+    .bubble-tag {
+      font-size: 9px; padding: 1px 5px; border-radius: 3px;
+      background: var(--surface); color: var(--text2); border: 1px solid var(--border);
+    }
+    .bubble-divider {
+      height: 1px; background: var(--border); margin: 12px 0;
+    }
+    .bubble-desc {
+      font-size: 12px; color: var(--text2); line-height: 1.6;
+      max-height: 200px; overflow-y: auto;
+    }
+    .bubble-desc-line { margin-bottom: 3px; }
+    .bubble-type {
+      font-size: 10px; font-weight: 600; color: var(--accent);
+      margin-right: 4px;
+    }
+    .bubble-level-bar {
+      display: flex; align-items: center; gap: 4px;
+      margin-top: 12px; padding: 8px 10px;
+      background: var(--surface2); border-radius: 8px;
+    }
+    .bubble-level-label {
+      font-size: 11px; font-weight: 600; color: var(--text);
+      white-space: nowrap;
+    }
+    .bubble-level-dots {
+      display: flex; gap: 4px; flex: 1; justify-content: center;
+    }
+    .bubble-level-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid var(--border); transition: all 0.2s;
+    }
+    .bubble-level-dot.active { border-width: 2px; }
+    .bubble-level-dot.current { transform: scale(1.3); box-shadow: 0 0 6px currentColor; }
+    .bubble-upgrade {
+      margin-top: 10px; text-align: center;
+      padding: 8px 14px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #2ecc71);
+      border: none; font-size: 13px; font-weight: 600;
+      color: #fff; cursor: pointer; transition: all 0.15s;
+      box-shadow: 0 2px 8px rgba(46,204,113,0.3);
+    }
+    .bubble-upgrade:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,204,113,0.4); }
+    .bubble-upgrade:active { transform: scale(0.97); }
+    .bubble-upgrade.max-tier {
+      background: linear-gradient(135deg, #c850f0, #9b59b6);
+      box-shadow: 0 2px 8px rgba(200,80,240,0.3);
+    }
+
+    /* Tier border on board overlay */
+    .bio-tier-border {
+      position: absolute; inset: 0; z-index: 3;
+      border-radius: 4px; pointer-events: none;
+      border: 3px solid transparent;
+      box-sizing: border-box;
+    }
+    /* Skill tier border */
+    .skill-circle.tier-border-bronze { border-color: rgb(180,98,65); }
+    .skill-circle.tier-border-silver { border-color: rgb(192,192,192); }
+    .skill-circle.tier-border-gold { border-color: rgb(255,215,0); }
+    .skill-circle.tier-border-diamond { border-color: rgb(0,255,255); }
+    .skill-circle.tier-border-legendary { border-color: #c850f0; }
+
+    /* Screenshot mode: hide UI chrome */
+    .board-viewer.screenshot-mode .back-bar,
+    .board-viewer.screenshot-mode .board-search-area,
+    .board-viewer.screenshot-mode .board-item-chips .chip-remove,
+    .board-viewer.screenshot-mode .board-info,
+    .board-viewer.screenshot-mode .board-removed,
+    .board-viewer.screenshot-mode .skill-section,
+    .board-viewer.screenshot-mode .board-bottom-actions,
+    .board-viewer.screenshot-mode ~ .app-footer { display: none !important; }
+    .board-viewer.screenshot-mode .board-save-btn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 100;
+      padding: 8px 16px; font-size: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      border-radius: 20px;
+    }
+    .board-item-overlay .bio-remove {
+      position: absolute; top: 2px; right: 2px; z-index: 5;
+      font-size: 14px; cursor: pointer; pointer-events: auto;
+      color: #fff; line-height: 1;
+      background: rgba(0,0,0,0.6); border-radius: 50%;
+      width: 20px; height: 20px; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .board-item-overlay .bio-remove:hover { color: #e74c3c; background: rgba(0,0,0,0.8); }
+    .board-item-overlay.is-dragging { opacity: 0.25; }
+    .board-drag-ghost {
+      position: fixed; pointer-events: none; z-index: 10000;
+      opacity: 0.85; border-radius: 4px; overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transform: rotate(1deg); transition: none;
+    }
+    .board-drag-ghost img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .board-slot.drop-target { outline: 2px dashed #2ecc71; outline-offset: -2px; }
+    .board-slot .slot-item-name {
+      font-size: 10px; font-weight: bold;
+      color: var(--text); text-align: center;
+      overflow: hidden; text-overflow: ellipsis;
+      white-space: nowrap; max-width: 100%;
+      padding: 0 2px; line-height: 1.2;
+    }
+    .board-slot .slot-remove-btn {
+      position: absolute; top: 2px; right: 2px; font-size: 10px;
+      color: var(--text2); cursor: pointer; line-height: 1;
+    }
+    .board-slot .slot-remove-btn:hover { color: #e74c3c; }
+    .board-slot.size-small { background: rgba(46,204,113,0.15); border-color: #2ecc71; }
+    .board-slot.size-medium { background: rgba(52,152,219,0.15); border-color: #3498db; }
+    .board-slot.size-large { background: rgba(155,89,182,0.15); border-color: #9b59b6; }
+    .board-slot.span-cont { border-left: none; border-radius: 0 4px 4px 0; }
+    .board-slot.span-cont .slot-num { display: none; }
+    .board-info {
+      text-align: center; margin-top: 8px; font-size: 12px; color: var(--text2);
+    }
+    .board-removed { margin-top: 12px; }
+    .board-removed h4 { color: var(--text2); font-size: 13px; margin-bottom: 6px; }
+    .board-removed-item {
+      display: inline-block; padding: 4px 10px; margin: 3px;
+      border-radius: 6px; font-size: 12px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface2);
+    }
+    .board-removed-item:hover { background: var(--surface); }
+
+    .sim-scenario {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .sim-scenario-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .sim-scenario-btn:active,
+    .sim-scenario-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🛠️ 大巴扎数据查询</h1>
+      <p>离线版 · 全部物品和技能</p>
+      <div class="season-selector">
+        <label>赛季</label>
+        <select id="seasonSelect" onchange="switchSeason(this.value)">
+          <option value="" selected>S16（最新）</option>
+          <option value="s15">S15</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="heroSelector" class="hero-selector">
+      <h2>📚 选择职业</h2>
+      <div class="hero-grid" id="heroGrid">
+        <div class="loading">
+          <div class="spinner"></div>
+        </div>
+      </div>
+      <div class="game-data-section">
+        <h2>🎮 游戏数据</h2>
+        <div class="game-data-grid">
+          <div class="game-data-card" onclick="loadGameData('events')">
+            <div class="gd-icon">⚔️</div>
+            <div class="gd-info"><div class="gd-name">事件</div>
+            <div class="gd-count" id="eventsCount">加载中...</div></div>
+          </div>
+          <div class="game-data-card" onclick="loadGameData('monsters')">
+            <div class="gd-icon">👾</div>
+            <div class="gd-info"><div class="gd-name">怪物</div>
+            <div class="gd-count" id="monstersCount">加载中...</div></div>
+          </div>
+          <div class="game-data-card" onclick="loadGameData('trainers')">
+            <div class="gd-icon">🏋️</div>
+            <div class="gd-info"><div class="gd-name">训练师</div>
+            <div class="gd-count" id="trainersCount">加载中...</div></div>
+          </div>
+          <div class="game-data-card" onclick="loadGameData('merchants')">
+            <div class="gd-icon">🏪</div>
+            <div class="gd-info"><div class="gd-name">商人</div>
+            <div class="gd-count" id="merchantsCount">加载中...</div></div>
+          </div>
+        </div>
+        <div class="game-data-card tool-card tool-sim" onclick="showSimulator()" style="display:none">
+          <div class="gd-icon">⚗️</div>
+          <div class="gd-info"><div class="gd-name">战斗模拟器</div>
+          <div class="gd-desc">灼烧 · 伤害 · 时间线</div></div>
+        </div>
+        <div class="game-data-card tool-card tool-mech" onclick="showMechanics()" style="display:none">
+          <div class="gd-icon">📖</div>
+          <div class="gd-info"><div class="gd-name">游戏机制大全</div>
+          <div class="gd-desc">6 大类 · 26 个主题</div></div>
+        </div>
+        <div class="game-data-card tool-card tool-board" onclick="showBoard()">
+          <div class="gd-icon">🎲</div>
+          <div class="gd-info"><div class="gd-name">布阵区模拟</div>
+          <div class="gd-desc">10 格 · 物品摆放 · 拖拽排序</div></div>
+        </div>
+      </div>
+
+      <div class="game-data-section">
+        <h2>🌐 常用网站</h2>
+        <div class="useful-links">
+          <a class="useful-link" href="https://bazaardb.gg" target="_blank" rel="noopener">
+            <div class="ul-icon">📦</div>
+            <div class="ul-info">
+              <div class="ul-name">BazaarDB</div>
+              <div class="ul-desc">bazaardb.gg · 物品与卡牌数据库</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+          <a class="useful-link" href="https://playthebazaar.com/patch-notes" target="_blank" rel="noopener">
+            <div class="ul-icon">📜</div>
+            <div class="ul-info">
+              <div class="ul-name">Patch Notes（更新日志）</div>
+              <div class="ul-desc">巴扎官网 · 版本更新公告</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+          <a class="useful-link" href="https://bazaar.mrmao.life" target="_blank" rel="noopener">
+            <div class="ul-icon">📊</div>
+            <div class="ul-info">
+              <div class="ul-name">巴扎查分工具</div>
+              <div class="ul-desc">bazaar.mrmao.life · 战绩查询</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+          <a class="useful-link" href="https://www.bazaarghost.stream/" target="_blank"
+            rel="noopener">
+            <div class="ul-icon">👻</div>
+            <div class="ul-info">
+              <div class="ul-name">我的巴扎幽灵</div>
+              <div class="ul-desc">bazaarghost.stream · 幽灵数据追踪</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+          <a class="useful-link" href="https://bazaarplusplus.com/heroes?lang=en" target="_blank" rel="noopener">
+            <div class="ul-icon">📈</div>
+            <div class="ul-info">
+              <div class="ul-name">Bazaar++ 英雄数据</div>
+              <div class="ul-desc">bazaarplusplus.com · 英雄胜率与统计</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+          <a class="useful-link" href="https://bazaarplanner.com" target="_blank" rel="noopener">
+            <div class="ul-icon">🧩</div>
+            <div class="ul-info">
+              <div class="ul-name">Bazaar Planner（构筑模拟器）</div>
+              <div class="ul-desc">bazaarplanner.com · 创建、模拟、分享构筑</div>
+            </div>
+            <span class="ul-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="contentArea" class="content-area">
+      <div class="back-bar">
+        <button class="back-btn" onclick="_prevData ? backToPrev() : showHeroSelector()">← 返回</button>
+        <span class="data-source" id="dataSource"></span>
+      </div>
+      <div class="filters">
+        <div class="filter-row">
+          <div class="search-box"><input type="text" id="searchInput" placeholder="搜索名称、标签、效果..."
+              oninput="applyFilters()"></div>
+          <span class="filter-label">排序:</span>
+          <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+            <option value="name">按名称</option>
+            <option value="tier">按品质</option>
+            <option value="size">按大小</option>
+          </select>
+        </div>
+        <div id="tagFilters" class="filter-row">
+          <span class="filter-label">标签:</span>
+          <div class="tag-filter-scroll" id="tagBtns"></div>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">范围:</span>
+          <div class="filter-group">
+            <button class="filter-btn active" id="scopeAll" onclick="setScope('all')">全部</button>
+            <button class="filter-btn" id="scopeExclusive" onclick="setScope('exclusive')">仅专属</button>
+          </div>
+          <button class="filter-btn updated-toggle" id="btnShowUpdated" onclick="toggleShowUpdated()" style="margin-left:6px">🆕 仅查看更新物品</button>
+          <span class="filter-label">品质:</span>
+          <div class="filter-group">
+            <button class="filter-btn" data-tier="铜" onclick="toggleFilter(this,'tier')">铜</button>
+            <button class="filter-btn" data-tier="银" onclick="toggleFilter(this,'tier')">银</button>
+            <button class="filter-btn" data-tier="金" onclick="toggleFilter(this,'tier')">金</button>
+            <button class="filter-btn" data-tier="钻石" onclick="toggleFilter(this,'tier')">钻石</button>
+            <button class="filter-btn" data-tier="传说" onclick="toggleFilter(this,'tier')">传说</button>
+          </div>
+          <span class="filter-label">大小:</span>
+          <div class="filter-group">
+            <button class="filter-btn" data-size="小型" onclick="toggleFilter(this,'size')">小</button>
+            <button class="filter-btn" data-size="中型" onclick="toggleFilter(this,'size')">中</button>
+            <button class="filter-btn" data-size="大型" onclick="toggleFilter(this,'size')">大</button>
+          </div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" data-tab="items" onclick="switchTab('items')">物品 <span class="count"
+            id="itemsCount">0</span></div>
+        <div class="tab" data-tab="skills" onclick="switchTab('skills')">技能 <span class="count"
+            id="skillsCount">0</span></div>
+      </div>
+      <div class="stats" id="statsBar"></div>
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+    <div id="simViewer" class="sim-viewer">
+      <div class="back-bar">
+        <button class="back-btn" onclick="hideSimulator()">← 返回</button>
+        <span class="data-source">战斗模拟器</span>
+      </div>
+      <div class="sim-board">
+        <h3>🎯 场景预设</h3>
+        <div class="sim-scenario" id="simScenarios"></div>
+        <h3>🧩 当前物品</h3>
+        <div class="sim-items" id="simItems"><span style="color:var(--text2);font-size:12px;">点击下方添加物品</span></div>
+        <div class="sim-controls">
+          <select class="sim-add-select" id="simAddSelect"></select>
+          <button class="sim-btn" onclick="simAddItem()">+ 添加</button>
+          <span style="font-size:12px;color:var(--text2)">时长:</span>
+          <input class="sim-duration" id="simDuration" type="number" value="12" min="1" max="120" step="1">
+          <span style="font-size:12px;color:var(--text2)">秒</span>
+          <button class="sim-btn primary" onclick="simRun()">▶ 开始模拟</button>
+        </div>
+      </div>
+      <div id="simResults" style="display:none"></div>
+    </div>
+    <div id="mechanicsViewer" class="mechanics-viewer">
+      <div class="back-bar">
+        <button class="back-btn" onclick="hideMechanics()">← 返回</button>
+        <span class="data-source">游戏机制参考手册</span>
+      </div>
+      <div id="mechContent"></div>
+    </div>
+    <div id="boardViewer" class="board-viewer">
+      <div class="back-bar">
+        <button class="back-btn" onclick="hideBoard()">← 返回</button>
+        <span class="data-source">布阵区模拟器</span>
+      </div>
+      <div class="board-search-area">
+        <input type="text" id="boardSearchInput" class="board-search-input" placeholder="搜索物品名称..." oninput="boardSearch()">
+        <div id="boardSearchResults" class="board-search-results"></div>
+      </div>
+      <div class="board-container" id="boardCaptureArea">
+        <div class="board-slots" id="boardSlots"></div>
+        <div class="board-item-chips" id="boardItemChips"></div>
+        <div class="board-info-row">
+          <div class="board-info" id="boardInfo">已用 0/10 格</div>
+        </div>
+      </div>
+      <div class="board-removed" id="boardRemoved" style="display:none">
+        <h4>已移除物品 <span style="font-size:11px;color:var(--text2)">(点击重新添加)</span></h4>
+        <div id="boardRemovedList"></div>
+      </div>
+      <div class="skill-section">
+        <h3 class="skill-section-title">⚡ 技能栏</h3>
+        <div class="board-search-area">
+          <input type="text" id="skillSearchInput" class="board-search-input" placeholder="搜索技能名称..." oninput="skillSearch()">
+          <div id="skillSearchResults" class="board-search-results"></div>
+        </div>
+        <div class="skill-list" id="skillList"></div>
+      </div>
+      <div class="board-bottom-actions">
+        <button class="board-share-btn" onclick="boardShare()">🔗 分享阵容</button>
+        <button class="board-save-btn" onclick="boardToggleScreenshot()">📷 截图模式</button>
+      </div>
+    </div>
+
+    <div class="app-footer">
+      <div>v2.5.1</div>
+      <div class="footer-data">数据来源：<a href="https://bazaardb.gg" target="_blank" rel="noopener">bazaardb.gg</a></div>
+      <div class="footer-credit">Made by 樊星城 · <a href="https://live.bilibili.com/8249977" target="_blank" rel="noopener">Bilibili 欢迎关注</a></div>
+    </div>
+  </div>
+
+  <script>
+    let heroesList = [];
+    let currentHero = null;
+    let currentData = null;
+    let currentTab = 'items';
+    let currentScope = 'all';
+    let activeFilters = {tier: new Set(), size: new Set(), tag: new Set()};
+    let renderLimit = 40;
+    let observer = null;
+
+    const TIER_ORDER = {Bronze: 0, Silver: 1, Gold: 2, Diamond: 3, Legendary: 4};
+    const TIER_ZH = {Bronze: '铜', Silver: '银', Gold: '金', Diamond: '钻石', Legendary: '传说'};
+    const TIER_ZH_REV = Object.fromEntries(Object.entries(TIER_ZH).map(([k, v]) => [v, k]));
+    const SIZE_ZH = {Small: '小型', Medium: '中型', Large: '大型'};
+    const SIZE_ZH_REV = Object.fromEntries(Object.entries(SIZE_ZH).map(([k, v]) => [v, k]));
+    const SIZE_ORDER = {Small: 0, Medium: 1, Large: 2};
+    const TIER_CLASS = {Bronze: 'bronze', Silver: 'silver', Gold: 'gold', Diamond: 'diamond', Legendary: 'legendary'};
+
+    // 赛季数据目录管理
+    const SEASON_DIRS = {'': './data', 's15': './data-s15', 's16': './data'};
+    let DATA_DIR = './data';
+    async function switchSeason(val) {
+      DATA_DIR = SEASON_DIRS[val] || './data';
+      _allItemsCache = null;
+      // 重置更新筛选状态
+      _showUpdatedOnly = false;
+      _prevSeasonData = null; _prevItemKeys = null; _prevSkillKeys = null;
+      _changedItemKeys = null; _changedSkillKeys = null;
+      const btn = document.getElementById('btnShowUpdated');
+      if (btn) { btn.classList.remove('active'); btn.textContent = '🆕 仅查看更新物品'; }
+      // 重新加载当前页面
+      if (currentHero && currentHero.name_en) {
+        if (['events','monsters','trainers','merchants'].includes(currentHero.name_en)) {
+          await loadGameData(currentHero.name_en);
+        } else if (currentHero.name_en !== 'All') {
+          await onHeroClick(currentHero.name_en);
+        } else {
+          await loadHeroes();
+        }
+      } else {
+        await loadHeroes();
+      }
+    }
+    const TAG_ZH = {'Aquatic':'水系','Core':'核心','Dinosaur':'恐龙','Dragon':'巨龙','Property':'地产','Reagent':'原料','Relic':'遗物','Friend':'伙伴','Tech':'科技','Loot':'战利品','Vehicle':'载具','Ray':'射线','Potion':'药水','Food':'食物','Drone':'无人机','Apparel':'服饰','Toy':'玩具','Trap':'陷阱','Weapon':'武器','Tool':'工具'};
+
+    // ===== 赛季差异对比：仅查看更新物品 =====
+    let _showUpdatedOnly = false;
+    let _prevSeasonData = null;   // S15 的 All.json 数据
+    let _prevItemKeys = null;     // S15 物品英文名集合
+    let _prevSkillKeys = null;    // S15 技能英文名集合
+    let _changedItemKeys = null;  // S16 与 S15 有差异的物品名集合
+    let _changedSkillKeys = null; // S16 与 S15 有差异的技能名集合
+
+    async function loadPrevSeasonForDiff() {
+      if (_prevSeasonData) return; // 已加载
+      try {
+        const resp = await fetch('./data-s15/All.json');
+        if (!resp.ok) return;
+        _prevSeasonData = await resp.json();
+        _prevItemKeys = new Set((_prevSeasonData['物品'] || []).map(i => i['英文名']));
+        _prevSkillKeys = new Set((_prevSeasonData['技能'] || []).map(i => i['英文名']));
+        // 构建变更集合
+        _changedItemKeys = new Set();
+        _changedSkillKeys = new Set();
+        const prevItems = Object.fromEntries((_prevSeasonData['物品'] || []).map(i => [i['英文名'], i]));
+        const prevSkills = Object.fromEntries((_prevSeasonData['技能'] || []).map(i => [i['英文名'], i]));
+        // 用于比较的核心字段（排除元数据和版本相关的 URL）
+        const CORE_FIELDS = ['名称','基础品质','大小','类型','显示标签','效果说明','基础属性','品质层级','所属职业','heroes','描述','事件描述','事件选项','怪物信息','战斗奖励'];
+        // 空值标准化：将 null / '' / [] / {} 统一视为相同
+        function isEmpty(v) {
+          if (v === null || v === undefined || v === '') return true;
+          if (Array.isArray(v) && v.length === 0) return true;
+          if (typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === 0) return true;
+          return false;
+        }
+        // 深度递归对比（不用 JSON.stringify，避免键序和 replacer 问题）
+        function deepEqual(a, b) {
+          if (a === b) return true;
+          const ae = isEmpty(a), be = isEmpty(b);
+          if (ae && be) return true;
+          if (ae !== be) return false;
+          if (a === null || b === null || a === undefined || b === undefined) return false;
+          if (typeof a !== typeof b) return false;
+          if (typeof a !== 'object') return false;
+          if (Array.isArray(a) !== Array.isArray(b)) return false;
+          if (Array.isArray(a)) {
+            if (a.length !== b.length) return false;
+            for (let i = 0; i < a.length; i++) if (!deepEqual(a[i], b[i])) return false;
+            return true;
+          }
+          const ka = Object.keys(a).sort(), kb = Object.keys(b).sort();
+          if (ka.length !== kb.length) return false;
+          for (let i = 0; i < ka.length; i++) {
+            if (ka[i] !== kb[i]) return false;
+            if (!deepEqual(a[ka[i]], b[kb[i]])) return false;
+          }
+          return true;
+        }
+        function coreFieldsEqual(itemA, itemB) {
+          for (const k of CORE_FIELDS) {
+            if (!deepEqual(itemA[k], itemB[k])) return false;
+          }
+          return true;
+        }
+        // 始终使用 All 数据作为 S16 基准（_allItemsCache 应已在 toggleShowUpdated 中加载）
+        const s16Items = _allItemsCache?.['物品'] || currentData?.['物品'] || [];
+        const s16Skills = _allItemsCache?.['技能'] || currentData?.['技能'] || [];
+        // 比较物品
+        for (const item of s16Items) {
+          const key = item['英文名'];
+          if (!key) continue;
+          if (!prevItems[key]) { _changedItemKeys.add(key); continue; }
+          if (!coreFieldsEqual(item, prevItems[key])) _changedItemKeys.add(key);
+        }
+        // 比较技能
+        for (const skill of s16Skills) {
+          const key = skill['英文名'];
+          if (!key) continue;
+          if (!prevSkills[key]) { _changedSkillKeys.add(key); continue; }
+          if (!coreFieldsEqual(skill, prevSkills[key])) _changedSkillKeys.add(key);
+        }
+        console.log(`[Diff] S16 vs S15: ${_changedItemKeys.size} 物品变更, ${_changedSkillKeys.size} 技能变更`);
+      } catch (e) {
+        console.warn('加载S15数据失败', e);
+      }
+    }
+
+    async function toggleShowUpdated() {
+      const btn = document.getElementById('btnShowUpdated');
+      _showUpdatedOnly = !_showUpdatedOnly;
+      btn.classList.toggle('active', _showUpdatedOnly);
+      if (_showUpdatedOnly) {
+        btn.textContent = '✅ 仅查看更新物品';
+        if (!currentData) { _showUpdatedOnly = false; btn.classList.remove('active'); btn.textContent = '🆕 仅查看更新物品'; return; }
+        // 始终加载 All.json 作为 S16 对比基准
+        if (!_allItemsCache) {
+          try { const r = await fetch(`${DATA_DIR}/All.json`); _allItemsCache = await r.json(); } catch(e) {}
+        }
+        // 重置缓存以重新计算差异
+        _prevSeasonData = null;
+        await loadPrevSeasonForDiff();
+      } else {
+        btn.textContent = '🆕 仅查看更新物品';
+      }
+      applyFilters();
+    }
+
+    function isCardUpdated(card) {
+      if (!_showUpdatedOnly || !_prevSeasonData) return false;
+      const key = card['英文名'];
+      if (!key) return false;
+      if (currentTab === 'items') {
+        // 新物品：S15 不存在
+        if (!_prevItemKeys.has(key)) return true;
+        // 变更物品
+        return _changedItemKeys.has(key);
+      } else {
+        if (!_prevSkillKeys.has(key)) return true;
+        return _changedSkillKeys.has(key);
+      }
+    }
+
+    function getCardUpdateStatus(card) {
+      if (!_prevSeasonData) return '';
+      const key = card['英文名'];
+      if (!key) return '';
+      if (currentTab === 'items') {
+        if (!_prevItemKeys.has(key)) return 'new';
+        if (_changedItemKeys.has(key)) return 'updated';
+      } else {
+        if (!_prevSkillKeys.has(key)) return 'new';
+        if (_changedSkillKeys.has(key)) return 'updated';
+      }
+      return '';
+    }
+    const TIER_ATTR_ZH = {'AmmoMax':'弹药','BurnApplyAmount':'燃烧','ChargeTargets':'充能目标','CritChance':'暴击率','Custom_3':'属性3','Custom_4':'属性4','EnchantTargets':'附魔目标','FlyingTargets':'飞行目标','FreezeAmount':'冻结','FreezeTargets':'冻结目标','HasteAmount':'急速','HasteTargets':'急速目标','PoisonApplyAmount':'中毒','RageApplyAmount':'激怒','RegenApplyAmount':'再生','ReloadAmount':'装弹','ReloadTargets':'装弹目标','ShieldApplyAmount':'护盾','SlowAmount':'减速','SlowTargets':'减速目标','UpgradeTargets':'升级目标','自定义属性0':'属性A','自定义属性1':'属性B','自定义属性2':'属性C','冷却时间(ms)':'冷却','伤害值':'伤害','治疗值':'治疗','多重施法':'多施','充能次数':'充能','出售价格':'售','购买价格':'购'};
+
+const HERO_COLORS = {'海盗': '#48c6a9', '卡诺克': '#cb6c72', '杜利': '#6c72cb', '皮格马利安': '#cb9b6c', '马克': '#6ccbc0', '斯特尔': '#c06ccb', '朱尔斯': '#6c8fcb', 'Common': '#888', '通用': '#888'};
+    const HERO_DISPLAY = {'Vanessa': '瓦妮莎', 'Karnok': '卡诺克', 'Dooley': '杜利', 'Pygmalien': '皮格马利安', 'Mak': '马克', 'Stelle': '史黛拉', 'Jules': '朱尔斯', 'All': '全部', 'Common': '通用'};
+
+    async function loadHeroes() {
+      const grid = document.getElementById('heroGrid');
+      try {
+        const resp = await fetch(`${DATA_DIR}/heroes.json`);
+        heroesList = await resp.json();
+        if (!heroesList.length) {
+          grid.innerHTML = '<div class="empty"><div class="icon">📭</div><h3>暂无数据</h3><p>请先运行 python build_data.py</p></div>';
+          return;
+        }
+        grid.innerHTML = heroesList.map(h => {
+      const hasAvatar = !['All', 'Common'].includes(h.name_en);
+      const avatarHtml = hasAvatar
+        ? `<img class="hero-avatar" src="./avatars/${h.name_en}.webp" alt="${h.name_en}" onerror="this.outerHTML='<div class=\\'hero-avatar-placeholder\\'>👤</div>'">`
+        : `<div class="hero-avatar-placeholder">${h.name_en === 'All' ? '📚' : '🌐'}</div>`;
+      return `
+      <div class="hero-card" onclick="onHeroClick('${h.name_en}')">
+        ${avatarHtml}
+        <div class="name-zh">${HERO_DISPLAY[h.name_en] || h.name_zh}</div>
+        <div class="name-en">${h.name_en}</div>
+        <div class="data-info ${h.has_data ? '' : 'no-data'}">
+          ${h.has_data ? '✓ ' + (h.data_time || '已就绪') : '⚠ 无数据'}
+        </div>
+      </div>`;
+    }).join('');
+      } catch (e) {
+        grid.innerHTML = '<div class="empty"><div class="icon">⚠️</div><h3>无法加载数据</h3><p>请运行 python build_data.py 获取数据</p></div>';
+      }
+    }
+
+    async function onHeroClick(heroName) {
+      const hero = heroesList.find(h => h.name_en === heroName);
+      if (!hero || !hero.has_data) {alert('该职业暂无数据'); return;}
+
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:10px;color:var(--text2)">加载中...</p></div>';
+      document.getElementById('heroSelector').style.display = 'none';
+      document.getElementById('contentArea').classList.add('active');
+      document.querySelector('.tabs').style.display = '';
+
+      try {
+        const resp = await fetch(`${DATA_DIR}/${heroName}.json`);
+        currentData = await resp.json();
+        currentHero = hero;
+        document.getElementById('dataSource').textContent = currentData['获取时间'] || '';
+        document.getElementById('itemsCount').textContent = (currentData['物品'] || []).length;
+        document.getElementById('skillsCount').textContent = (currentData['技能'] || []).length;
+        applyFilters();
+      } catch (e) {
+        grid.innerHTML = `<div class="empty"><div class="icon">⚠️</div><h3>加载失败</h3><p>${e.message}</p></div>`;
+      }
+    }
+
+    function showHeroSelector() {
+      document.getElementById('heroSelector').style.display = 'block';
+      document.getElementById('contentArea').classList.remove('active');
+      currentHero = null;
+      currentData = null;
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+      applyFilters();
+    }
+    let _allItemsCache = null;
+    let _prevData = null;
+    let _prevHero = null;
+    let _prevTab = null;
+    async function searchItem(itemName) {
+      if (!_allItemsCache) {
+        try {
+          const resp = await fetch(`${DATA_DIR}/All.json`);
+          _allItemsCache = await resp.json();
+        } catch (e) { console.error('无法加载All.json', e); return; }
+      }
+      _prevData = currentData;
+      _prevHero = currentHero;
+      _prevTab = currentTab;
+      currentData = _allItemsCache;
+      currentHero = {name_en: 'All', name_zh: '全部'};
+      currentTab = 'items';
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === 'items'));
+      document.getElementById('searchInput').value = itemName;
+      document.getElementById('dataSource').textContent = _allItemsCache['获取时间'] || '';
+      document.getElementById('itemsCount').textContent = (_allItemsCache['物品'] || []).length;
+      document.getElementById('skillsCount').textContent = (_allItemsCache['技能'] || []).length;
+      applyFilters();
+    }
+    function backToPrev() {
+      if (_prevData) {
+        currentData = _prevData;
+        currentHero = _prevHero;
+        const restoreTab = _prevTab || 'items';
+        _prevData = null;
+        _prevHero = null;
+        _prevTab = null;
+        document.getElementById('searchInput').value = '';
+        document.getElementById('dataSource').textContent = currentData['获取时间'] || '';
+        document.getElementById('itemsCount').textContent = (currentData['物品'] || []).length;
+        document.getElementById('skillsCount').textContent = (currentData['技能'] || []).length;
+        currentTab = restoreTab;
+        document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === restoreTab));
+        applyFilters();
+      }
+    }
+
+    function setScope(scope) {
+      currentScope = scope;
+      document.getElementById('scopeAll').classList.toggle('active', scope === 'all');
+      document.getElementById('scopeExclusive').classList.toggle('active', scope === 'exclusive');
+      applyFilters();
+    }
+    function toggleFilter(btn, type) {
+      btn.classList.toggle('active');
+      const val = type === 'tier' ? btn.dataset.tier : type === 'size' ? btn.dataset.size : btn.dataset.tag;
+      activeFilters[type].has(val) ? activeFilters[type].delete(val) : activeFilters[type].add(val);
+      applyFilters();
+    }
+
+    function applyFilters() {
+      if (!currentData) return;
+      renderLimit = 40;
+      updateTagFilters();
+      const cards = getCards().filter(matchFilters);
+      const sorted = sortCards(cards);
+      renderCards(sorted);
+    }
+
+    function updateTagFilters() {
+      const container = document.getElementById('tagFilters');
+      const btnBox = document.getElementById('tagBtns');
+      if (currentTab !== 'items') {container.classList.remove('show'); return;}
+      const items = currentData['物品'] || [];
+      const tagSet = new Set();
+      items.forEach(item => (item['显示标签'] || []).forEach(t => tagSet.add(t)));
+      const tags = [...tagSet].sort();
+      if (!tags.length) {container.classList.remove('show'); return;}
+      container.classList.add('show');
+      btnBox.innerHTML = tags.map(t =>
+        `<button class="filter-btn${activeFilters.tag.has(t) ? ' active' : ''}" data-tag="${t}" onclick="toggleFilter(this,'tag')">${TAG_ZH[t] || t}</button>`
+      ).join('');
+    }
+
+    function getCards() {
+      return currentData[currentTab === 'items' ? '物品' : '技能'] || [];
+    }
+    function f(card, ...keys) {
+      for (const k of keys) if (card[k] != null && card[k] !== '') return card[k];
+      return '';
+    }
+    function normTier(v) {return TIER_ZH_REV[v] || v;}
+    function normSize(v) {return SIZE_ZH_REV[v] || v;}
+
+    function matchFilters(card) {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      if (currentScope === 'exclusive') {
+        const heroes = f(card, '所属职业', 'heroes') || [];
+        const heroEn = currentData['英文名'] || '';
+        const heroZh = currentData['职业'] || '';
+        if (!Array.isArray(heroes) || !heroes.some(h => h === heroEn || h === heroZh)) return false;
+      }
+      if (search) {
+        const hay = [
+          f(card, '名称', 'name'), f(card, '英文名', 'name_en'),
+          (f(card, '显示标签', 'tags') || []).join(' '),
+          (f(card, '效果说明', 'tooltips') || []).map(t => typeof t === 'object' ? (t.text || '') : t).join(' '),
+          f(card, '事件描述') || '',
+          (f(card, '事件选项') || []).map(o => o['名称'] || '').join(' '),
+          ((f(card, '怪物信息') || {})['物品栏'] || []).map(b => b['名称'] || '').join(' ')
+        ].join(' ').toLowerCase();
+        if (!hay.includes(search)) return false;
+      }
+      if (activeFilters.tier.size) {
+        const raw = f(card, '基础品质', 'base_tier');
+        if (!activeFilters.tier.has(raw) && !activeFilters.tier.has(normTier(raw))) return false;
+      }
+      if (activeFilters.size.size) {
+        const raw = f(card, '大小', 'size');
+        if (!activeFilters.size.has(raw) && !activeFilters.size.has(normSize(raw))) return false;
+      }
+      if (activeFilters.tag.size && currentTab === 'items') {
+        const tags = f(card, '显示标签', 'tags') || [];
+        if (!Array.isArray(tags) || !tags.some(t => activeFilters.tag.has(t))) return false;
+      }
+      if (_showUpdatedOnly && !isCardUpdated(card)) return false;
+      return true;
+    }
+
+    function sortCards(cards) {
+      const sortBy = document.getElementById('sortSelect').value;
+      return [...cards].sort((a, b) => {
+        if (sortBy === 'name') return f(a, '名称', 'name').localeCompare(f(b, '名称', 'name'));
+        if (sortBy === 'tier') return (TIER_ORDER[normTier(f(a, '基础品质'))] ?? 99) - (TIER_ORDER[normTier(f(b, '基础品质'))] ?? 99);
+        if (sortBy === 'size') return (SIZE_ORDER[normSize(f(a, '大小'))] ?? 99) - (SIZE_ORDER[normSize(f(b, '大小'))] ?? 99);
+        return 0;
+      });
+    }
+
+    function renderCards(cards) {
+      const grid = document.getElementById('cardsGrid');
+      const all = getCards();
+      const tierS = {}, sizeS = {};
+      cards.forEach(c => {const t = f(c, '基础品质'); tierS[t] = (tierS[t] || 0) + 1; const s = f(c, '大小'); sizeS[s] = (sizeS[s] || 0) + 1;});
+      const tStr = Object.entries(tierS).map(([k, v]) => `${TIER_ZH[k] || k}:${v}`).join('  ');
+      const sStr = Object.entries(sizeS).map(([k, v]) => `${SIZE_ZH[k] || k}:${v}`).join('  ');
+      document.getElementById('statsBar').innerHTML =
+        `显示 ${cards.length}/${all.length} 个${currentTab === 'items' ? '物品' : '技能'}${tStr ? ' · ' + tStr : ''}${sStr ? ' · ' + sStr : ''}`;
+
+      if (!cards.length) {
+        grid.innerHTML = '<div class="empty"><div class="icon">🔍</div><h3>没有匹配的结果</h3></div>';
+        return;
+      }
+
+      const visibleCards = cards.slice(0, renderLimit);
+      const hasMore = cards.length > renderLimit;
+
+      grid.innerHTML = visibleCards.map(card => {
+        const name = f(card, '名称', 'name'), nameEn = f(card, '英文名', 'name_en');
+        const tier = f(card, '基础品质'), tierZh = TIER_ZH[tier] || tier;
+        const size = f(card, '大小'), sizeZh = SIZE_ZH[size] || size;
+        const type = f(card, '类型', 'type');
+        const heroes = f(card, '所属职业', 'heroes_zh', 'heroes') || [];
+        const heroesArr = Array.isArray(heroes) ? heroes : [heroes];
+        const tags = f(card, '显示标签', 'tags') || [];
+        const attrs = f(card, '基础属性') || {};
+        const link = f(card, '详情链接', 'uri');
+        const fullLink = link && !link.startsWith('http') ? 'https://bazaardb.gg' + link : link;
+        const tooltips = f(card, '效果说明', 'tooltips') || [];
+        const imgSrc = f(card, '图片链接', 'art_large', 'art');
+        const isGameData = currentHero && ['events', 'monsters', 'trainers', 'merchants'].includes(currentHero.name_en);
+        const fgSrc = isGameData && imgSrc ? imgSrc.replace(/(@\d+)/, '_p$1') : null;
+        const fallbackChar = (name || '?')[0];
+        let iconHtml;
+        if (isGameData && imgSrc && fgSrc) {
+          iconHtml = `<div class="card-icon-wrap"><img class="card-icon-bg" src="${imgSrc}" alt="" loading="lazy"><img class="card-icon-fg" src="${fgSrc}" alt="" loading="lazy" onerror="this.style.display='none'"></div>`;
+        } else if (imgSrc) {
+          iconHtml = `<img class="card-icon" src="${imgSrc}" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'card-icon-fallback\\'>${fallbackChar}</div>'">`;
+        } else {
+          iconHtml = `<div class="card-icon-fallback">${fallbackChar}</div>`;
+        }
+        const tooltipHtml = tooltips.map(t => {
+          let text = typeof t === 'object' ? (t.text || '') : t;
+          const tipType = typeof t === 'object' ? (t.type || '') : '';
+          text = text.replace(/\{(ability|aura)\.(\d+)(?:\.\w+)?\}/g, (m, type, idx) => {
+            const key = `自定义属性${idx}`;
+            return attrs[key] != null ? attrs[key] : m;
+          });
+          return text ? `<div><span class="tip-type">${tipType}</span>${text}</div>` : '';
+        }).join('');
+        // Render tier levels
+        const tierLevels = f(card, '品质层级') || {};
+        let tierHtml = '';
+        const tierEntries = Object.entries(tierLevels).filter(([_, v]) => {
+          const changes = v['属性变更'];
+          return changes && changes !== '无变更' && typeof changes === 'object';
+        });
+        if (tierEntries.length) {
+          const tierClassMap = {'银':'tier-silver','金':'tier-gold','钻石':'tier-diamond','传说':'tier-legendary','Bronze':'tier-bronze','Silver':'tier-silver','Gold':'tier-gold','Diamond':'tier-diamond','Legendary':'tier-legendary'};
+          tierHtml = `<div class="card-tier-levels">${tierEntries.map(([tName, tData]) => {
+            const changes = tData['属性变更'];
+            const cls = tierClassMap[tName] || '';
+            const attrsStr = Object.entries(changes).map(([k,v]) => `${TIER_ATTR_ZH[k]||k}: <b>${v}</b>`).join(', ');
+            return `<div class="tl-row"><span class="tl-tier ${cls}">${tName}</span><span class="tl-attrs">${attrsStr}</span></div>`;
+          }).join('')}</div>`;
+        }
+        const isMerchant = tags.includes('Merchant');
+        const filteredAttrs = isMerchant ? {} : Object.fromEntries(Object.entries(attrs).filter(([k]) => !k.startsWith('自定义属性')));
+        const attrHtml = Object.entries(filteredAttrs).slice(0, 6).map(([k, v]) => `<span>${TIER_ATTR_ZH[k]||k}: <b>${v}</b></span>`).join('');
+        const merchDesc = f(card, '描述');
+        const merchDescHtml = merchDesc ? `<div class="card-merch-desc">🛒 ${merchDesc}</div>` : '';
+        const tierCls = TIER_CLASS[normTier(tier)] || '';
+        const heroTagsHtml = heroesArr.map(h => `<span class="hero-tag" style="background:${HERO_COLORS[h] || '#555'}33;color:${HERO_COLORS[h] || '#999'};border:1px solid ${HERO_COLORS[h] || '#555'}55">${h}</span>`).join('');
+        const evtDesc = f(card, '事件描述');
+        const evtOpts = f(card, '事件选项') || [];
+        const evtDescHtml = evtDesc ? `<div class="card-event-desc">${evtDesc}</div>` : '';
+        const evtOptsHtml = evtOpts.length ? `<div class="card-event-opts">${evtOpts.map(o => {
+          const img = o['图片'] ? `<img class="opt-img" src="${o['图片']}" loading="lazy">` : `<span class="opt-icon">▸</span>`;
+          const name = o['名称'] || '';
+          const link = o['链接'] || '';
+          const fullLink = link && !link.startsWith('http') ? 'https://bazaardb.gg' + link : link;
+          const nameHtml = fullLink ? `<a class="opt-name" href="${fullLink}" target="_blank" onclick="event.stopPropagation()">${name}</a>` : `<span class="opt-name">${name}</span>`;
+          return `<div class="opt-item">${img}${nameHtml}</div>`;
+        }).join('')}</div>` : '';
+        const monInfo = f(card, '怪物信息');
+        const monReward = f(card, '战斗奖励');
+        let monHtml = '';
+        if (monInfo || monReward) {
+          let stats = [];
+          if (monInfo) {
+            if (monInfo['出现天数']) stats.push(`<span class="ms-item">📅 Day <span class="ms-val">${monInfo['出现天数']}</span></span>`);
+            if (monInfo['血量']) stats.push(`<span class="ms-item">❤️ <span class="ms-val">${monInfo['血量']}</span></span>`);
+          }
+          if (monReward) {
+            if (monReward['金币']) stats.push(`<span class="ms-item">💰 <span class="ms-val">${monReward['金币']}</span></span>`);
+            if (monReward['经验']) stats.push(`<span class="ms-item">⭐ <span class="ms-val">${monReward['经验']}</span></span>`);
+          }
+          const board = monInfo?.['物品栏'] || [];
+          let boardHtml = '';
+          if (board.length) {
+            const sizeMap = {'Small':'S','Medium':'M','Large':'L'};
+            boardHtml = `<div class="mon-board"><div class="mon-board-row">${board.map(b => {
+              const sz = sizeMap[b['大小']] || 'S';
+              const tier = b['品质'] || 'Bronze';
+              const name = b['名称'] || '';
+              const img = b['图片'] || '';
+              const bgStyle = img ? ` style="background-image:url('${img}')"` : '';
+              return `<div class="mon-board-slot size-${sz} tier-${tier}" onclick="event.stopPropagation();searchItem('${name.replace(/'/g,"\\'")}')"><div class="slot-img-wrap"${bgStyle}></div><div class="slot-name">${name}</div></div>`;
+            }).join('')}</div></div>`;
+          }
+          monHtml = `<div class="card-monster-info">${stats.length ? `<div class="card-monster-stats">${stats.join('')}</div>` : ''}${boardHtml}</div>`;
+        }
+
+        const updateStatus = _showUpdatedOnly ? getCardUpdateStatus(card) : '';
+        const updateBadge = updateStatus === 'new' ? '<span class="card-new-badge">NEW</span>' : updateStatus === 'updated' ? '<span class="card-updated-badge">UPD</span>' : '';
+
+        return `<div class="card${fullLink ? ' has-link' : ''}"${fullLink ? ` onclick="window.open('${fullLink}','_blank')"` : ''}>
+      ${updateBadge}${fullLink ? `<span class="card-ext-link">↗</span>` : ''}
+      <div class="card-header">
+        ${iconHtml}
+        <div class="card-name" style="flex:1">${name}${nameEn && nameEn !== name ? `<small>${nameEn}</small>` : ''}</div>
+        <div class="card-badges">
+          ${tier ? `<span class="badge badge-tier ${tierCls}">${tierZh}</span>` : ''}
+          ${size && currentTab === 'items' ? `<span class="badge badge-size">${sizeZh}</span>` : ''}
+          ${type ? `<span class="badge badge-type">${type === 'Item' ? '物品' : type === 'Skill' ? '技能' : type}</span>` : ''}
+        </div>
+      </div>
+      ${heroTagsHtml ? `<div class="card-heroes">${heroTagsHtml}</div>` : ''}
+      ${merchDescHtml}
+      ${tooltipHtml ? `<div class="card-tooltip">${tooltipHtml}</div>` : ''}
+      ${tierHtml}
+      ${evtDescHtml}
+      ${evtOptsHtml}
+      ${monHtml}
+      ${attrHtml ? `<div class="card-attrs">${attrHtml}</div>` : ''}
+      ${tags.length ? `<div class="card-tags">${tags.map(t => `<span class="card-tag">${TAG_ZH[t]||t}</span>`).join('')}</div>` : ''}
+    </div>`;
+      }).join('');
+
+      if (hasMore) {
+        grid.innerHTML += `<div class="load-more" id="loadMore"><span class="dot-pulse">⏳ 加载更多... (${renderLimit}/${cards.length})</span></div>`;
+        requestAnimationFrame(() => {
+          if (observer) observer.disconnect();
+          const el = document.getElementById('loadMore');
+          if (el) {
+            observer = new IntersectionObserver(entries => {
+              if (entries[0].isIntersecting) {
+                renderLimit += 20;
+                renderCards(cards);
+              }
+            });
+            observer.observe(el);
+          }
+        });
+      }
+    }
+
+    async function loadGameData(type) {
+      const names = {events: '事件', monsters: '怪物', trainers: '训练师', merchants: '商人'};
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:10px;color:var(--text2)">加载中...</p></div>';
+      document.getElementById('heroSelector').style.display = 'none';
+      document.getElementById('contentArea').classList.add('active');
+      document.querySelector('.tabs').style.display = 'none';
+      try {
+        const resp = await fetch(`${DATA_DIR}/${type}.json`);
+        if (!resp.ok) throw new Error('数据文件不存在，请先运行 build_data.py');
+        currentData = await resp.json();
+        currentHero = {name_en: type, name_zh: names[type] || type};
+        document.getElementById('dataSource').textContent = currentData['获取时间'] || '';
+        const items = currentData['物品'] || [];
+        const skills = currentData['技能'] || [];
+        document.getElementById('itemsCount').textContent = items.length;
+        document.getElementById('skillsCount').textContent = skills.length;
+        document.getElementById('tagFilters').classList.remove('show');
+        applyFilters();
+      } catch (e) {
+        grid.innerHTML = `<div class="empty"><div class="icon">⚠️</div><h3>加载失败</h3><p>${e.message}</p></div>`;
+      }
+    }
+
+    async function updateGameDataCounts() {
+      for (const type of ['events', 'monsters', 'trainers', 'merchants']) {
+        try {
+          const resp = await fetch(`${DATA_DIR}/${type}.json`);
+          if (resp.ok) {
+            const data = await resp.json();
+            const total = (data['物品'] || []).length + (data['技能'] || []).length;
+            const el = document.getElementById(`${type}Count`);
+            if (el) el.textContent = `${total} 条`;
+          } else {
+            const el = document.getElementById(`${type}Count`);
+            if (el) {el.textContent = '暂无数据'; el.style.color = '#f39c12';}
+          }
+        } catch {
+          const el = document.getElementById(`${type}Count`);
+          if (el) {el.textContent = '暂无数据'; el.style.color = '#f39c12';}
+        }
+      }
+    }
+
+    // ===== Game Mechanics Data =====
+    const MECHANICS_DATA = [
+      {
+        icon: '📚', title: '游戏基础', topics: [
+          {t: '游戏概述', c: `《The Bazaar》是一款 PvP 卡牌自动战斗游戏，玩家在一个共享集市中购买物品来组建构筑，然后在自动战斗中对决。\n<h4>核心循环</h4><ul><li><strong>白天</strong>：在集市中浏览和购买物品、合并升级</li><li><strong>夜晚</strong>：自动战斗（你的物品 vs 对手的物品）</li><li>胜者不会获得声望，但败者会损失声望</li></ul>`},
+          {t: '天结构 (Day Structure)', c: `<ul><li><strong>Day 1–3</strong>：普通难度，适合熟悉和积累</li><li><strong>Day 4–5</strong>：中等难度</li><li><strong>Day 6–7</strong>：困难阶段</li><li><strong>Day 8+</strong>：高难度</li></ul><h4>关键天数</h4><ul><li><strong>Day 5</strong>：第一个 Boss 怪（特殊奖励）</li><li><strong>Day 10</strong>：第二个 Boss</li><li><strong>Day 15</strong>：最终 Boss</li></ul><div class="mech-note">每天的集市物品池会根据天数进度更新，越到后期品质越高。</div>`},
+          {t: '声望系统 (Prestige)', c: `声望是游戏的"生命条"，初始固定上限。<h4>核心规则</h4><ul><li>每局开始固定 <strong>20 点声望</strong></li><li><strong>赢得战斗不会获得声望</strong></li><li><strong>输掉 PvP 战斗</strong>会损失声望，损失量 = 当前天数（Day 3 输掉就扣 3 点）</li><li>声望降到 <strong>0</strong> 时触发"最后机会"buff，若再输则淘汰</li><li><strong>特定事件</strong>可以恢复声望（目前游戏中有恢复声望的事件选项）</li></ul><h4>一局游戏的可能结果</h4><ul><li>0-3 胜：失败，掉分</li><li>4-6 胜：铜胜，不掉分</li><li>7-9 胜：银胜，小幅加分</li><li>10 胜（至少 1 败）：金胜，中幅加分</li><li>10 胜 0 败：钻胜（完美通关），大幅加分</li></ul><div class="mech-note">声望主要通过战斗消耗（输就扣），但特定事件可以恢复少量声望。早期输掉只扣 1-2 点，后期输掉可能扣 10+ 点。目标是赢满 10 场。</div>`},
+          {t: '角色与英雄 (Heroes)', c: `游戏中有多个可选英雄，每个英雄有独特的被动效果和专属物品池。<h4>英雄列表</h4><ul><li><strong>海盗 — 瓦妮莎 (Vanessa)</strong>：海盗主题，多种海盗协同物品</li><li><strong>猎人 — 卡诺克 (Karnok)</strong>：火焰和灼烧为核心</li><li><strong>杜利 (Dooley)</strong>：机械和充能主题</li><li><strong>猪猪 — 皮格马利安 (Pygmalien)</strong>：治疗和持续效果</li><li><strong>马克 (Mak)</strong>：毒素和腐蚀</li><li><strong>史黛拉 (Stelle)</strong>：护盾和防御</li><li><strong>厨师 — 朱尔斯 (Jules)</strong>：速度和多重施放</li></ul><h4>专属 vs 通用</h4><ul><li>每个英雄有一个"专属物品"列表（标记为 Exclusive）</li><li>通用物品（Common）任何英雄都可以使用</li><li>英雄被动会在战斗开始时自动生效</li></ul>`}
+        ]
+      },
+      {
+        icon: '⚔️', title: '战斗系统', topics: [
+          {t: '战斗流程', c: `<ul><li>双方物品按从左到右的顺序排列在棋盘上</li><li>每个物品有独立的冷却时间（Cooldown）</li><li>当物品冷却完成时，它会“施放”其效果</li><li>战斗持续到一方所有物品被摧毁，或达到时间上限（平局）</li></ul><div class="mech-note">战斗是全自动的，玩家无法在战斗中干预。策略完全体现在购物和布局阶段。</div>`},
+          {t: '伤害 (Damage)', c: `<ul><li>物理伤害（Physical Damage）：最常见的伤害类型</li><li>伤害会被护盾先吸收，剩余部分扣除生命值</li><li>伤害值由物品的基础值 + 升级加成 + 其他来源的加成决定</li></ul><h4>伤害计算</h4><ul><li>基础伤害 + 加成 → 减去护盾 → 减去生命</li><li>部分伤害可以穿透护盾（如毒素）</li></ul>`},
+          {t: '护盾 (Shield)', c: `<ul><li>护盾在伤害到达生命值之前吸收伤害</li><li>护盾在每场战斗开始时重置为 0</li><li>护盾由物品效果生成（如护盾生成器）</li><li>过量护盾不会转化为生命值</li><li>护盾可以抵挡灼烧伤害，且拥有护盾时灼烧伤害<strong>减半</strong></li><li>护盾<strong>无法抵挡</strong>毒素伤害（毒素穿透护盾）</li></ul><div class="mech-note">护盾是防御体系的核心。高护盾构筑可以完全免疫物理伤害，同时灼烧伤害也会减半。但毒素穿透护盾，是护盾构筑的天敌。</div>`},
+          {t: '暴击 (Critical Hit)', c: `<ul><li>暴击有一定几率使物品效果翻倍</li><li>暴击率由物品和效果叠加</li><li>暴击倍率默认为 2x，部分效果可以提高</li><li>暴击可以应用于伤害、护盾、治疗等各种效果</li></ul>`},
+          {t: '吸血 (Lifesteal)', c: `<ul><li>吸血物品在造成伤害时，将一部分伤害转化为自身生命恢复</li><li>吸血量不能超过造成的伤害</li><li>吸血对护盾无效（不会恢复护盾）</li></ul>`},
+          {t: '触发优先级 (Trigger Priority)', c: `当多个效果同时可以触发时，按以下顺序执行：<h4>优先级顺序</h4><ul><li>1. 你的技能（Hero Abilities）</li><li>2. 你的物品（Items），从左到右</li><li>3. 对手的技能</li><li>4. 对手的物品，从左到右</li></ul><div class="mech-note">理解触发优先级对于构筑非常关键。例如，伤害物品放在左侧可以先触发，而增益效果放在右侧可以在伤害后触发。</div>`},
+          {t: '物品位置与相邻效果', c: `物品在棋盘上的位置会影响其效果。<h4>位置类型</h4><ul><li><strong>最左侧</strong>（Leftmost）</li><li><strong>最右侧</strong>（Rightmost）</li><li><strong>相邻</strong>（Adjacent）：与指定物品左右相邻</li><li><strong>中间</strong>：不在最左或最右</li><li><strong>特定间距</strong>：如“隔 1 个物品”</li></ul><h4>相邻效果示例</h4><ul><li>“给相邻物品 +10% 暴击率”</li><li>“当相邻物品施放时，获得护盾”</li><li>合理安排位置可以最大化相邻协同效果</li></ul>`}
+        ]
+      },
+      {
+        icon: '⏱️', title: '速度与时间', topics: [
+          {t: '多重施放 (Multicast)', c: `Multicast 是允许物品在一次冷却完成后多次施放其效果的机制。<h4>核心规则</h4><ul><li>当 Multicast 触发时，物品会连续施放多次</li><li>每次施放之间有 <strong>0.1~0.25 秒</strong> 的间隔（因物品而异）</li><li>Multicast 施放间隔<strong>不受</strong>加速/减速影响</li><li>Multicast 有几率触发，可以叠加多层几率</li></ul><h4>示例</h4><ul><li>“20% 几率 Multicast” → 施放时有 20% 几率连续施放 2 次</li><li>“100% Multicast” → 每次都会施放 2 次</li></ul><div class="mech-note">Multicast 施放间隔和内部冷却（ICD）是独立机制。Multicast 的多次施放之间不受 ICD 限制。</div>`},
+          {t: '内部冷却 (ICD)', c: `内部冷却是限制物品响应触发条件的最小时间间隔。<h4>核心数据</h4><ul><li>ICD 约为 <strong>0.2 秒（200ms）</strong></li><li>在 ICD 期间内，物品不会响应任何触发条件</li><li>ICD 不影响物品自身的主冷却时间</li></ul><h4>具体案例</h4><ul><li><strong>悠悠球充能断点</strong>：悠悠球冷却 <code>4s</code>，金版充能 3s（不足以覆盖完整 CD，会浪费），钻版充能 4s（每次相邻物品施放都能确保悠悠球立即触发）</li><li><strong>投石机 + 河豚</strong>：投石机施放触发河豚，但河豚有 ICD，无法在同一周期内再次响应</li><li><strong>老盐爪</strong>：ICD 限制了其在高加速下的触发频率</li><li><strong>飞刀</strong>：高多重施放下每次投掷间有 ICD 间隔</li></ul><h4>Server Tick</h4><ul><li>游戏最底层时钟为 <strong>0.1 秒</strong>（Server Tick）</li><li>所有时间参数都是 0.1s 的整数倍</li></ul>`},
+          {t: '充能溢出 (Charge Overflow)', c: `充能允许物品存储额外的施放次数，但存在溢出限制。<h4>核心规则</h4><ul><li>物品冷却时间<strong>最低为 1 秒</strong>，充能无法突破此下限</li><li>如果物品冷却已到达下限，额外的充能会被浪费</li><li>充能上限通常为物品的最大充能数</li></ul><h4>悠悠球的充能断点</h4><ul><li>悠悠球（金品质）：相邻物品施放时充能 3s，但悠悠球 CD 为 4s，充能不足以覆盖剩余 CD，多出部分浪费</li><li>悠悠球（钻品质）：充能 4s，每次相邻物品施放都能确保悠悠球立即触发</li></ul><div class="mech-note">构筑时要注意避免过度堆积电能，超出实际能使用的量就是浪费。</div>`},
+          {t: '冷却时间减少 (CDR)', c: `减少物品冷却时间的两种主要方式：<h4>1. 平减（Flat CDR）</h4><ul><li>直接减少固定秒数，如 <code>-1s 冷却</code></li><li>对高冷却物品收益明显（如 10s→9s 是 10% 提升）</li><li>对低冷却物品同样有效（如 3s→2s 是 33% 提升）</li></ul><h4>2. 百分比减少（Percentage CDR）</h4><ul><li>按比例减少，如 <code>-20% 冷却</code></li><li>对任何冷却时间的物品提升比例一致</li></ul><h4>冷却下限</h4><ul><li>物品冷却时间<strong>最低为 1 秒</strong>，不可能降到 1s 以下</li><li>这是游戏的硬性限制，无论叠加多少 CDR 都无法突破</li></ul><h4>断点效应</h4><ul><li>冷却减少存在"断点"，即某些阈值会让物品在战斗时间内多施放一次</li><li>例如：60 秒战斗，物品 CD=10s 可施放 6 次；CD 减到 8.5s 可施放 7 次</li></ul>`},
+          {t: '加速', c: `<ul><li>加速效果使物品的冷却时间按比例缩短</li><li>加速可以叠加，多层加速效果相加</li><li>加速受 ICD 限制，不能无限加速</li></ul><div class="mech-note">加速是最常见的加速来源。多个加速效果可以叠加，但收益递减。</div>`},
+          {t: '减速 (Slow)', c: `<ul><li>减慢对手物品的冷却时间</li><li>减速可以叠加</li><li>减速不影响已经施放的效果，只影响后续冷却</li></ul>`},
+          {t: '冻结 (Freeze)', c: `<ul><li>冻结使物品无法施放其效果</li><li>冻结期间物品的冷却时间暂停</li><li>冻结期间物品<strong>仍然可以继续充能</strong>（Charge 仍会积累）</li><li>冻结有持续时间，到期后物品恢复正常并立即施放（如果充能已满）</li><li>冻结是一种强力控制手段</li></ul><div class="mech-note">冻结虽然阻止施放，但不阻止充能。这意味着冻结解除后物品可能立刻施放多次。</div>`},
+          {t: '飞行 (Flight)', c: `<ul><li>飞行状态使物品免疫某些效果</li><li>飞行物品受到冻结时效果<strong>减半</strong></li><li>飞行物品受到减速时效果<strong>减半</strong></li><li>飞行是一种防御性状态，通常由物品效果赋予</li></ul>`}
+        ]
+      },
+      {
+        icon: '✨', title: '持续效果', topics: [
+          {t: '毒素 (Poison)', c: `<ul><li>毒素是持续伤害效果（DoT）</li><li>每层毒素在固定间隔内造成伤害</li><li>毒素伤害<strong>穿透护盾</strong>，直接扣除生命值</li><li>毒素可以叠加多层</li><li>部分物品可以“腐蚀”（Corrode）来增加毒素伤害</li></ul><div class="mech-note">毒素构筑是马克（Mak）的核心策略。高毒素层数可以在对手高护盾时仍然造成大量伤害。</div>`},
+          {t: '灼烧 (Burn)', c: `<ul><li>灼烧是持续伤害效果</li><li>灼烧在固定间隔内造成伤害</li><li>灼烧<strong>不能穿透护盾</strong>：护盾可以抵挡灼烧伤害，且拥有护盾时灼烧伤害<strong>减半</strong></li><li>灼烧可以叠加层数</li><li>部分效果可以对灼烧目标造成额外伤害</li></ul><div class="mech-note">卡诺克（Karnok）的专属物品大量涉及灼烧。注意：灼烧被护盾克制（伤害减半），但毒素可以穿透护盾。</div>`},
+          {t: '治疗 (Heal)', c: `<ul><li>治疗直接恢复生命值</li><li>治疗不能超过最大生命值</li><li>治疗效果可以被暴击加成</li><li>部分物品有“过量治疗”（Overheal）转化为护盾的效果</li></ul>`},
+          {t: '再生 (Regeneration)', c: `<ul><li>再生是持续治疗效果（HoT）</li><li>每层再生在固定间隔内恢复生命</li><li>再生可以叠加多层</li><li>再生适合持久战构筑</li></ul>`},
+          {t: '附魔 (Enchants)', c: `附魔是可以附加到物品上的额外效果。<h4>常见附魔</h4><ul><li><strong>辉耀 (Radiant)</strong>：物品施放时获得额外效果</li><li><strong>加速 (Turbo)</strong>：减少物品冷却</li><li><strong>沉重 (Heavy)</strong>：增加物品伤害但增加冷却</li><li><strong>敏捷 (Shiny)</strong>：增加暴击率</li><li><strong>毒性 (Toxic)</strong>：物品施放时施加毒素</li><li><strong>灼热 (Fiery)</strong>：物品施放时施加灼烧</li></ul><div class="mech-note">附魔可以极大地改变物品的价值。一个好的附魔可以让普通物品变成核心装备。</div>`}
+        ]
+      },
+      {
+        icon: '🎒', title: '物品与经济', topics: [
+          {t: '物品系统', c: `<h4>物品尺寸</h4><ul><li><strong>小型 (Small)</strong>：占 1 格</li><li><strong>中型 (Medium)</strong>：占 2 格</li><li><strong>大型 (Large)</strong>：占 3 格</li></ul><h4>物品品质</h4><ul><li><strong>铜 (Bronze)</strong> → <strong>银 (Silver)</strong> → <strong>金 (Gold)</strong> → <strong>钻石 (Diamond)</strong> → <strong>传说 (Legendary)</strong></li><li>品质越高，基础效果越强</li></ul><h4>物品类型</h4><ul><li>武器（Weapon）：主要伤害来源</li><li>护甲（Armor）：防御相关</li><li>工具（Tool）：辅助功能</li><li>饰品（Accessory）：特殊效果</li></ul>`},
+          {t: '商店机制', c: `<h4>每天商店物品品质分布</h4><table class="mech-table"><tr><th>天数</th><th>铜</th><th>银</th><th>金</th><th>钻石</th></tr><tr><td>Day 1</td><td>100%</td><td>0%</td><td>0%</td><td>0%</td></tr><tr><td>Day 2</td><td>90%</td><td>10%</td><td>0%</td><td>0%</td></tr><tr><td>Day 3</td><td>80%</td><td>20%</td><td>0%</td><td>0%</td></tr><tr><td>Day 5</td><td>55%</td><td>40%</td><td>5%</td><td>0%</td></tr><tr><td>Day 6</td><td>40%</td><td>50%</td><td>10%</td><td>0%</td></tr><tr><td>Day 9</td><td>10%</td><td>40%</td><td>40%</td><td>10%</td></tr><tr><td>Day 10+</td><td>0%</td><td>30%</td><td>50%</td><td>20%</td></tr></table><div class="mech-note">金品质从 Day 5 开始在商店出现（5%），钻石从 Day 9 开始出现（10%）。Feb 5 补丁后，铜品质物品消退更快，高品质物品出现更早。</div><h4>商店与商人</h4><ul><li>每天有多个商人出现，不同商人有不同物品池和价格</li><li>刷新费用：不同商人不同（通常 1-8 金币）</li><li>购买重复物品时自动升级</li></ul>`},
+          {t: '英雄升级选项', c: `英雄通过经验（XP）升级，每级需要 <strong>8 XP</strong>。升级时出现的选项数量和类型因等级和英雄而异。<h4>选项数量变化</h4><ul><li>不是固定的 3 选 1！有些等级只有 <strong>1-2 个选项</strong>，有些有 <strong>3 个</strong></li><li>例：Lv.2 只有 1 个选项（Pip（皮普，铜技能训练师），Lv.4 有 2 个选项，Lv.3 有 3 个选项</li></ul><h4>关键等级奖励示例</h4><ul><li><strong>Lv.2</strong>：Pip（皮普，铜技能训练师）—— 1 个选项</li><li><strong>Lv.3</strong>：获得铜物品 / 获得铜战利品 / 角色专属奖励 —— 3 个选项</li><li><strong>Lv.5</strong>：阿尔根塔（银技能训练师）—— 1 个选项</li><li><strong>Lv.8</strong>：奥林（金技能训练师）/ 随机技能训练师 / 随机技能训练师 —— 3 个选项</li><li><strong>Lv.10</strong>：随机附魔 / 艺术家 —— 2 个选项</li><li><strong>Lv.12</strong>：获得金物品 / 获得金战利品 / 角色专属奖励 —— 3 个选项</li><li><strong>Lv.18</strong>：金或钻石物品 / 金或钻石战利品 / 角色专属奖励 —— 3 个选项</li></ul><h4>角色专属训练师</h4><ul><li>不同英雄在特定等级有专属训练师选项：</li><li>海盗瓦妮莎：老赞恩（Lv.11/17）</li><li>猎人卡诺克：无专属训练师，共享通用选项</li><li>杜利：西蒙（Lv.11/17）</li><li>猪猪皮格马利安：图斯卡里先生（Lv.11/17）</li><li>马克：佐西玛（Lv.11）</li></ul><div class="mech-note">升级选项非常多样化：技能训练师、物品、战利品、金币、物品升级、附魔、角色专属奖励等。不同英雄在同一等级的选项可能完全不同。</div>`},
+          {t: '价值系统 (Value)', c: `每个物品都有一个基础价值（Value），影响其售价和升级成本。<h4>价值规则</h4><ul><li>物品价值影响升级所需的金币</li><li>合并两个同品质物品时，价值会影响结果</li><li>高价值物品升级成本更高，但出售价格也更高</li></ul>`},
+          {t: '物品升级', c: `<ul><li>两个相同品质、相同名称的物品可以合并升级为下一品质</li><li>铜→银→金→钻石→传说</li><li>升级后物品的所有数值提升</li><li>部分物品在特定品质时会解锁新效果</li></ul><div class="mech-note">升级是提升战力的核心途径。优先升级核心物品比广泛购买低品质物品更有效。</div>`},
+          {t: '背包 (Stash)', c: `<ul><li>背包可以存储暂时不放在棋盘上的物品</li><li>背包中的物品<strong>不会</strong>参与战斗</li><li>背包空间有限</li><li>可以在每场战斗前重新安排物品布局</li></ul>`},
+          {t: '物品效率公式', c: `用于评估物品空间效率的计算公式：<h4>公式</h4><code>效率 = 效果值 × (60 ÷ 冷却时间) ÷ 尺寸</code><h4>示例</h4><ul><li>一个小型物品（1格），CD=5s，伤害=20：效率 = 20 × 12 ÷ 1 = <strong>240</strong></li><li>一个大型物品（3格），CD=5s，伤害=50：效率 = 50 × 12 ÷ 3 = <strong>200</strong></li></ul><div class="mech-note">效率公式帮助你判断哪些物品更值得占据有限的棋盘空间。小型高效物品通常更受欢迎。</div>`},
+          {t: '沙暴 (Sandstorm)', c: `<ul><li>沙暴是战斗后期的递增伤害机制</li><li>战斗进行到一定时间后，沙暴开始对双方造成持续伤害</li><li>沙暴伤害随时间递增</li><li>目的是防止战斗无限拖延</li></ul><div class="mech-note">沙暴使得持久战构筑不能无限拖延。如果你的构筑偏向防御，需要考虑在沙暴来临前结束战斗。</div>`}
+        ]
+      },
+      {
+        icon: '🔧', title: '工具与策略', topics: [
+          {t: 'BazaarPlanner 模拟器', c: `BazaarPlanner 是社区开发的战斗模拟器，可以模拟物品战斗效果。<h4>功能</h4><ul><li>模拟物品战斗，预览伤害/护盾/治疗曲线</li><li>测试不同布局和物品组合</li><li>对比不同构筑的胜率</li></ul><h4>已知差异（与真实游戏）</h4><ul><li>1. <strong>缺少 ICD 模拟</strong>：BazaarPlanner 未完全模拟内部冷却机制</li><li>2. <strong>触发优先级差异</strong>：某些触发顺序可能与真实游戏不同</li><li>3. <strong>充能溢出处理</strong>：模拟器的 Charge 溢出逻辑可能不精确</li><li>4. <strong>新物品支持延迟</strong>：更新后新物品可能需要等待支持</li></ul><div class="mech-note">BazaarPlanner 是很好的参考工具，但不要完全依赖它。ICD 缺失意味着模拟器中的 DPS 通常比实际偏高。</div>`},
+          {t: '策略要点', c: `<ul><li>1. <strong>专注核心</strong>：围绕 1-2 个核心物品构建，比散乱购买更有效</li><li>2. <strong>空间效率</strong>：小型高效物品优先，大型物品需要证明其价值</li><li>3. <strong>冷却管理</strong>：注意 CDR 断点，避免无效的冷却减少</li><li>4. <strong>充能不要溢出</strong>：充能堆叠要适量，超出实际施放量就是浪费</li><li>5. <strong>触发链</strong>：利用触发优先级构建效果链（增益→伤害→追加效果）</li><li>6. <strong>位置优化</strong>：相邻效果物品的摆放位置非常重要</li><li>7. <strong>对抗思维</strong>：考虑对手可能的构筑，准备对策（如毒素对抗高护盾）</li><li>8. <strong>经济管理</strong>：不要在非核心物品上花太多钱，保留资金等关键物品</li><li>9. <strong>升级优先</strong>：升级核心物品 > 购买新物品</li><li>10. <strong>附魔选择</strong>：好的附魔可以极大提升物品价值</li><li>11. <strong>关注沙暴</strong>：后期构筑需要考虑沙暴时限</li><li>12. <strong>模拟器验证</strong>：用 BazaarPlanner 测试构筑，但注意 ICD 差异</li></ul>`}
+        ]
+      }
+    ];
+
+    // ===== Game Mechanics Viewer =====
+    function showMechanics() {
+      document.getElementById('heroSelector').style.display = 'none';
+      document.getElementById('contentArea').classList.remove('active');
+      document.getElementById('boardViewer').classList.remove('active');
+      const viewer = document.getElementById('mechanicsViewer');
+      viewer.classList.add('active');
+      if (!document.getElementById('mechContent').innerHTML) {
+        renderMechanics();
+      }
+    }
+    function hideMechanics() {
+      document.getElementById('mechanicsViewer').classList.remove('active');
+      document.getElementById('heroSelector').style.display = 'block';
+    }
+    function renderMechanics() {
+      const container = document.getElementById('mechContent');
+      container.innerHTML = MECHANICS_DATA.map((cat, ci) => `
+    <div class="mech-category" id="mechCat${ci}">
+      <div class="mech-cat-header" onclick="toggleMechCat(${ci})">
+        <span class="mech-cat-icon">${cat.icon}</span>
+        <span class="mech-cat-title">${cat.title}</span>
+        <span class="mech-cat-count">${cat.topics.length} 个主题</span>
+        <span class="mech-cat-arrow">▶</span>
+      </div>
+      <div class="mech-cat-body">
+        ${cat.topics.map((tp) => `
+          <div class="mech-topic">
+            <div class="mech-topic-title">${tp.t}</div>
+            <div class="mech-topic-content">${tp.c.replace(/\n/g, '')}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+    }
+    function toggleMechCat(ci) {
+      document.getElementById('mechCat' + ci).classList.toggle('open');
+    }
+
+    // ===== Combat Simulator Engine =====
+    const SIM_ITEMS = {
+      lighter: {
+        id: 'lighter', name: '打火机', cd: 3, type: 'burn', ammo: null,
+        tiers: {bronze: 3, silver: 5, gold: 7, diamond: 9},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '施加灼烧'
+      },
+      pop_snappers: {
+        id: 'pop_snappers', name: '燃烧响炮', cd: 3, type: 'burn', ammo: 4,
+        tiers: {bronze: 4, silver: 8, gold: 12, diamond: 16},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '施加灼烧（有弹药）'
+      },
+      fire_bomb: {
+        id: 'fire_bomb', name: '燃烧炸弹', cd: 4, type: 'burn', ammo: null,
+        tiers: {bronze: 6, silver: 9, gold: 12, diamond: 15},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '施加灼烧（使用后自毁）'
+      },
+      cutlass: {
+        id: 'cutlass', name: '弯刀', cd: 6, type: 'damage', ammo: null, multicast: 2,
+        tiers: {bronze: 15, silver: 25, gold: 35, diamond: 50},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '物理伤害（多重施放 x2）'
+      },
+      shield_gen: {
+        id: 'shield_gen', name: '护盾生成器', cd: 5, type: 'shield', ammo: null,
+        tiers: {bronze: 10, silver: 18, gold: 28, diamond: 40},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '生成护盾'
+      },
+      cannon: {
+        id: 'cannon', name: '火炮', cd: 4, type: 'mixed', ammo: 2,
+        damageTiers: {bronze: 40, silver: 80, gold: 160, diamond: 320},
+        burnTiers: {bronze: 4, silver: 8, gold: 16, diamond: 32},
+        tierNames: {bronze: '铜', silver: '银', gold: '金', diamond: '钻石'},
+        desc: '物理+灼烧（10%伤害，2发弹药）'
+      }
+    };
+
+    const SIM_SCENARIOS = [
+      {name: '场景 1：单打火机', items: [{id: 'lighter', tier: 'gold'}]},
+      {name: '场景 2：燃烧响炮+打火机', items: [{id: 'pop_snappers', tier: 'gold'}, {id: 'lighter', tier: 'gold'}]},
+      {name: '场景 3：打火机+响炮+火炮', items: [{id: 'lighter', tier: 'gold'}, {id: 'pop_snappers', tier: 'gold'}, {id: 'cannon', tier: 'gold'}]},
+      {name: '场景 4：全金品质燃烧套', items: [{id: 'lighter', tier: 'gold'}, {id: 'pop_snappers', tier: 'gold'}, {id: 'fire_bomb', tier: 'gold'}]},
+    ];
+
+    let simBoard = []; // [{ id, tier }]
+    let simIdCounter = 0;
+
+    function showSimulator() {
+      document.getElementById('heroSelector').style.display = 'none';
+      document.getElementById('contentArea').classList.remove('active');
+      document.getElementById('mechanicsViewer').classList.remove('active');
+      document.getElementById('boardViewer').classList.remove('active');
+      document.getElementById('simViewer').classList.add('active');
+      initSimUI();
+    }
+    function hideSimulator() {
+      document.getElementById('simViewer').classList.remove('active');
+      document.getElementById('heroSelector').style.display = 'block';
+    }
+
+    function initSimUI() {
+      // Populate add select
+      const sel = document.getElementById('simAddSelect');
+      sel.innerHTML = Object.entries(SIM_ITEMS).map(([id, item]) =>
+        `<option value="${id}">${item.name} (${item.desc})</option>`
+      ).join('');
+      // Populate scenarios
+      document.getElementById('simScenarios').innerHTML = SIM_SCENARIOS.map((s, i) =>
+        `<button class="sim-scenario-btn" onclick="simLoadScenario(${i})">${s.name}</button>`
+      ).join('');
+      // Default: load scenario 1
+      simLoadScenario(0);
+    }
+
+    function simLoadScenario(idx) {
+      simBoard = SIM_SCENARIOS[idx].items.map(it => ({...it, uid: ++simIdCounter}));
+      simRenderBoard();
+      simRun();
+    }
+
+    function simAddItem() {
+      const id = document.getElementById('simAddSelect').value;
+      simBoard.push({id, tier: 'gold', uid: ++simIdCounter});
+      simRenderBoard();
+    }
+
+    function simRemoveItem(uid) {
+      simBoard = simBoard.filter(it => it.uid !== uid);
+      simRenderBoard();
+    }
+
+    function simSetTier(uid, tier) {
+      const item = simBoard.find(it => it.uid === uid);
+      if (item) item.tier = tier;
+      simRenderBoard();
+    }
+
+    function simRenderBoard() {
+      const container = document.getElementById('simItems');
+      if (!simBoard.length) {
+        container.innerHTML = '<span style="color:var(--text2);font-size:12px;">点击下方添加物品</span>';
+        return;
+      }
+      container.innerHTML = simBoard.map(it => {
+        const def = SIM_ITEMS[it.id];
+        const val = def.type === 'mixed' ? def.burnTiers[it.tier] : def.tiers[it.tier];
+        const dmgVal = def.type === 'mixed' ? def.damageTiers[it.tier] : null;
+        const tierName = def.tierNames[it.tier];
+        const ammoStr = def.ammo ? ` · 弹药${def.ammo}` : '';
+        const mcStr = def.multicast ? ` · 多重x${def.multicast}` : '';
+        const infoStr = def.type === 'burn' ? `灼烧: ${val}` : def.type === 'damage' ? `伤害: ${val}` : def.type === 'mixed' ? `伤害${dmgVal} + 灼烧${val}` : `护盾: ${val}`;
+        return `<div class="sim-item-card">
+      <span class="sim-item-remove" onclick="simRemoveItem(${it.uid})">&times;</span>
+      <div class="sim-item-name">${def.name}</div>
+      <div class="sim-item-info">CD ${def.cd}s${ammoStr}${mcStr}</div>
+      <div class="sim-item-info">${infoStr}</div>
+      <div class="sim-item-quality">
+        ${Object.entries(def.tierNames).map(([k, v]) =>
+          `<span class="sim-q-btn${it.tier === k ? ' active' : ''}" onclick="simSetTier(${it.uid},'${k}')">${v}</span>`
+        ).join('')}
+      </div>
+    </div>`;
+      }).join('');
+    }
+
+    function simRun() {
+      const duration = parseInt(document.getElementById('simDuration').value) || 12;
+
+      let burnStack = 0;
+      let totalBurnDmg = 0;
+      let totalPhysDmg = 0;
+      let totalShield = 0;
+      let timeline = [];
+
+      // Use integer math (tenths of a second) to avoid floating point errors
+      const totalSteps = Math.round(duration * 10);
+      const BURN_IV = 5; // 0.5s = 5 tenths
+
+      const items = simBoard.map(it => {
+        const def = SIM_ITEMS[it.id];
+        return {
+          def,
+          val: def.type === 'mixed' ? def.burnTiers[it.tier] : def.tiers[it.tier],
+          dmgVal: def.type === 'mixed' ? def.damageTiers[it.tier] : 0,
+          cd: Math.round(def.cd * 10), // convert to tenths
+          cooldownLeft: Math.round(def.cd * 10), // full CD, fire after first cooldown completes
+          ammo: def.ammo || Infinity,
+          multicast: def.multicast || 1,
+          destroyed: false,
+          uid: it.uid
+        };
+      });
+
+      for (let step = 0; step <= totalSteps; step++) {
+        const t = step / 10; // display time in seconds
+        let burnDmgThisTick = 0;
+        let physDmgThisTick = 0;
+        let events = [];
+
+        // Burn tick every 0.5s (every 5 tenths)
+        if (step > 0 && step % BURN_IV === 0 && burnStack > 0) {
+          burnDmgThisTick = burnStack;
+          totalBurnDmg += burnStack;
+          burnStack = Math.max(0, burnStack - 1);
+        }
+
+        // Item triggers
+        for (const item of items) {
+          if (item.destroyed) continue;
+          if (item.cooldownLeft <= 0) {
+            if (item.ammo <= 0) {item.destroyed = true; continue;}
+            for (let mc = 0; mc < item.multicast; mc++) {
+              if (item.def.type === 'burn') {
+                burnStack += item.val;
+                events.push(`${item.def.name} +${item.val}灼烧`);
+              } else if (item.def.type === 'mixed') {
+                physDmgThisTick += item.dmgVal;
+                totalPhysDmg += item.dmgVal;
+                burnStack += item.val;
+                events.push(`${item.def.name} ${item.dmgVal}伤害+${item.val}灼烧`);
+              } else if (item.def.type === 'damage') {
+                physDmgThisTick += item.val;
+                totalPhysDmg += item.val;
+                events.push(`${item.def.name} ${item.val}伤害`);
+              } else if (item.def.type === 'shield') {
+                totalShield += item.val;
+                events.push(`${item.def.name} +${item.val}护盾`);
+              }
+            }
+            if (item.ammo !== Infinity) item.ammo--;
+            if (item.def.id === 'fire_bomb') item.destroyed = true;
+            item.cooldownLeft = item.cd;
+          }
+          item.cooldownLeft--;
+        }
+
+        // Record every 0.5s or on events
+        if (step % BURN_IV === 0 || events.length) {
+          timeline.push({time: t, burnDmg: burnDmgThisTick, physDmg: physDmgThisTick, burnStack, events});
+        }
+      }
+
+      simShowResults({duration, totalBurnDmg, totalPhysDmg, totalShield, burnStack, timeline});
+    }
+
+    function simShowResults(r) {
+      const total = r.totalBurnDmg + r.totalPhysDmg;
+      const maxBurnStack = Math.max(...r.timeline.map(t => t.burnStack));
+
+      // Build 0.5s tick timeline - only ticks with actual damage
+      const ticks = r.timeline.filter(t => t.burnDmg > 0 || t.physDmg > 0 || t.events.length > 0);
+      const maxTickDmg = Math.max(...ticks.map(t => t.burnDmg + t.physDmg), 1);
+
+      // Group into 0.5s intervals for display
+      const halfSecMap = {};
+      r.timeline.forEach(t => {
+        const key = (Math.round(t.time * 2) / 2).toFixed(1);
+        if (!halfSecMap[key]) halfSecMap[key] = {burn: 0, phys: 0, stack: 0, events: []};
+        halfSecMap[key].burn += t.burnDmg;
+        halfSecMap[key].phys += t.physDmg;
+        halfSecMap[key].stack = Math.max(halfSecMap[key].stack, t.burnStack);
+        halfSecMap[key].events.push(...t.events);
+      });
+
+      // For short simulations show all ticks, for long ones show every 1s
+      const showInterval = r.duration <= 15 ? 0.5 : 1;
+      const displayTicks = [];
+      const sortedKeys = Object.keys(halfSecMap).sort((a, b) => Number(a) - Number(b));
+      sortedKeys.forEach(key => {
+        const t = Number(key);
+        const entry = halfSecMap[key];
+        if (showInterval >= 1) {
+          const sec = Math.floor(t);
+          const existing = displayTicks.find(d => d.time === sec);
+          if (existing) {
+            existing.burn += entry.burn;
+            existing.phys += entry.phys;
+            existing.stack = Math.max(existing.stack, entry.stack);
+            existing.events.push(...entry.events);
+          } else {
+            displayTicks.push({time: sec, burn: entry.burn, phys: entry.phys, stack: entry.stack, events: [...entry.events]});
+          }
+        } else {
+          displayTicks.push({time: t, burn: entry.burn, phys: entry.phys, stack: entry.stack, events: entry.events});
+        }
+      });
+
+      const maxDispDmg = Math.max(...displayTicks.map(d => d.burn + d.phys), 1);
+
+      const timelineHtml = displayTicks.map(d => {
+        const dmg = d.burn + d.phys;
+        const burnW = Math.round((d.burn / maxDispDmg) * 180);
+        const physW = Math.round((d.phys / maxDispDmg) * 180);
+        const isFire = d.events.length > 0;
+        const timeLabel = Number.isInteger(d.time) ? d.time + '.0s' : d.time + 's';
+        const fireIcon = isFire ? '🔥' : '';
+        const stackInfo = d.stack > 0 ? ` 层数${d.stack}` : '';
+        return `<div class="sim-bar-row">
+      <span class="sim-bar-time">${timeLabel}</span>
+      ${d.burn ? `<div class="sim-bar burn" style="width:${burnW}px"></div>` : ''}
+      ${d.phys ? `<div class="sim-bar dmg" style="width:${physW}px"></div>` : ''}
+      <span class="sim-bar-label">${fireIcon}${dmg > 0 ? dmg + '伤害' : ''}${stackInfo}</span>
+    </div>`;
+      }).join('');
+
+      // Build burn stack area chart as SVG
+      const svgW = 320, svgH = 80;
+      const totalTicks = displayTicks.length;
+      let svgPath = '';
+      let svgArea = `M0,${svgH} `;
+      displayTicks.forEach((d, i) => {
+        const x = Math.round((i / Math.max(totalTicks - 1, 1)) * svgW);
+        const y = Math.round(svgH - (d.stack / Math.max(maxBurnStack, 1)) * (svgH - 4));
+        svgPath += (i === 0 ? `M${x},${y}` : ` L${x},${y}`);
+        svgArea += `L${x},${y} `;
+      });
+      svgArea += `L${svgW},${svgH} Z`;
+
+      const el = document.getElementById('simResults');
+      el.style.display = 'block';
+      el.innerHTML = `<div class="sim-results">
+    <h3>📊 模拟结果（${r.duration}秒）</h3>
+    <div class="sim-stat"><span class="sim-stat-label">灼烧总伤害</span><span class="sim-stat-value" style="color:#e67e22">${r.totalBurnDmg}</span></div>
+    <div class="sim-stat"><span class="sim-stat-label">物理总伤害</span><span class="sim-stat-value" style="color:#e74c3c">${r.totalPhysDmg}</span></div>
+    <div class="sim-stat"><span class="sim-stat-label">总伤害</span><span class="sim-stat-value">${total}</span></div>
+    <div class="sim-stat"><span class="sim-stat-label">最高灼烧层数</span><span class="sim-stat-value">${maxBurnStack}</span></div>
+    <div class="sim-stat"><span class="sim-stat-label">战斗结束剩余灼烧</span><span class="sim-stat-value">${r.burnStack}</span></div>
+    <div class="sim-timeline">
+      <h4>📈 灼烧层数变化</h4>
+      <div style="font-size:11px;color:var(--text2);margin-bottom:4px;">🔥 = 物品施放时刻</div>
+      <svg viewBox="0 0 ${svgW} ${svgH}" style="width:100%;max-width:${svgW}px;height:auto;background:var(--surface2);border-radius:6px;">
+        <path d="${svgArea}" fill="rgba(230,126,34,0.15)" />
+        <path d="${svgPath}" fill="none" stroke="#e67e22" stroke-width="2" />
+        ${displayTicks.filter(d => d.events.length).map((d, i) => {
+        const x = Math.round((i / Math.max(totalTicks - 1, 1)) * svgW);
+        const y = Math.round(svgH - (d.stack / Math.max(maxBurnStack, 1)) * (svgH - 4));
+        return `<circle cx="${x}" cy="${y}" r="3" fill="#e67e22" />`;
+      }).join('')}
+      </svg>
+      <h4 style="margin-top:12px;">⚔️ 每 ${showInterval}s 伤害明细</h4>
+      <div style="display:flex;gap:8px;margin-bottom:6px;font-size:11px;">
+        <span><span style="display:inline-block;width:10px;height:10px;background:#e67e22;border-radius:2px;"></span> 灼烧</span>
+        <span><span style="display:inline-block;width:10px;height:10px;background:#e74c3c;border-radius:2px;"></span> 物理</span>
+      </div>
+      ${timelineHtml}
+    </div>
+  </div>`;
+    }
+
+    // Service Worker registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => { });
+    }
+
+    loadHeroes();
+    updateGameDataCounts();
+    // Auto-open board viewer if share link detected
+    if (location.hash.startsWith('#board=')) {
+      setTimeout(function() { showBoard(); }, 300);
+    }
+    // Listen for hash changes (e.g. when user clicks a share link while app is open)
+    window.addEventListener('hashchange', function() {
+      if (location.hash.startsWith('#board=')) showBoard();
+    });
+  
+    // ===== Board Simulator =====
+    let boardItems = [];
+    let boardSkills = [];
+    let boardSlots = new Array(10).fill(null);
+    let boardRemoved = [];
+    let boardUidCounter = 0;
+    let boardAddedSkills = []; // {name, nameEn, img}
+    const BOARD_SIZE_MAP = {'小型': 1, '中型': 2, '大型': 3};
+    const BOARD_SIZE_CLASS = {'小型': 'size-small', '中型': 'size-medium', '大型': 'size-large'};
+    const BOARD_SIZE_COLOR = {'小型': '#2ecc71', '中型': '#3498db', '大型': '#9b59b6'};
+    const BOARD_SIZE_LABEL = {'小型': 'S', '中型': 'M', '大型': 'L'};
+    const BOARD_TIER_COLOR = {
+      '铜': {bg:'rgba(180,140,100,0.2)', fg:'#b48c64'},
+      '银': {bg:'#b0b8c833', fg:'#b0b8c8'},
+      '金': {bg:'#d4a84433', fg:'#d4a844'},
+      '钻石': {bg:'#6ec6e633', fg:'#6ec6e6'},
+      '传说': {bg:'#c850f033', fg:'#c850f0'},
+    };
+    // Tier border colors for upgrade display
+    const TIER_BORDER = {
+      '铜': 'rgb(180,98,65)',
+      '银': 'rgb(192,192,192)',
+      '金': 'rgb(255,215,0)',
+      '钻石': 'rgb(0,255,255)',
+      '传说': '#c850f0',
+    };
+    const BOARD_TIER_ORDER = ['铜', '银', '金', '钻石', '传说'];
+
+    function showBoard() {
+      document.getElementById('heroSelector').style.display = 'none';
+      document.getElementById('contentArea').classList.remove('active');
+      document.getElementById('simViewer').classList.remove('active');
+      document.getElementById('mechanicsViewer').classList.remove('active');
+      document.getElementById('boardViewer').classList.add('active');
+      document.getElementById('boardSlots').addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      if (!boardItems.length) {
+        boardLoadItems().then(function() {
+          if (location.hash.startsWith('#board=')) boardRestoreFromHash();
+          boardRender();
+        });
+      } else {
+        if (location.hash.startsWith('#board=')) boardRestoreFromHash();
+        boardRender();
+      }
+    }
+    function hideBoard() {
+      document.getElementById('boardViewer').classList.remove('active');
+      document.getElementById('heroSelector').style.display = 'block';
+      if (location.hash.startsWith('#board=')) history.replaceState(null, '', location.pathname + location.search);
+    }
+    async function boardLoadItems() {
+      try {
+        const resp = await fetch(`${DATA_DIR}/All.json`);
+        const data = await resp.json();
+        boardItems = (data['物品'] || []).map(item => ({
+          name: item['名称'], nameEn: item['英文名'],
+          size: item['大小'], tier: item['基础品质'] || '',
+          img: item['图片链接'] || '',
+          tags: item['显示标签'] || [],
+          desc: item['效果说明'] || [],
+          tierLevels: item['品质层级'] || {},
+        }));
+        boardSkills = (data['技能'] || []).map(item => ({
+          name: item['名称'], nameEn: item['英文名'],
+          size: item['大小'], tier: item['基础品质'] || '',
+          img: item['图片链接'] || '',
+          tags: item['显示标签'] || [],
+          desc: item['效果说明'] || [],
+          tierLevels: item['品质层级'] || {},
+        }));
+      } catch (e) { console.error('Board: failed to load items', e); }
+    }
+    function boardSearch() {
+      const query = document.getElementById('boardSearchInput').value.trim().toLowerCase();
+      const resultsEl = document.getElementById('boardSearchResults');
+      if (!query) { resultsEl.classList.remove('show'); return; }
+      if (!boardItems.length) {
+        resultsEl.innerHTML = '<div style="padding:8px;color:var(--text2);font-size:12px;">加载中...</div>';
+        resultsEl.classList.add('show'); return;
+      }
+      const matches = boardItems.filter(item =>
+        item.name.toLowerCase().includes(query) || item.nameEn.toLowerCase().includes(query)
+      ).slice(0, 20);
+      if (!matches.length) {
+        resultsEl.innerHTML = '<div style="padding:8px;color:var(--text2);font-size:12px;">无匹配结果</div>';
+      } else {
+        resultsEl.innerHTML = matches.map(item => {
+          const c = BOARD_SIZE_COLOR[item.size] || '#888';
+          const tierC = BOARD_TIER_COLOR[item.tier] || {};
+          const tierBg = tierC.bg || 'transparent';
+          const tierFg = tierC.fg || 'var(--text2)';
+          const tierHtml = item.tier ? `<span class="bsi-tier" style="background:${tierBg};color:${tierFg}">${item.tier}</span>` : '';
+          const tagsHtml = (item.tags||[]).map(t => `<span class="bsi-tag">${TAG_ZH[t]||t}</span>`).join('');
+          const imgHtml = item.img ? `<img class="bsi-img" src="${item.img}" loading="lazy" onerror="this.style.display='none'">` : `<div class="bsi-img" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--surface2)">📦</div>`;
+          return `<div class="board-search-item" onclick="boardAddItem('${item.nameEn.replace(/'/g,"\\'")}')">
+            ${imgHtml}
+            <div class="bsi-info">
+              <div class="bsi-row1">${tierHtml}<span class="bsi-name">${item.name}</span></div>
+              <div class="bsi-row2"><span class="bsi-en">${item.nameEn}</span>${tagsHtml}</div>
+            </div>
+            <span class="bsi-size" style="background:${c}">${BOARD_SIZE_LABEL[item.size]||'S'}</span>
+          </div>`;
+        }).join('');
+      }
+      resultsEl.classList.add('show');
+    }
+    function boardAddItem(nameEn) { boardAddItemAt(nameEn, -1, ''); }
+    function boardAddItemAt(nameEn, targetPos, tierOverride) {
+      const item = boardItems.find(it => it.nameEn === nameEn);
+      if (!item) return;
+      const slotSize = BOARD_SIZE_MAP[item.size] || 1;
+      let startIdx = targetPos >= 0 ? targetPos : -1;
+      if (startIdx < 0 || startIdx + slotSize > 10) {
+        // Find first free position
+        startIdx = -1;
+        for (let i = 0; i <= 10 - slotSize; i++) {
+          let free = true;
+          for (let j = 0; j < slotSize; j++) {
+            if (boardSlots[i + j] !== null) { free = false; break; }
+          }
+          if (free) { startIdx = i; break; }
+        }
+      } else {
+        // Check if target position is free
+        for (let j = 0; j < slotSize; j++) {
+          if (boardSlots[startIdx + j] !== null) { startIdx = -1; break; }
+        }
+      }
+      if (startIdx === -1) {
+        if (targetPos < 0) alert('没有足够的连续空位放置 ' + item.name + '（' + item.size + '，需要 ' + slotSize + ' 格）');
+        return;
+      }
+      const uid = ++boardUidCounter;
+      const curTier = tierOverride || item.tier;
+      const entry = { name: item.name, nameEn: item.nameEn, size: item.size, uid, spanStart: startIdx, spanSize: slotSize, img: item.img, tier: item.tier, currentTier: curTier, desc: item.desc, tierLevels: item.tierLevels, tags: item.tags };
+      for (let j = 0; j < slotSize; j++) {
+        boardSlots[startIdx + j] = { ...entry };
+      }
+      boardRemoved = boardRemoved.filter(r => r.uid !== uid);
+      document.getElementById('boardSearchInput').value = '';
+      document.getElementById('boardSearchResults').classList.remove('show');
+      boardRender();
+    }
+    function boardRemoveItem(uid) {
+      const slotEntry = boardSlots.find(s => s && s.uid === uid);
+      if (!slotEntry) return;
+      boardRemoved.push({ name: slotEntry.name, nameEn: slotEntry.nameEn, size: slotEntry.size, uid });
+      for (let i = 0; i < 10; i++) {
+        if (boardSlots[i] && boardSlots[i].uid === uid) boardSlots[i] = null;
+      }
+      boardRender();
+    }
+    function boardRender() {
+      const slotsEl = document.getElementById('boardSlots');
+      let slotsHtml = '';
+      for (let i = 0; i < 10; i++) {
+        const slot = boardSlots[i];
+        if (slot) {
+          const sizeClass = BOARD_SIZE_CLASS[slot.size] || '';
+          const isStart = slot.spanStart === i;
+          const contClass = (!isStart) ? ' span-cont' : '';
+          slotsHtml += `<div class="board-slot occupied ${sizeClass}${contClass}" data-idx="${i}"></div>`;
+        } else {
+          slotsHtml += `<div class="board-slot"><span class="slot-num">${i + 1}</span></div>`;
+        }
+      }
+      slotsEl.innerHTML = slotsHtml;
+      // Overlay items using getBoundingClientRect for accurate positioning
+      const slotEls = slotsEl.querySelectorAll('.board-slot');
+      const containerRect = slotsEl.getBoundingClientRect();
+      const rendered = new Set();
+      for (let i = 0; i < 10; i++) {
+        const slot = boardSlots[i];
+        if (slot && slot.spanStart === i && !rendered.has(slot.uid)) {
+          rendered.add(slot.uid);
+          const startRect = slotEls[i].getBoundingClientRect();
+          const endIdx = i + slot.spanSize - 1;
+          const endRect = slotEls[endIdx].getBoundingClientRect();
+          const left = startRect.left - containerRect.left;
+          const width = endRect.right - startRect.left;
+          const imgHtml = slot.img ? `<div class="bio-img" style="background-image:url('${slot.img}')"></div>` : `<div class="bio-img" style="display:flex;align-items:center;justify-content:center;font-size:24px;">📦</div>`;
+          const ov = document.createElement('div');
+          const dragClass = (boardDragging && boardDragging.uid === slot.uid) ? ' is-dragging' : '';
+          ov.className = 'board-item-overlay' + dragClass;
+          ov.style.left = left + 'px';
+          ov.style.width = width + 'px';
+          ov.setAttribute('data-uid', slot.uid);
+          ov.addEventListener('pointerdown', function(e) { boardDragStart(e, slot.uid); });
+          const tierBorder = slot.currentTier ? TIER_BORDER[slot.currentTier] || 'transparent' : 'transparent';
+          ov.innerHTML = imgHtml + `<div class="bio-tier-border" style="border-color:${tierBorder}"></div>` + `<span class="bio-name">${slot.name}</span>`;
+          ov.addEventListener('click', function(e) {
+            if (boardDragging && boardDragging.moved) return;
+            e.stopPropagation();
+            showInfoBubble(ov, { ...slot, _uid: slot.uid, _isSkill: false });
+          });
+          slotsEl.appendChild(ov);
+        }
+      }
+      // Render item chips below the board
+      const chipsEl = document.getElementById('boardItemChips');
+      const renderedChips = new Set();
+      let chipsHtml = '';
+      for (let i = 0; i < 10; i++) {
+        const slot = boardSlots[i];
+        if (slot && !renderedChips.has(slot.uid)) {
+          renderedChips.add(slot.uid);
+          const chipImg = slot.img ? `<img class="chip-img" src="${slot.img}">` : '';
+          chipsHtml += `<span class="board-chip">${chipImg}${slot.name}<span class="chip-remove" onclick="boardRemoveItem(${slot.uid})">✕</span></span>`;
+        }
+      }
+      chipsEl.innerHTML = chipsHtml;
+      const usedSlots = boardSlots.filter(s => s !== null).length;
+      document.getElementById('boardInfo').textContent = '已用 ' + usedSlots + '/10 格';
+      const removedEl = document.getElementById('boardRemovedList');
+      if (boardRemoved.length) {
+        removedEl.innerHTML = boardRemoved.map(item =>
+          `<div class="board-removed-item" onclick="boardReAddItem(${item.uid})" style="border-color:${BOARD_SIZE_COLOR[item.size]||'#888'}">${item.name} (${BOARD_SIZE_LABEL[item.size]||'S'})</div>`
+        ).join('');
+        document.getElementById('boardRemoved').style.display = 'block';
+      } else {
+        removedEl.innerHTML = '';
+        document.getElementById('boardRemoved').style.display = 'none';
+      }
+    }
+    function boardReAddItem(uid) {
+      const item = boardRemoved.find(r => r.uid === uid);
+      if (item) boardAddItem(item.nameEn);
+    }
+
+    // ===== Skill Bar =====
+    function skillSearch() {
+      const query = document.getElementById('skillSearchInput').value.trim().toLowerCase();
+      const resultsEl = document.getElementById('skillSearchResults');
+      if (!query) { resultsEl.classList.remove('show'); return; }
+      if (!boardSkills.length) {
+        resultsEl.innerHTML = '<div style="padding:8px;color:var(--text2);font-size:12px;">加载中...</div>';
+        resultsEl.classList.add('show'); return;
+      }
+      const matches = boardSkills.filter(item =>
+        item.name.toLowerCase().includes(query) || item.nameEn.toLowerCase().includes(query)
+      ).slice(0, 20);
+      if (!matches.length) {
+        resultsEl.innerHTML = '<div style="padding:8px;color:var(--text2);font-size:12px;">无匹配结果</div>';
+      } else {
+        resultsEl.innerHTML = matches.map(item => {
+          const tierC = BOARD_TIER_COLOR[item.tier] || {};
+          const tierBg = tierC.bg || 'transparent';
+          const tierFg = tierC.fg || 'var(--text2)';
+          const tierHtml = item.tier ? `<span class="bsi-tier" style="background:${tierBg};color:${tierFg}">${item.tier}</span>` : '';
+          const added = boardAddedSkills.some(s => s.nameEn === item.nameEn);
+          const tagsHtml = (item.tags||[]).map(t => `<span class="bsi-tag">${TAG_ZH[t]||t}</span>`).join('');
+          const imgHtml = item.img
+            ? `<div class="bsi-img" style="border-radius:50%;overflow:hidden;width:40px;height:40px;flex-shrink:0;"><img src="${item.img}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.display='none'"></div>`
+            : `<div class="bsi-img" style="display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--surface2);border-radius:50%;width:40px;height:40px;">⚡</div>`;
+          return `<div class="board-search-item${added ? ' added' : ''}" onclick="skillAdd('${item.nameEn.replace(/'/g,"\\'")}')">
+            ${imgHtml}
+            <div class="bsi-info">
+              <div class="bsi-row1">${tierHtml}<span class="bsi-name">${item.name}</span></div>
+              <div class="bsi-row2"><span class="bsi-en">${item.nameEn}</span>${tagsHtml}</div>
+            </div>
+            ${added ? '<span class="bsi-size" style="background:#27ae60">✓</span>' : ''}
+          </div>`;
+        }).join('');
+      }
+      resultsEl.classList.add('show');
+    }
+    function skillAdd(nameEn) {
+      if (boardAddedSkills.some(s => s.nameEn === nameEn)) {
+        boardAddedSkills = boardAddedSkills.filter(s => s.nameEn !== nameEn);
+        skillRender();
+      } else {
+        const skill = boardSkills.find(s => s.nameEn === nameEn);
+        if (!skill) return;
+        boardAddedSkills.push({ name: skill.name, nameEn: skill.nameEn, img: skill.img, tier: skill.tier, currentTier: skill.tier, desc: skill.desc, tierLevels: skill.tierLevels, size: skill.size, tags: skill.tags });
+        skillRender();
+      }
+      document.getElementById('skillSearchInput').value = '';
+      document.getElementById('skillSearchResults').classList.remove('show');
+    }
+    function skillRemove(nameEn) {
+      boardAddedSkills = boardAddedSkills.filter(s => s.nameEn !== nameEn);
+      skillRender();
+    }
+    function skillRender() {
+      const el = document.getElementById('skillList');
+      if (!el) return;
+      el.querySelectorAll('.skill-icon-item').forEach(n => n.remove());
+      if (!boardAddedSkills.length) return;
+      const tierClassMap = {'铜':'tier-border-bronze','银':'tier-border-silver','金':'tier-border-gold','钻石':'tier-border-diamond','传说':'tier-border-legendary'};
+      boardAddedSkills.forEach(s => {
+        const imgInner = s.img
+          ? `<img src="${s.img}" alt="${s.name}">`
+          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--surface2)">⚡</div>`;
+        const curTier = s.currentTier || s.tier;
+        const tc = tierClassMap[curTier] || '';
+        const tierBorder = TIER_BORDER[curTier] || '';
+        const tierStyle = tierBorder ? `border-color:${tierBorder};border-width:3px` : '';
+        const div = document.createElement('div');
+        div.className = 'skill-icon-item';
+        div.innerHTML = `<div class="skill-circle ${tc}" style="${tierStyle}">${imgInner}</div>`
+          + `<span class="skill-name-label">${s.name}</span>`
+          + `<span class="skill-remove" onclick="event.stopPropagation();skillRemove('${s.nameEn.replace(/'/g,"\\'")}')">✕</span>`;
+        div.addEventListener('click', function(e) {
+          e.stopPropagation();
+          showInfoBubble(div, { ...s, _isSkill: true });
+        });
+        el.appendChild(div);
+      });
+    }
+
+    let boardScreenshotMode = false;
+    function boardToggleScreenshot() {
+      boardScreenshotMode = !boardScreenshotMode;
+      document.getElementById('boardViewer').classList.toggle('screenshot-mode', boardScreenshotMode);
+      var btn = document.querySelector('.board-save-btn');
+      if (btn) btn.textContent = boardScreenshotMode ? '✏️ 退出截图' : '📷 截图模式';
+    }
+
+    // ===== Board Share =====
+    function boardGetShareCode() {
+      const items = [];
+      const seen = new Set();
+      for (let i = 0; i < 10; i++) {
+        const slot = boardSlots[i];
+        if (slot && !seen.has(slot.uid)) {
+          seen.add(slot.uid);
+          // Include position and current tier
+          let code = slot.nameEn + '@' + slot.spanStart;
+          if (slot.currentTier && slot.currentTier !== slot.tier) code += ':' + slot.currentTier;
+          items.push(code);
+        }
+      }
+      const skills = boardAddedSkills.map(s => {
+        let code = 's:' + s.nameEn;
+        if (s.currentTier && s.currentTier !== s.tier) code += ':' + s.currentTier;
+        return code;
+      });
+      const all = items.concat(skills);
+      return all.length ? btoa(unescape(encodeURIComponent(all.join('|')))) : '';
+    }
+    function boardDecodeShareCode(code) {
+      try {
+        return decodeURIComponent(escape(atob(code))).split('|');
+      } catch(e) { return null; }
+    }
+    function boardShare() {
+      const code = boardGetShareCode();
+      if (!code) {
+        alert('当前布阵区为空，请先添加物品或技能');
+        return;
+      }
+      const url = location.origin + location.pathname + '#board=' + code;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function() {
+          var btn = document.querySelector('.board-share-btn');
+          if (btn) { btn.textContent = '✅ 已复制'; setTimeout(function() { btn.textContent = '🔗 分享阵容'; }, 1500); }
+        }).catch(function() {
+          prompt('复制以下链接分享给好友：', url);
+        });
+      } else {
+        prompt('复制以下链接分享给好友：', url);
+      }
+    }
+    function boardRestoreFromHash() {
+      const hash = location.hash;
+      if (!hash.startsWith('#board=')) return false;
+      const code = hash.substring(7);
+      if (!code) return false;
+      const parts = boardDecodeShareCode(code);
+      if (!parts) return false;
+      boardSlots = new Array(10).fill(null);
+      boardRemoved = [];
+      boardUidCounter = 0;
+      boardAddedSkills = [];
+      if (!boardItems.length) return false;
+      for (const part of parts) {
+        if (part.startsWith('s:')) {
+          // Skill: s:nameEn[:tier]
+          const rest = part.substring(2);
+          const colonIdx = rest.lastIndexOf(':');
+          const nameEn = colonIdx >= 0 ? rest.substring(0, colonIdx) : rest;
+          const tierOverride = colonIdx >= 0 ? rest.substring(colonIdx + 1) : '';
+          const skill = boardSkills.find(s => s.nameEn === nameEn);
+          if (skill) {
+            const entry = { name: skill.name, nameEn: skill.nameEn, img: skill.img, tier: skill.tier, currentTier: tierOverride || skill.tier, desc: skill.desc, tierLevels: skill.tierLevels, tags: skill.tags };
+            boardAddedSkills.push(entry);
+          }
+        } else {
+          // Item: nameEn@pos[:tier]
+          const atIdx = part.indexOf('@');
+          const colonIdx = atIdx >= 0 ? part.indexOf(':', atIdx + 1) : part.indexOf(':');
+          const nameEn = atIdx >= 0 ? part.substring(0, atIdx) : (colonIdx >= 0 ? part.substring(0, colonIdx) : part);
+          const pos = atIdx >= 0 ? parseInt(part.substring(atIdx + 1, colonIdx >= 0 ? colonIdx : undefined)) : -1;
+          const tierOverride = colonIdx >= 0 ? part.substring(colonIdx + 1) : '';
+          boardAddItemAt(nameEn, isNaN(pos) ? -1 : pos, tierOverride);
+        }
+      }
+      skillRender();
+      boardRender();
+      return true;
+    }
+
+    // ===== Board Tier Upgrade & Info Bubble =====
+    function boardUpgradeItem(uid) {
+      const slotEntry = boardSlots.find(s => s && s.uid === uid);
+      if (!slotEntry) return;
+      const levels = Object.keys(slotEntry.tierLevels || {});
+      const allTiers = levels.length ? BOARD_TIER_ORDER.filter(t => levels.includes(t) || t === slotEntry.tier) : BOARD_TIER_ORDER;
+      const curIdx = allTiers.indexOf(slotEntry.currentTier);
+      const nextTier = curIdx < allTiers.length - 1 ? allTiers[curIdx + 1] : allTiers[0];
+      // Update all slots with same uid
+      for (let i = 0; i < 10; i++) {
+        if (boardSlots[i] && boardSlots[i].uid === uid) boardSlots[i].currentTier = nextTier;
+      }
+      boardRender();
+    }
+    function skillUpgrade(nameEn) {
+      const skill = boardAddedSkills.find(s => s.nameEn === nameEn);
+      if (!skill) return;
+      const levels = Object.keys(skill.tierLevels || {});
+      const allTiers = levels.length ? BOARD_TIER_ORDER.filter(t => levels.includes(t) || t === skill.tier) : BOARD_TIER_ORDER;
+      const curIdx = allTiers.indexOf(skill.currentTier);
+      skill.currentTier = curIdx < allTiers.length - 1 ? allTiers[curIdx + 1] : allTiers[0];
+      skillRender();
+    }
+    let _bubbleData = null;
+    function showInfoBubble(el, data) {
+      closeInfoBubble();
+      _bubbleData = data;
+      // Backdrop
+      const backdrop = document.createElement('div');
+      backdrop.className = 'board-info-bubble-backdrop';
+      backdrop.id = 'boardBubbleBackdrop';
+      backdrop.addEventListener('click', closeInfoBubble);
+      document.getElementById('boardViewer').appendChild(backdrop);
+      // Bubble
+      const bubble = document.createElement('div');
+      bubble.className = 'board-info-bubble';
+      bubble.id = 'boardInfoBubble';
+      const curTier = data.currentTier || data.tier;
+      const tierC = BOARD_TIER_COLOR[curTier] || BOARD_TIER_COLOR[data.tier] || {};
+      const tierBorder = TIER_BORDER[curTier] || 'var(--border)';
+      bubble.style.borderColor = tierBorder;
+      const tierBadge = curTier ? `<span class="bubble-tier" style="background:${tierC.bg};color:${tierC.fg};border:1px solid ${TIER_BORDER[curTier]||tierC.fg}">${curTier}</span>` : '';
+      const sizeBadge = data.size ? `<span class="bubble-size" style="background:${BOARD_SIZE_COLOR[data.size]||'#888'}">${BOARD_SIZE_LABEL[data.size]||'S'} (${data.size})</span>` : '';
+      // Tags
+      const tagsHtml = (data.tags||[]).length
+        ? `<div class="bubble-tags">${data.tags.map(t => `<span class="bubble-tag">${TAG_ZH[t]||t}</span>`).join('')}</div>`
+        : '';
+      // Description
+      let descHtml = '';
+      if (data.desc && Array.isArray(data.desc) && data.desc.length) {
+        descHtml = data.desc.map(d => {
+          const t = typeof d === 'object' ? (d.text || '') : d;
+          const tp = typeof d === 'object' ? (d.type || '') : '';
+          return t ? `<div class="bubble-desc-line">${tp ? `<span class="bubble-type">${tp}</span>` : ''}${t}</div>` : '';
+        }).filter(Boolean).join('');
+      }
+      if (descHtml) descHtml = `<div class="bubble-divider"></div><div class="bubble-desc">${descHtml}</div>`;
+      // Level bar
+      const levels = Object.keys(data.tierLevels || {});
+      const allTiers = levels.length ? BOARD_TIER_ORDER.filter(t => levels.includes(t) || t === data.tier) : BOARD_TIER_ORDER;
+      const curIdx = allTiers.indexOf(curTier);
+      const isMax = curIdx >= allTiers.length - 1;
+      const dotsHtml = allTiers.map((t, i) => {
+        const c = TIER_BORDER[t] || '#888';
+        const active = i <= curIdx;
+        const current = i === curIdx;
+        return `<div class="bubble-level-dot${active ? ' active' : ''}${current ? ' current' : ''}" style="border-color:${c};${active ? 'background:'+c+';' : ''}color:${c}" title="${t}"></div>`;
+      }).join('');
+      const levelBar = `<div class="bubble-level-bar"><span class="bubble-level-label" style="color:${TIER_BORDER[curTier]||'var(--text)'}">${curTier}</span><div class="bubble-level-dots">${dotsHtml}</div></div>`;
+      // Upgrade button
+      const nextTier = isMax ? allTiers[0] : allTiers[curIdx + 1];
+      const nextBorder = TIER_BORDER[nextTier] || '#888';
+      const upgradeLabel = isMax
+        ? `🔄 重置为 ${allTiers[0]}`
+        : `⬆ 升级至 <span style="color:${nextBorder};font-weight:700">${nextTier}</span>`;
+      const upgradeClass = isMax ? 'bubble-upgrade max-tier' : 'bubble-upgrade';
+      // Img
+      const imgClass = data._isSkill ? 'bubble-img skill-img' : 'bubble-img';
+      const imgHtml = data.img
+        ? `<img class="${imgClass}" src="${data.img}" style="border-color:${tierBorder}">`
+        : `<div class="${imgClass}" style="display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--surface2);border-color:${tierBorder}">${data._isSkill ? '⚡' : '📦'}</div>`;
+      bubble.innerHTML = `
+        <button class="bubble-close" onclick="event.stopPropagation();closeInfoBubble()">✕</button>
+        <div class="bubble-header">
+          ${imgHtml}
+          <div class="bubble-title">
+            <div class="bubble-name">${data.name}</div>
+            <div class="bubble-badges">${sizeBadge}${tierBadge}</div>
+            ${tagsHtml}
+          </div>
+        </div>
+        ${descHtml}
+        ${levelBar}
+        <div class="${upgradeClass}" onclick="event.stopPropagation();_doUpgrade()">${upgradeLabel}</div>
+      `;
+      bubble.addEventListener('click', function(e) { e.stopPropagation(); });
+      document.getElementById('boardViewer').appendChild(bubble);
+    }
+    function _doUpgrade() {
+      if (!_bubbleData) return;
+      if (_bubbleData._isSkill) {
+        skillUpgrade(_bubbleData.nameEn);
+        const s = boardAddedSkills.find(sk => sk.nameEn === _bubbleData.nameEn);
+        if (s) showInfoBubble(null, { ...s, _isSkill: true });
+      } else {
+        boardUpgradeItem(_bubbleData._uid);
+        const slot = boardSlots.find(s => s && s.uid === _bubbleData._uid);
+        if (slot) showInfoBubble(null, { ...slot, _uid: slot.uid, _isSkill: false });
+      }
+    }
+    function closeInfoBubble() {
+      const b = document.getElementById('boardInfoBubble');
+      if (b) b.remove();
+      const bd = document.getElementById('boardBubbleBackdrop');
+      if (bd) bd.remove();
+      _bubbleData = null;
+    }
+
+    // ===== Board Drag & Drop =====
+    let boardDragging = null;
+    let boardDragGhost = null;
+    let boardDragStartPos = null;
+    const BOARD_DRAG_THRESHOLD = 8;
+
+    function boardDragStart(e, uid) {
+      if (e.target.closest('.bio-remove')) return;
+      const slotData = boardSlots.find(s => s && s.uid === uid);
+      if (!slotData) return;
+      e.preventDefault();
+      boardDragStartPos = { x: e.clientX, y: e.clientY };
+      boardDragging = {
+        uid: uid, name: slotData.name, size: slotData.size,
+        nameEn: slotData.nameEn, img: slotData.img,
+        spanSize: slotData.spanSize, spanStart: slotData.spanStart,
+        startX: e.clientX, startY: e.clientY, moved: false,
+        pointerId: e.pointerId,
+      };
+      e.currentTarget.setPointerCapture(e.pointerId);
+      document.addEventListener('pointermove', boardDragMove, { passive: false });
+      document.addEventListener('pointerup', boardDragEnd);
+      document.addEventListener('pointercancel', boardDragEnd);
+    }
+
+    function boardDragMove(e) {
+      if (!boardDragging) return;
+      e.preventDefault();
+      const dx = e.clientX - boardDragStartPos.x;
+      const dy = e.clientY - boardDragStartPos.y;
+      if (!boardDragging.moved && Math.abs(dx) < BOARD_DRAG_THRESHOLD && Math.abs(dy) < BOARD_DRAG_THRESHOLD) return;
+
+      if (!boardDragging.moved) {
+        boardDragging.moved = true;
+        const ghost = document.createElement('div');
+        ghost.className = 'board-drag-ghost';
+        const slotsEl = document.getElementById('boardSlots');
+        const slotEls = slotsEl.querySelectorAll('.board-slot');
+        const startRect = slotEls[boardDragging.spanStart].getBoundingClientRect();
+        const endIdx = boardDragging.spanStart + boardDragging.spanSize - 1;
+        const endRect = slotEls[endIdx].getBoundingClientRect();
+        ghost.style.width = (endRect.right - startRect.left) + 'px';
+        ghost.style.height = startRect.height + 'px';
+        if (boardDragging.img) {
+          ghost.style.backgroundImage = 'url("' + boardDragging.img + '")';
+          ghost.style.backgroundSize = 'cover';
+          ghost.style.backgroundPosition = 'center';
+        } else {
+          ghost.innerHTML = '<div style="width:100%;height:100%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:20px;">📦</div>';
+        }
+        document.body.appendChild(ghost);
+        boardDragGhost = ghost;
+        const ov = slotsEl.querySelector('.board-item-overlay[data-uid="' + boardDragging.uid + '"]');
+        if (ov) ov.classList.add('is-dragging');
+      }
+
+      boardDragGhost.style.left = (e.clientX - boardDragGhost.offsetWidth / 2) + 'px';
+      boardDragGhost.style.top = (e.clientY - boardDragGhost.offsetHeight / 2) + 'px';
+
+      const slotsEl = document.getElementById('boardSlots');
+      slotsEl.querySelectorAll('.drop-target').forEach(function(el) { el.classList.remove('drop-target'); });
+      const targetIdx = boardGetSlotAt(e.clientX, e.clientY);
+      if (targetIdx >= 0 && boardCanPlace(targetIdx, boardDragging.spanSize, boardDragging.uid)) {
+        const slotEls = slotsEl.querySelectorAll('.board-slot');
+        for (let j = 0; j < boardDragging.spanSize && (targetIdx + j) < 10; j++) {
+          slotEls[targetIdx + j].classList.add('drop-target');
+        }
+      }
+    }
+
+    function boardDragEnd(e) {
+      if (!boardDragging) return;
+      document.removeEventListener('pointermove', boardDragMove);
+      document.removeEventListener('pointerup', boardDragEnd);
+      document.removeEventListener('pointercancel', boardDragEnd);
+
+      if (boardDragGhost) { boardDragGhost.remove(); boardDragGhost = null; }
+      document.querySelectorAll('.drop-target').forEach(function(el) { el.classList.remove('drop-target'); });
+
+      if (boardDragging.moved) {
+        const targetIdx = boardGetSlotAt(e.clientX, e.clientY);
+        if (targetIdx >= 0) {
+          boardReposition(boardDragging.uid, targetIdx);
+        } else {
+          boardDragging = null;
+          boardRender();
+        }
+      } else {
+        boardDragging = null;
+      }
+    }
+
+    function boardGetSlotAt(x, y) {
+      const slotsEl = document.getElementById('boardSlots');
+      const slotEls = slotsEl.querySelectorAll('.board-slot');
+      for (let i = 0; i < slotEls.length; i++) {
+        const r = slotEls[i].getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return i;
+      }
+      return -1;
+    }
+
+    function boardCanPlace(startIdx, size, ignoreUid) {
+      if (startIdx < 0 || startIdx + size > 10) return false;
+      for (let j = 0; j < size; j++) {
+        const s = boardSlots[startIdx + j];
+        if (s !== null && s.uid !== ignoreUid) return false;
+      }
+      return true;
+    }
+
+    function boardReposition(uid, newStart) {
+      const item = boardSlots.find(s => s && s.uid === uid);
+      if (!item) return;
+      const oldStart = item.spanStart;
+      if (newStart === oldStart) { boardDragging = null; return; }
+      if (!boardCanPlace(newStart, item.spanSize, uid)) {
+        boardDragging = null; boardRender(); return;
+      }
+      // Clear old
+      for (let i = 0; i < 10; i++) {
+        if (boardSlots[i] && boardSlots[i].uid === uid) boardSlots[i] = null;
+      }
+      // Set new
+      const entry = { ...item, spanStart: newStart };
+      for (let j = 0; j < item.spanSize; j++) {
+        boardSlots[newStart + j] = { ...entry };
+      }
+      boardDragging = null;
+      boardRender();
+    }
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+      const area = document.querySelector('.board-search-area');
+      if (area && !area.contains(e.target)) {
+        const r = document.getElementById('boardSearchResults');
+        if (r) r.classList.remove('show');
+      }
+    });
+
+  </script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "77f6297689f14755b1f7a0d969014f55"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+
+</html>

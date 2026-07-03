@@ -1,0 +1,20 @@
+Aquatic：水系
+Core: 核心
+Dinosaur：恐龙
+Dragon：巨龙
+Property：地产
+Reagent：原料
+Relic：遗物
+Friend：伙伴
+Tech：科技
+Loot：战利品
+Vehicle：载具
+Ray：射线
+Potion：药水
+Food：食物
+Drone：无人机
+Apparel：服饰
+Toy：玩具
+Tool：工具
+Trap：陷阱
+Weapon：武器

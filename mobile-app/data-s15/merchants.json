@@ -1,0 +1,1202 @@
+{
+  "职业": "商人",
+  "英文名": "merchants",
+  "获取时间": "2026-06-18 13:59:35",
+  "物品数量": 47,
+  "技能数量": 0,
+  "物品": [
+    {
+      "名称": "凯夫军械库",
+      "英文名": "Kev's Armory",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "杜利",
+        "海盗",
+        "皮格马利安",
+        "朱尔斯",
+        "斯特尔",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/84845fc163d41901b4bef9c0a61b6c5a683d0314@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/84845fc163d41901b4bef9c0a61b6c5a683d0314_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/vwff82l5tp827v0qxxjv8pk6xh/Kev's-Armory",
+      "描述": "出售生命值和护盾物品"
+    },
+    {
+      "名称": "加瑟奥",
+      "英文名": "Gaseo",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/68a4bda200227045225836da2d5c0823ed4e292b@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/68a4bda200227045225836da2d5c0823ed4e292b_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/v207kvfgvxdvnbjkzw2bh7mbj8/Gaseo",
+      "描述": "出售任意英雄的服饰"
+    },
+    {
+      "名称": "卡诺克",
+      "英文名": "Karnok",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "海盗",
+        "杜利",
+        "马克",
+        "皮格马利安",
+        "朱尔斯",
+        "斯特尔"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/dbf023f34fc7e43b82e5f99c3949c138425ff48c@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/dbf023f34fc7e43b82e5f99c3949c138425ff48c_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/8pqfkxdxn7klx5n12f1l23g2sb/Karnok",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "古董商",
+      "英文名": "The Antiquarian",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "海盗",
+        "皮格马利安",
+        "杜利",
+        "马克",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/f51111ae06f5867f10ed0e4905174e25858b83b6@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/f51111ae06f5867f10ed0e4905174e25858b83b6_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/16f2dg1g1b36s0pvj8pg41pfh88/The-Antiquarian",
+      "描述": "出售任意英雄的遗物"
+    },
+    {
+      "名称": "叮当",
+      "英文名": "Tinker",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "杜利"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/57a6d020f45d03168fa08b57362decc7ea447ee9@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/57a6d020f45d03168fa08b57362decc7ea447ee9_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/xw94vs9t1tbps3q8zhm16b8qbq/Tinker",
+      "描述": "出售伙伴物品"
+    },
+    {
+      "名称": "吉娜",
+      "英文名": "Kina",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/fd3b97db3d1f96ce6a716e5b89b40126ec71d83e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/fd3b97db3d1f96ce6a716e5b89b40126ec71d83e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/gbk2hkvzc56978f5k5kwwp6qft/Kina",
+      "描述": "出售非武器物品"
+    },
+    {
+      "名称": "塔季扬娜",
+      "英文名": "Tatiana",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/1a5eed71b9073d4fa808f9fb54ba9edf9239135e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/1a5eed71b9073d4fa808f9fb54ba9edf9239135e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/5ffn3b4hvcxbjdff6pwdyy3ly3/Tatiana",
+      "描述": "出售任意英雄的玩具"
+    },
+    {
+      "名称": "奥利恩",
+      "英文名": "Orion",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/9ffa38efcfff1fc700430a111afe0f617c4942b7@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/9ffa38efcfff1fc700430a111afe0f617c4942b7_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/1354nkqnt7q9fgq281wbgz1627q/Orion",
+      "描述": "出售工具"
+    },
+    {
+      "名称": "安德",
+      "英文名": "Ande",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/a7b539d3ba8ee72e55158d0d855cd59ffcfcce43@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/a7b539d3ba8ee72e55158d0d855cd59ffcfcce43_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/klt8t3yh9sd2vvvnpmn0qt3h1n/Ande",
+      "描述": "出售小型物品"
+    },
+    {
+      "名称": "寇特",
+      "英文名": "Colt",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "海盗"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/c7eae152cb50368bf4a51445463863c525eb2bb4@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/c7eae152cb50368bf4a51445463863c525eb2bb4_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/n94npkpvsm85ttljjzxk4q7hg1/Colt",
+      "描述": "出售弹药物品"
+    },
+    {
+      "名称": "库里欧",
+      "英文名": "Curio",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/90168268c65e6949e0298242871adaa040fe7e30@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/90168268c65e6949e0298242871adaa040fe7e30_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/115nqybdhph9jp9jg6ttc0ptx8h/Curio",
+      "描述": "出售青铜级中立物品"
+    },
+    {
+      "名称": "戈尔迪",
+      "英文名": "Goldie",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/7bec736da723e764df89b10e3863d4f958343bd8@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/7bec736da723e764df89b10e3863d4f958343bd8_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/4y02616ykxh5x934gpsj8qvv5s/Goldie",
+      "描述": "出售黄金级物品"
+    },
+    {
+      "名称": "托克钟表店",
+      "英文名": "Tok's Clocks",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "杜利",
+        "海盗",
+        "马克",
+        "朱尔斯",
+        "斯特尔",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/f3451895ce61b49e3fd0f816b816b3f70ccb3368@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/f3451895ce61b49e3fd0f816b816b3f70ccb3368_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/9t8dy44j7hmx4c10tj2czgm5c1/Tok's-Clocks",
+      "描述": "出售加速、减速和冷却物品"
+    },
+    {
+      "名称": "收容所谢尔比",
+      "英文名": "Shelter Shelby",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "卡诺克",
+        "海盗"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/413e04c78a8dfc80d6cc4b18e5eacbab841339be@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/413e04c78a8dfc80d6cc4b18e5eacbab841339be_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/s85w5jhz5n5pmfpzkqwwqmydnp/Shelter-Shelby",
+      "描述": "出售伙伴物品"
+    },
+    {
+      "名称": "斯黛尔",
+      "英文名": "Stelle",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "海盗",
+        "杜利",
+        "马克",
+        "皮格马利安",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/dde4009253a0afd0785e0ee34eefd896fa4b63c5@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/dde4009253a0afd0785e0ee34eefd896fa4b63c5_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/15vlkkxt5hmkgnnpjby8k1773s0/Stelle",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "时精",
+      "英文名": "Chronos",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/fa1c7872940298da97e80edbcc6a4363f5aaeb15@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/fa1c7872940298da97e80edbcc6a4363f5aaeb15_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/xsschmwb6svmvg7dfnywvsk0h6/Chronos",
+      "描述": "出售加速物品"
+    },
+    {
+      "名称": "普洛斯佩罗",
+      "英文名": "Prospero",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "皮格马利安"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/9dfac6fb48a0fb92a5a3ca187c0f3a73cdd3812e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/9dfac6fb48a0fb92a5a3ca187c0f3a73cdd3812e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/zltpmmmclczkn8x3ycsw318yzv/Prospero",
+      "描述": "出售来自任意英雄的经济类物品"
+    },
+    {
+      "名称": "朱尔斯",
+      "英文名": "Jules",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "斯特尔",
+        "杜利",
+        "马克",
+        "皮格马利安",
+        "海盗",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/b47743c478628cec1a12a6602e2cd98cc90d72fa@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/b47743c478628cec1a12a6602e2cd98cc90d72fa_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/n1qtk00m6fnh85pptz5tz3w5k8/Jules",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "杜利",
+      "英文名": "Dooley",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "斯特尔",
+        "海盗",
+        "马克",
+        "皮格马利安",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/5c37ebbc8f12e27ae1205606891d07049caf2223@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/5c37ebbc8f12e27ae1205606891d07049caf2223_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/bx3cxfs0lzvbdt9p3zlmlv7384/Dooley",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "杰杰",
+      "英文名": "Jay Jay",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/0abfc199aedf7883d4af81dfa08a1357845c0fbc@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/0abfc199aedf7883d4af81dfa08a1357845c0fbc_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/nzzjkyl7flftzc23t05z1m4s59/Jay-Jay",
+      "描述": "出售物品"
+    },
+    {
+      "名称": "橡树君",
+      "英文名": "Barkun",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/91846399d16358c633d1a89178c8f2d0b8e33f83@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/91846399d16358c633d1a89178c8f2d0b8e33f83_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/qf6h07kp9vmw5mcym5m3wdtbny/Barkun",
+      "描述": "出售中型和大型物品。以+{aura.3}价值收购你的小型物品。"
+    },
+    {
+      "名称": "波尔",
+      "英文名": "Pol",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/8bca2b9c4021e18a92cf62245ead5602e7869e7b@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/8bca2b9c4021e18a92cf62245ead5602e7869e7b_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/zzs4j9lz5gvvsqz2n7wt66q1d/Pol",
+      "描述": "出售大型物品"
+    },
+    {
+      "名称": "测试家",
+      "英文名": "The Tester",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "杜利",
+        "海盗",
+        "斯特尔"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/451f00d30158cbcc7e2905fe33774bd80577f2b2@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/451f00d30158cbcc7e2905fe33774bd80577f2b2_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/b9p2gmp000q2lb27f72hc8ql37/The-Tester",
+      "描述": "出售任意英雄的科技物品"
+    },
+    {
+      "名称": "爱伊拉",
+      "英文名": "Aila",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/178c966fbb3de4ac7175d281d1740533dc0ab98c@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/178c966fbb3de4ac7175d281d1740533dc0ab98c_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/14hqpzjc2gzvxy5t262l5vlx3hk/Aila",
+      "描述": "出售武器"
+    },
+    {
+      "名称": "猪大厨",
+      "英文名": "Gastro",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "朱尔斯"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/cfc32bc656dacfc6f458b38f0a656277f1d4352b@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/cfc32bc656dacfc6f458b38f0a656277f1d4352b_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/10pqk8wvlp5z15s53bhhlcvspvn/Gastro",
+      "描述": "出售食物"
+    },
+    {
+      "名称": "瓦内莎",
+      "英文名": "Vanessa",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "斯特尔",
+        "杜利",
+        "马克",
+        "皮格马利安",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/b341e7934a7427a43e546d879a61087ee5a249ac@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/b341e7934a7427a43e546d879a61087ee5a249ac_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/ftc9zbpz0hbn9l187219gwxlnc/Vanessa",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "瓦尔帕克",
+      "英文名": "Valpak",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/15dea774ddcc30ea366a937fc3c808bf19bc010b@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/15dea774ddcc30ea366a937fc3c808bf19bc010b_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/15pqdqvxfq2p0fhfhjcqgcxlxv0/Valpak",
+      "描述": "出售物品。总是出售折扣物品"
+    },
+    {
+      "名称": "癫茄",
+      "英文名": "Knightshade",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/b7bfef73ca3f40a35655bf56ff156e3cce08e633@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/b7bfef73ca3f40a35655bf56ff156e3cce08e633_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/64tx7zxyq1djm3zkty1z34gpqb/Knightshade",
+      "描述": "出售剧毒物品"
+    },
+    {
+      "名称": "皮格马利翁",
+      "英文名": "Pygmalien",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "斯特尔",
+        "杜利",
+        "马克",
+        "海盗",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/9cdcc6acc30cef8bc859498f02b2589c49f252d9@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/9cdcc6acc30cef8bc859498f02b2589c49f252d9_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/1920w059l8bw3bxkf857866778z/Pygmalien",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "米兹沃斯",
+      "英文名": "Midsworth",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/113ce60ee8fdcf1e62320d8f76a365fff8ed6d9e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/113ce60ee8fdcf1e62320d8f76a365fff8ed6d9e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/z0gngbv2h93x673gghg78d1yw5/Midsworth",
+      "描述": "出售小型和大型物品。以+{aura.3}价值收购己方中型物品"
+    },
+    {
+      "名称": "米透",
+      "英文名": "Mittel",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/d144735d830d6f55cab449ced4fbadebb673b9e2@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/d144735d830d6f55cab449ced4fbadebb673b9e2_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/qs7dysfmfkv0kkzfqhwnvfbc1y/Mittel",
+      "描述": "出售中型物品"
+    },
+    {
+      "名称": "翼罗",
+      "英文名": "Aero",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "斯特尔"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/e897bdf8aaf45a0c29a44e6c81352e407137631c@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/e897bdf8aaf45a0c29a44e6c81352e407137631c_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/nsh7bpkbfgpd770mgsgkjf58ht/Aero",
+      "描述": "出售载具或无人机"
+    },
+    {
+      "名称": "肌肉王",
+      "英文名": "Flex",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "皮格马利安",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/92871a1fdaf1f3da179190e7b03100b4d1f6512c@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/92871a1fdaf1f3da179190e7b03100b4d1f6512c_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/mdwj92l7s4g6mh4w776ysv83gs/Flex",
+      "描述": "出售最大生命值物品"
+    },
+    {
+      "名称": "自瞄机",
+      "英文名": "Aimbot",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "海盗",
+        "杜利",
+        "马克",
+        "朱尔斯",
+        "卡诺克",
+        "斯特尔"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/d57aa960aeb8a3db9b9134a0892eefbcc39b8f9d@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/d57aa960aeb8a3db9b9134a0892eefbcc39b8f9d_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/17ztwbvh6kqm12ts51mgdst195l/Aimbot",
+      "描述": "出售任意英雄的暴击物品"
+    },
+    {
+      "名称": "艾利",
+      "英文名": "Eli",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "马克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/e4fd3c5cb115d019c59849f00531c32fedb52fbc@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/e4fd3c5cb115d019c59849f00531c32fedb52fbc_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/2h1l6pj771vbv92nh6ly4fvf3s/Eli",
+      "描述": "出售药水"
+    },
+    {
+      "名称": "芙蕾雅",
+      "英文名": "Freiya",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/62abca8396c7a2318365488d685ff382600ea16e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/62abca8396c7a2318365488d685ff382600ea16e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/10gbd1yw54dk020d1xghjy271mc/Freiya",
+      "描述": "出售冻结物品"
+    },
+    {
+      "名称": "葵仙子",
+      "英文名": "Quixel",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/13ee1d0aa3a892b5651a789225942d793749c4b7@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/13ee1d0aa3a892b5651a789225942d793749c4b7_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/7wfwyl97ct1h02hfzgh3mfw9lv/Quixel",
+      "描述": "出售小型和中型物品。以+{aura.3}的溢价收购己方大型物品"
+    },
+    {
+      "名称": "蛛网",
+      "英文名": "Cobweb",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/1c2b8ef5419739da0e1ef2233bd3cb29a1766ae8@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/1c2b8ef5419739da0e1ef2233bd3cb29a1766ae8_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/17hhw5gnbsym9ttj15jdmdcp4v4/Cobweb",
+      "描述": "出售减速物品"
+    },
+    {
+      "名称": "西尔维娅",
+      "英文名": "Silvia",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/7903da97fd041531134ffe1222b17208742d4750@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/7903da97fd041531134ffe1222b17208742d4750_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/1732vhcfj9km6hpn3mvvtcc3c85/Silvia",
+      "描述": "出售白银级物品"
+    },
+    {
+      "名称": "诺提卡",
+      "英文名": "Nautica",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "海盗"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/99d642dc64e5a35a085eee12cd2a869fe59c7658@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/99d642dc64e5a35a085eee12cd2a869fe59c7658_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/42zhdl512bs1mnw42ln1q7623g/Nautica",
+      "描述": "出售水系物品"
+    },
+    {
+      "名称": "贺夫",
+      "英文名": "Hef",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/4818076098049b8aa28e2eefea0bea1e05b4138e@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/4818076098049b8aa28e2eefea0bea1e05b4138e_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/bmc3pns1ylbxy14879nthf90z1/Hef",
+      "描述": "出售灼烧物品"
+    },
+    {
+      "名称": "赛拉菲娜",
+      "英文名": "Serafina",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/4b5173d0a6dd5394055a1c1b6cf3df769264fbd3@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/4b5173d0a6dd5394055a1c1b6cf3df769264fbd3_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/ym6n6wjzxn465s129dxvwlkt1q/Serafina",
+      "描述": "出售附魔物品"
+    },
+    {
+      "名称": "赫玛",
+      "英文名": "Herma",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "皮格马利安",
+        "马克",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/07f469245e431fa0b40912eb62353cb35e9fb39b@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/07f469245e431fa0b40912eb62353cb35e9fb39b_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/63nxjntdzzxtffnlp6c2f4115y/Herma",
+      "描述": "出售治疗和生命再生物品"
+    },
+    {
+      "名称": "路克斯",
+      "英文名": "Luxe",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/aa6123000160e32707bd01dced697d25440838f5@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/aa6123000160e32707bd01dced697d25440838f5_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/phlm6pkm32ls4l0kl9lsmkywvl/Luxe",
+      "描述": "出售钻石级物品"
+    },
+    {
+      "名称": "针羽",
+      "英文名": "Pinfeather",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "斯特尔",
+        "马克",
+        "皮格马利安",
+        "卡诺克",
+        "海盗",
+        "杜利"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/68e56afa23bdcb6a7b449f6319216716c6637cea@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/68e56afa23bdcb6a7b449f6319216716c6637cea_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/km089wlm1hh2m1wzhk0cl8vg7g/Pinfeather",
+      "描述": "出售来自任意英雄的飞行物品"
+    },
+    {
+      "名称": "马克",
+      "英文名": "Mak",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "斯特尔",
+        "杜利",
+        "海盗",
+        "皮格马利安",
+        "朱尔斯",
+        "卡诺克"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/44bf7d63c75daae0ccc0d009f348c1e00c477743@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/44bf7d63c75daae0ccc0d009f348c1e00c477743_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/bq61bh41fmhzh7gwt0832z1k35/Mak",
+      "描述": "出售此英雄的物品"
+    },
+    {
+      "名称": "默兰德先生",
+      "英文名": "Mr. Morland",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "皮格马利安"
+      ],
+      "显示标签": [
+        "Merchant"
+      ],
+      "基础属性": {
+        "自定义属性0": 0
+      },
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z15.0/6c3bae5f0523ce3a7a1387102f49e1ebcc202776@400.webp",
+      "图标链接": "https://s.bazaardb.gg/v1/z15.0/6c3bae5f0523ce3a7a1387102f49e1ebcc202776_p@256.webp?v=6",
+      "详情链接": "https://bazaardb.gg/card/15ll2v3qh6ms3gj8yshgysp0nsj/Mr.-Morland",
+      "描述": "出售地产物品"
+    }
+  ],
+  "技能": []
+}

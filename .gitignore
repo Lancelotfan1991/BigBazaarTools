@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.wrangler/
+output/
+node_modules/
+.vercel/
+_*.cjs
