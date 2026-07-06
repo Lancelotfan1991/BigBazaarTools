@@ -22,6 +22,20 @@ from config import (
 logger = logging.getLogger(__name__)
 
 
+def _load_skill_name_map() -> dict:
+    """加载技能英文名→中文名映射"""
+    map_path = os.path.join(os.path.dirname(__file__), "skill_name_map.json")
+    if os.path.exists(map_path):
+        try:
+            with open(map_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+_SKILL_NAME_MAP = _load_skill_name_map()
+
+
 def normalize_card(card: dict) -> dict:
     """
     标准化卡片数据，统一字段名（处理 API 返回的 PascalCase 和搜索结果的 lowercase）
@@ -174,8 +188,11 @@ def normalize_card(card: dict) -> dict:
         mon_skills = []
         for skill in (mon_meta.get("skills") or []):
             if isinstance(skill, dict):
+                en_name = skill.get("title", "")
+                zh_name = _SKILL_NAME_MAP.get(en_name, en_name)
                 mon_skills.append({
-                    "名称": skill.get("title", ""),
+                    "名称": zh_name,
+                    "英文名": en_name,
                     "图片": skill.get("art", ""),
                     "品质": skill.get("tierOverride", "Bronze"),
                     "链接": skill.get("url", ""),
