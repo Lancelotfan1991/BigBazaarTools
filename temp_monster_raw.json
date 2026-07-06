@@ -1,0 +1,128 @@
+{
+  "Id": "6547a38e-d27f-4443-84bb-db8e04bae467",
+  "Type": "CombatEncounter",
+  "Title": {
+    "Text": "不堪重负的学生"
+  },
+  "Description": null,
+  "Art": "https://s.bazaardb.gg/v1/z16.0/b81e873ea79cfc6d836dba81ab0d97881dfb2a14@256.webp?v=7",
+  "Size": "Medium",
+  "Tooltips": [],
+  "TooltipReplacements": {},
+  "DisplayTags": [],
+  "HiddenTags": [],
+  "Tags": [
+    "CombatEncounter",
+    "Common"
+  ],
+  "Heroes": [
+    "Common"
+  ],
+  "BaseTier": "Bronze",
+  "CombatantType": {
+    "$type": "TCombatantMonster",
+    "MonsterTemplateId": "77a31f8e-77b1-431f-aab8-22bbe5c3826b",
+    "Level": 3
+  },
+  "RewardCombatGold": 2,
+  "RewardCombatXp": 3,
+  "RewardVictory": {
+    "SelectionContextRules": null,
+    "SpawnContext": null,
+    "GoldReward": 0,
+    "ExperienceReward": 0
+  },
+  "RewardDefeat": {
+    "SelectionContextRules": null,
+    "SpawnContext": null,
+    "GoldReward": 0,
+    "ExperienceReward": 0
+  },
+  "_originalTitleText": "Overwhelmed Student",
+  "ArtBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBACdASoUABQAPlkmkUeDf6qAAMCwjjAKwR+qLXhbZH4iBuG9WKO2dcAA/vMPrCrmfFsAhG5RnUTbIIEBR5pYEnQc7a48B/fHXtih9L39Nj0c//qFKYYaS05hymh0vVAjvMpq7LTTuBu+wTykCQH+EwhiaL75MRXMOx0Um9IX3ViwcdicbyCUyy5YtOUFYOOy+sCa6vMAAA==",
+  "ArtFg": "https://s.bazaardb.gg/v1/z16.0/b81e873ea79cfc6d836dba81ab0d97881dfb2a14_p@256.webp?v=7",
+  "ArtLarge": "https://s.bazaardb.gg/v1/z16.0/b81e873ea79cfc6d836dba81ab0d97881dfb2a14@400.webp",
+  "Uri": "/card/hwmxlhjj20mhlv99v9jzjc25v5/Overwhelmed-Student",
+  "MonsterMetadata": {
+    "available": "Day 4",
+    "day": 4,
+    "health": 300,
+    "board": [
+      {
+        "baseId": "cfca6975-d74c-41b1-a179-ae796058ca18",
+        "tierOverride": "Silver",
+        "title": "太阳能无人机",
+        "art": "https://s.bazaardb.gg/v1/z16.0/3c3d4d9c6c09bbdc9f829981937f6f2a90f95360@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRoYBAABXRUJQVlA4IHoBAACQBwCdASoUABQAPl0slEiCgIAAwLiOwAnTKDxCnDewhgNtn4gHrY+gDeM+e59kusAGxvGQOEmlL6aBdR0tofoX6hby6gAA/uRfXZYPZNv7H5L8KGgNBrh3wX3BWO6ZcfLKy/YFqZO46s2SjtCluLfJw9JMEdk0Pf5mvhdjo0apgaLftO8X3drCr4uHv7R7Vbl/BqGHNlP/qtuOIjwe4qix6TGZAH44J6GhVTq5P//hmk/3Y2kM0gL/SycTZT/cvXQ8MU4SB5zL/H6/zCfx+PtNdNd+Ly0I7H/VfraePEBnRtiqWV9wQvQfu9ynkegYOZis81lJQe8XM87Cvu3RuH4dIyufct6D/Ma1nDn/KrPJuIzzOK1WP3lfqHKFKB/yMXL8cdXcPzbzwbxZ+Pc1elzsx4xh122/JGDVDTnuAHrkYLU5q98TqOVZpG2qVGgXA4ZVpvucK7Sf8X2Lv6erXccdB4L+P/2Ll+oDHlAyHXaGcX2RBYHM1s0AAAA=",
+        "size": "Small",
+        "url": "/card/12kydgqjxbnsw50j6c3677x9f56/Solar-Drone",
+        "type": "Item"
+      },
+      {
+        "baseId": "175b351d-f28a-4f74-8bc2-6568eeb075ca",
+        "tierOverride": "Silver",
+        "title": "制图桌",
+        "art": "https://s.bazaardb.gg/v1/z16.0/7884d61cd3967827dc9e8ad28d98ecc378663962@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRi4BAABXRUJQVlA4ICIBAADwBQCdASoUABQAPl0slEiCgIAAwLiOQAnTLs+0EALs53k8iIAwAoR/3lrkwnQSfxtcUHeg5YywAAD+8w7zhMY8mjoygNRn9U+qa09KDPGVCAlIpT3UchzKZ5zCLfNuRk81ZnMLPE8nj82j3p9wy4SEyHaqSdcHyU5/xL6b9CQOGWiw/KX85T7/J4nj4NTrC0RT1TVKPZze4fNYdk6UH/EA8V4myUjXPotNB9rx2XnV721NysBdSPSnFuYL4w2O9JJbBPCtLFWZcR+39Pb3uW/2bv8sInN81M7Hodg2mZlcQ83rLhrNA2DUkUVEHyfY9S48IExkRig4R+s4uQAHQW/wjbjehvkUndgTKQ+78WhfGMGc9xXoJkmSfw60lQE1O9hAAA==",
+        "size": "Medium",
+        "url": "/card/3mxppdxwwt48p46xzf5ztw5dj2/Drafting-Table",
+        "type": "Item"
+      },
+      {
+        "baseId": "d7c87f38-276a-4d40-a297-fe75422c93a9",
+        "enchantmentOverride": "Shielded",
+        "title": "笔与墨",
+        "art": "https://s.bazaardb.gg/v1/z16.0/6f1ec30c51c8ba78a46cc78e41b3117f3fbc6080@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRjIBAABXRUJQVlA4ICYBAACQBgCdASoUABQAPl0slEiCgIAAwLiOYAnTKEe1+gXK1KXnsNMA3mgiMAxEQALispnJsE4nAqYsijVKa9AAAP77fPecagBEZuDlsVFmS442mfpeuSL3SdZp9Y5+ahS3fpj4bTvqh3/8SVjnTznC9X8Y/C84VcmZT9xUS/0Rcc5h8ggPvEYnmyzjH+90zWWCtRJqQ4nNKjuug2OmDbkUf/P/5/47PYJyzDKMVS4Dm/5jjN8LAHZ2Hm/tu08Ml13MYedzZSWwb8qcyAz9NqJj1UC236tE3FVcctrhu5IoYrVAnH2FpGLl99FEQUewNZUmqS6XkWQcz1F8qXSSrlGmYUQBbkmyS2mGxgJHH3/yh+yX1Fp/spSugHXD6DRjj9enKkcwsUYwAAA=",
+        "size": "Small",
+        "tierOverride": "Bronze",
+        "url": "/card/13vjwxtv5s98bppt2sftg7p3bwz/Quill-and-Ink",
+        "type": "Item"
+      },
+      {
+        "baseId": "833b205c-b5a6-4095-b816-a8df156ef7fa",
+        "tierOverride": "Silver",
+        "title": "咖啡",
+        "art": "https://s.bazaardb.gg/v1/z16.0/39db484b8a24270dbc5e059c2612098d8b71a6d1@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRlgBAABXRUJQVlA4IEwBAACwBgCdASoUABQAPl0slEiCgIAAwLiOwAnTKEfjec8Ug4TRjnwLJVIioMC3jJsT09K8OyStZO+ddWw+sjgGEAD+65DbXa74oO1tqZ8EhnGY3i2vVn8MX3FlC7z+Gov81q7GM2llVwZa0m4GKdW8hWfnNZFvDvJghmVKiV1SRmT7+eKwh0FjajB0y4uomopv36IjftQZtxe3SxEoQ+rXLv2LRfzJIo7+frdF6i2pY/mdhPUktizF3HBgRk4pH4lEgZGDn/4K6/1IfV2Uw/BkMoxzol4lM5rGgQQ+hvmaBVzKK31n7t0QQC8eFtZvtBQUwSIYanOdXJIVkTEY0WJJ9Kfr8ym3bxlnq5wXFFvNtOLrvaPLaxlvG8UewfB+SKf6PHjuRYY+/7mLPETM2NSe/j9ya5vXiC+XDeMDQqjdMcp372I99L4EbatofJzwAA==",
+        "size": "Small",
+        "url": "/card/nklsj7g3bq6ynlvkd1js8hy94g/Coffee",
+        "type": "Item"
+      },
+      {
+        "baseId": "d24d6805-6fed-4261-9e75-5cce64c03923",
+        "title": "吐司机",
+        "art": "https://s.bazaardb.gg/v1/z16.0/db8731b5ae8e9bd2319d69a1e747bc79f4157a12@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRmoBAABXRUJQVlA4IF4BAACQBwCdASoUABQAPl0slEiCgIAAwLiOwAnTKEcDeq8UE+fUA9QGcA/TvJOfQA6UgiJgn8ZJvYOytO74tZL0VNmln/IKglAA/ueopSjAUVYQAmN2bp6g8kn+3cW9cVgZwVwmnD9GTWHzJk3LcM76spkFuG/Rx8KwobTAop4J9wOAftbFA/EWsQYFdtu7+M0ywNRsdQVdGx8/hNO107rF0155/J9xSH4669t8bH/XdL7v5NIi1T5Xe3fohz//Bcu+iK0wgQST5lcBnvnWPszAmvloND5Ww1LfX2votivx33KohtBnhHz6vsvnnEvN2NhcJ5OPDNpZHehEV28dU7yw5Zpk0jrGXOoT+OaTdxH//hrjhIjhMi0KsIQyGnagdQx3MXrhFFZ2J4pJfw7cPl9CtGPkL9ef4/5MKCWpl+3RBkG6xMYP3HLa7RQxXsnyCDhrt2JBINpeKEx6dS8J7YAAAA==",
+        "size": "Medium",
+        "tierOverride": "Bronze",
+        "url": "/card/12zs1fgks9t77cccy96y4bkztym/Toaster",
+        "type": "Item"
+      },
+      {
+        "baseId": "1a0c645a-8a0b-424b-bff1-124263589749",
+        "tierOverride": "Silver",
+        "title": "幸运饼干",
+        "art": "https://s.bazaardb.gg/v1/z16.0/08d37b5870c6cca9546d2719da8f169812684851@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRloBAABXRUJQVlA4IE4BAACQBwCdASoUABQAPl0sk0iCgKqAwLiOwAnTMmAsi482YwG2A58Do/9K49jP9tPSAo4B2fiD5n2BjFpYvWvfIBeuhempIRAA/vvS4NnGNXccbe2Kzxqlzsvk1+OSEA5KPFub5/Km9/LxGWCibYQUhKm0Sp+0ANtKfUaShcjm4KzPtj3pz3sh7jcHR/da/r/zSnaa/hX+k1gYPB+pkQTwqlmH3S7UWEL/x09fAjrRc5IVa1XN1cXHgSUi2U1KYF5GfHeRp02mkT/YZ5UX9e7ryU0hhvBOt8HLyTAk1f0m18SoHr0u3cNiQOghjrokLPlHV6FQ+ICptrE0UaGjlJL2zSjzbLMAJGR/RVQ10Se0cgOvnfxWv9aSa/ILY56pIHsGHnSE7Sd8PB/etmX7yK12HXBoaFm4IoufevGWRr3WLiuI86sNtZuWdlBOuZrkAAAA",
+        "size": "Small",
+        "url": "/card/42ktxz1f4x71b755cgj7vf4ng5/Fortune-Cookie",
+        "type": "Item"
+      }
+    ],
+    "skills": [
+      {
+        "baseId": "ad77818e-b050-4ecb-81ca-eafb35e2bf4e",
+        "tierOverride": "Gold",
+        "title": "Crash Out",
+        "art": "https://s.bazaardb.gg/v1/z16.0/626e60a2db614825869808b1cbee600d43f2315b@256.webp?v=7",
+        "artBlur": "data:image/webp;base64,UklGRo4BAABXRUJQVlA4IIIBAABwCACdASoUABQAPl0slEiCgIAAwLiOwAnTKEeZir9MmwzpR4BzwH4AazB6AHSbfuD6TJgPmed3MF7JbNs5YIHrv9IFE1HAJW9xiSiQAP7slUXHWI306L+idCZ7nJywDeiDU2/VntUQIM3pyfvbBNwNrjs9S+PmQkpKbzhD02V5aoYCXjjxsJUbOUxxxbQQANltXpft9NNVXeb2m0JAKrUPmXgPVCkTJ+fdqaeaLhBGO+Pqjouo1ErQqmU/+ccoOj0n9vKB2rx8jII+1Jpmo6yGBEQeN/+Sk4IZFC9eFmy2RAakbTU26nMjPDQbddM30iJ6qlU2e7qNvu2LJOlviuP0PPb3i+TPhevPszj2AZ0E5osaJ4dvsvosjx6n5n3EuemP7pWegnQu65t4zjWTof43+7fmP7N3GIEPvqn2RZkxHAJoIcX/1OPTn8ahIFL9f+v/alfCgr7oP1JpfvKhv0vgnppLot0igTfepc/6jKuTxX1LxXp5EawfzU5UAFhHR+4AAA==",
+        "url": "/card/x6d4pjqfpssj19vyx8bbd6zbx4/Crash-Out",
+        "type": "Skill"
+      }
+    ]
+  },
+  "_locale": "zh-CN",
+  "Enchantments": "$undefined",
+  "Quests": "$undefined"
+}

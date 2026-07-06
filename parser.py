@@ -171,6 +171,16 @@ def normalize_card(card: dict) -> dict:
     # 怪物信息
     mon_meta = card.get("MonsterMetadata") or card.get("monster_metadata") or {}
     if mon_meta and isinstance(mon_meta, dict) and mon_meta != '$undefined':
+        mon_skills = []
+        for skill in (mon_meta.get("skills") or []):
+            if isinstance(skill, dict):
+                mon_skills.append({
+                    "名称": skill.get("title", ""),
+                    "图片": skill.get("art", ""),
+                    "品质": skill.get("tierOverride", "Bronze"),
+                    "链接": skill.get("url", ""),
+                    "类型": skill.get("type", "Skill"),
+                })
         normalized["monster_info"] = {
             "出现天数": mon_meta.get("day"),
             "血量": mon_meta.get("health"),
@@ -183,6 +193,7 @@ def normalize_card(card: dict) -> dict:
                 }
                 for item in (mon_meta.get("board") or [])
             ],
+            "技能": mon_skills,
         }
     else:
         normalized["monster_info"] = None
