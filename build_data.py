@@ -2,17 +2,21 @@
 """数据预获取脚本 - 为移动端 App 准备离线数据
 
 遍历所有职业，从 bazaardb.gg 获取全部物品和技能数据，
-保存到 mobile-app/data/ 目录供离线 App 使用。
+保存到 mobile-app/data-s{N}/ 版本化目录供离线 App 使用。
 
-支持赛季版本管理：
-- 默认输出到 mobile-app/data/（最新版本）
-- --season 15 输出到 mobile-app/data-s15/（历史版本归档）
+数据目录严格按版本号管理：
+- --season 16   输出到 mobile-app/data-s16/
+- --season 16.1 输出到 mobile-app/data-s16.1/
+- --season s15  输出到 mobile-app/data-s15/
+
+可选 --sync-vue 参数会在 bazaar-vue/public/ 下创建符号链接，
+确保两个仓库共享同一份数据。
 
 使用方式:
-    python build_data.py              # 获取所有职业数据（最新版本）
-    python build_data.py --hero Vanessa  # 只获取指定职业
-    python build_data.py --season 16  # 获取 S16 赛季数据到 data-s16/
-    python build_data.py --season 16 --hero Vanessa  # 指定赛季+职业
+    python build_data.py --season 16             # 获取 S16 数据
+    python build_data.py --season 16.1           # 获取 S16.1 补丁数据
+    python build_data.py --season 16.1 --sync-vue  # 获取数据并同步到 vue 项目
+    python build_data.py --season 16.1 --hero Vanessa  # 指定赛季+职业
 """
 
 import argparse
@@ -37,25 +41,69 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-MOBILE_DATA_DIR_DEFAULT = Path("mobile-app/data")
-
-# 当前最新赛季编号（可通过 --season 覆盖）
-LATEST_SEASON = 16
+# bazaar-vue 项目的 public 目录（用于 --sync-vue 符号链接）
+VUE_PUBLIC_DIR = Path("../bazaar-vue/public")
 
 
-def get_data_dir(season: int = None) -> Path:
-    """根据赛季编号返回数据目录
+def get_data_dir(season: str) -> Path:
+    """根据赛季编号返回版本化数据目录
 
     Args:
-        season: 赛季编号。None 表示最新版本（输出到 data/），
-                其他值输出到 data-s{season}/
+        season: 赛季编号（支持整数如 16，或补丁版本如 16.1、's16.1'）。
+                始终输出到 data-s{N}/ 目录。
 
     Returns:
         数据目录 Path 对象
     """
-    if season is None:
-        return MOBILE_DATA_DIR_DEFAULT
-    return Path(f"mobile-app/data-s{season}")
+    s = str(season).lstrip('sS')
+    return Path(f"mobile-app/data-s{s}")
+
+
+def sync_to_vue(data_dir: Path, season_label: str):
+    """在 bazaar-vue/public/ 下创建符号链接，指向 data_dir
+
+    Args:
+        data_dir: 版本化数据目录，如 mobile-app/data-s16.1/
+        season_label: 赛季标签，如 S16.1
+    """
+    import platform
+
+    vue_dir = VUE_PUBLIC_DIR
+    if not vue_dir.exists():
+        logger.error(f"bazaar-vue 目录不存在: {vue_dir.resolve()}")
+        return
+
+    dir_name = data_dir.name  # e.g. data-s16.1
+    link_path = vue_dir / dir_name
+    target_path = data_dir.resolve()
+
+    # 如果已存在相同的符号链接，跳过
+    if link_path.is_symlink():
+        existing_target = link_path.resolve()
+        if existing_target == target_path:
+            logger.info(f"符号链接已存在且正确: {link_path} -> {target_path}")
+            return
+        # 删除旧链接重建
+        if platform.system() == 'Windows':
+            os.rmdir(link_path)
+        else:
+            os.unlink(link_path)
+    elif link_path.exists():
+        logger.warning(f"{link_path} 是真实目录，跳过（请先删除后重试）")
+        return
+
+    # 创建符号链接
+    try:
+        if platform.system() == 'Windows':
+            os.symlink(str(target_path), str(link_path), target_is_directory=True)
+        else:
+            # Unix: 使用相对路径
+            rel_target = os.path.relpath(target_path, link_path.parent)
+            os.symlink(rel_target, str(link_path))
+        logger.info(f"✅ 已创建符号链接: {link_path} -> {target_path}")
+    except OSError as e:
+        logger.error(f"创建符号链接失败: {e}")
+        logger.error("Windows 下需要管理员权限或开启开发者模式")
 
 
 def build_all_data(data_dir: Path):
@@ -228,14 +276,18 @@ def main():
         help="数据获取方式（默认: auto）",
     )
     parser.add_argument(
-        "--season", "-s", type=int, default=None,
-        help=f"赛季编号（默认: 最新版本 S{LATEST_SEASON}，输出到 data/；指定则输出到 data-s{{N}}/）",
+        "--season", "-s", type=str, required=True,
+        help="赛季/补丁编号（必填），支持 16、16.1、s16.1 等格式，输出到 data-s{N}/",
+    )
+    parser.add_argument(
+        "--sync-vue", action="store_true", default=False,
+        help="在 bazaar-vue/public/ 下创建符号链接，共享数据",
     )
     args = parser.parse_args()
 
-    # 确定数据输出目录
+    # 确定数据输出目录（始终版本化）
     data_dir = get_data_dir(args.season)
-    season_label = f"S{args.season}" if args.season else f"S{LATEST_SEASON}（最新）"
+    season_label = f"S{str(args.season).lstrip('sS')}"
     os.makedirs(data_dir, exist_ok=True)
 
     heroes_to_fetch = [args.hero] if args.hero else HEROES
@@ -322,6 +374,10 @@ def main():
         print(f"  赛季: {season_label}")
         print(f"  目录: {data_dir.resolve()}")
         print(f"{'=' * 60}")
+
+        # 同步到 bazaar-vue（创建符号链接）
+        if args.sync_vue:
+            sync_to_vue(data_dir, season_label)
 
     finally:
         fetcher.close()
