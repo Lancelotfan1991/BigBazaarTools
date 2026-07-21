@@ -43,12 +43,13 @@ from rsc_parser import parse_search_content, extract_total_pages
 logger = logging.getLogger(__name__)
 
 
-def _info_to_record(info: dict, hero: str) -> dict:
+def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
     """把 rsc_parser 的中文键卡片信息映射为 parser.normalize_card 可消费的记录。
 
     Args:
         info: rsc_parser.extract_card_info 的输出（中文键）
         hero: 当前搜索的英雄（作为权威归属，因为使用了 t=t:hero 过滤）
+        category: 类别 "items" 或 "skills"，决定 type 字段（Item/Skill）
     """
     card_id = info.get("卡片ID") or ""
     name = info.get("名称") or ""
@@ -74,10 +75,13 @@ def _info_to_record(info: dict, hero: str) -> dict:
 
     icon = info.get("图标") or ""
 
+    # type 沿用历史契约（Item/Skill），供前端 typeZh 映射为 物品/技能；
+    # 具体品类（Weapon/Tool/... ）已保留在 display_tags 中，不放入 type，
+    # 否则前端会把英文品类原样显示在大小徽标右侧。
     return {
         "id": card_id,
         "name": name,
-        "type": tags[0] if tags else "",
+        "type": "Skill" if category == "skills" else "Item",
         "size": "",  # 新版全量 SSR 页面不再以文本形式渲染大小
         "base_tier": base_tier,
         "heroes": heroes,
@@ -452,7 +456,7 @@ class BazaarDBFetcher:
 
             page_new = 0
             for info in infos:
-                rec = _info_to_record(info, hero)
+                rec = _info_to_record(info, hero, category)
                 cid = rec["id"] or rec["name"]
                 if not cid or cid in seen_ids:
                     continue
