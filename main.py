@@ -16,6 +16,13 @@ import logging
 import sys
 import time
 
+# 确保控制台按 UTF-8 输出，避免 emoji/中文在 Windows CP936 控制台触发编码错误
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+
 from config import HEROES, HERO_NAMES_ZH, DEFAULT_HERO, OUTPUT_DIR
 from fetcher import BazaarDBFetcher
 from parser import (

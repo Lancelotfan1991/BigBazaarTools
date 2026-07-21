@@ -2,14 +2,14 @@
 
 通过 bazaardb.gg 的 RSC（React Server Components）端点获取数据。
 
-核心发现：
-- 搜索页面使用 Next.js RSC 渲染
+核心发现（16.2+ 新格式）：
+- 搜索页面使用 Next.js 全量服务端渲染的 RSC 组件树
 - 通过 Accept: text/x-component + RSC: 1 头可以获取纯数据
-- pageCards 包含卡片数据，total 表示总数
-- page 参数控制分页（1-indexed URL，0-indexed 数据）
+- 旧版 pageCards JSON 数组已不存在，卡片数据渲染在 React 组件树中，
+  由 rsc_parser 模块解析
+- 英雄过滤使用标签参数 t=t:{hero}（小写），物品与技能均生效
+- totalPages 表示总页数，page 参数控制分页（1-indexed）
 - 每页 10 张卡片
-- /api/card/{id} 端点需要认证（401），不能直接使用
-- /api/search 端点也需要认证（401）
 """
 
 import json
@@ -38,8 +38,62 @@ from config import (
     REQUEST_DELAY,
     SEARCH_URL,
 )
+from rsc_parser import parse_search_content, extract_total_pages
 
 logger = logging.getLogger(__name__)
+
+
+def _info_to_record(info: dict, hero: str) -> dict:
+    """把 rsc_parser 的中文键卡片信息映射为 parser.normalize_card 可消费的记录。
+
+    Args:
+        info: rsc_parser.extract_card_info 的输出（中文键）
+        hero: 当前搜索的英雄（作为权威归属，因为使用了 t=t:hero 过滤）
+    """
+    card_id = info.get("卡片ID") or ""
+    name = info.get("名称") or ""
+
+    # 品质：rawTier 形如 "Silver+"/"Gold+"/"Diamond"，去掉末尾 '+' 供中文映射
+    raw_tier = info.get("品质") or ""
+    base_tier = raw_tier.rstrip("+")
+
+    tags = info.get("标签") or []
+
+    # 英雄归属：t=t:hero 过滤已保证归属，优先用过滤英雄；保留卡面英雄标签作参考
+    heroes = [hero]
+
+    # 效果 → tooltips（数值分级 » 已在文本内联，无需 replacements）
+    tooltips = [{"text": e, "type": "", "condition": ""} for e in (info.get("效果") or [])]
+
+    # 冷却/多重释放放入 base_attributes（未知键会被 format_base_attributes 原样保留）
+    base_attributes = {}
+    if info.get("冷却"):
+        base_attributes["冷却时间(秒)"] = info["冷却"]
+    if info.get("多重释放"):
+        base_attributes["多重释放"] = info["多重释放"]
+
+    icon = info.get("图标") or ""
+
+    return {
+        "id": card_id,
+        "name": name,
+        "type": tags[0] if tags else "",
+        "size": "",  # 新版全量 SSR 页面不再以文本形式渲染大小
+        "base_tier": base_tier,
+        "heroes": heroes,
+        "tags": tags,
+        "display_tags": tags,
+        "base_attributes": base_attributes,
+        "tooltips": tooltips,
+        "tooltip_replacements": {},
+        "art": icon,
+        "art_large": icon,
+        "art_fg": "",
+        "uri": f"/card/{card_id}" if card_id else "",
+        "_hero_tag": info.get("英雄"),
+        "_cooldown": info.get("冷却"),
+        "_multicast": info.get("多重释放"),
+    }
 
 
 class BazaarDBFetcher:
@@ -356,41 +410,67 @@ class BazaarDBFetcher:
         return all_cards
 
     def search_cards(self, category: str, hero: str = DEFAULT_HERO, max_pages: int = None) -> list:
-        """
-        搜索指定分类的卡片数据（仅获取该分类专属内容）
+        """搜索指定英雄 + 分类的卡片数据（使用 t=t:{hero} 标签过滤，自动分页）。
 
-        - hero="Common" → 搜索通用物品/技能，过滤 Heroes 包含 "Common"
-        - hero="Vanessa" 等 → 搜索英雄专属，过滤 Heroes 包含对应英雄名
+        英雄过滤机制（16.2+）：搜索 URL 用标签参数 t=t:{hero}（小写），
+        物品与技能均生效，服务端直接返回该英雄专属卡池，无需再按 Heroes 字段过滤。
 
         Args:
             category: 类别 "items" 或 "skills"
-            hero: 分类名称，默认 Vanessa
+            hero: 英雄名（含 Common），默认 Vanessa
             max_pages: 最大页数限制（None 表示获取全部）
 
         Returns:
-            卡片数据列表
+            标准化记录列表（可直接交给 parser.normalize_card）
         """
-        is_common = (hero == "Common")
-        search_term = "Common" if is_common else hero.lower()
-        filter_key = "Common" if is_common else hero
+        tag_value = f"t:{hero.lower()}"
+        params = {"c": category, "t": tag_value}
+        base_search_url = f"{SEARCH_URL}?{urlencode(params)}"
 
-        logger.info(f"🔍 搜索 {filter_key} {category}...")
-        raw_cards = self._search_cards_raw(category, search_term, max_pages)
+        logger.info(f"🔍 搜索 {hero} {category}（过滤 {tag_value}）...")
 
-        # 过滤：只保留 Heroes 中包含当前分类的卡片
         seen_ids = set()
-        filtered = []
-        for card in raw_cards:
-            card_id = card.get("Id") or card.get("id") or card.get("Name")
-            if not card_id or card_id in seen_ids:
-                continue
-            heroes = card.get("Heroes") or []
-            if filter_key in heroes:
-                seen_ids.add(card_id)
-                filtered.append(card)
+        records = []
+        current_page = 1
+        total_pages = None
 
-        logger.info(f"📦 {filter_key} {category}: {len(filtered)} 个（搜索结果 {len(raw_cards)} 条）")
-        return filtered
+        while True:
+            page_url = f"{base_search_url}&page={current_page}"
+            rsc_content = self._fetch_rsc_page(page_url)
+            if not rsc_content:
+                logger.warning(f"第 {current_page} 页获取失败，停止分页")
+                break
+
+            infos, version, tp = parse_search_content(rsc_content)
+            if total_pages is None and tp:
+                total_pages = tp
+                logger.info(f"  数据版本={version}, 总页数={total_pages}")
+
+            if not infos:
+                logger.info(f"第 {current_page} 页无卡片，停止分页")
+                break
+
+            page_new = 0
+            for info in infos:
+                rec = _info_to_record(info, hero)
+                cid = rec["id"] or rec["name"]
+                if not cid or cid in seen_ids:
+                    continue
+                seen_ids.add(cid)
+                records.append(rec)
+                page_new += 1
+
+            logger.info(f"  第 {current_page}/{total_pages or '?'} 页: +{page_new}（累计 {len(records)}）")
+
+            if max_pages and current_page >= max_pages:
+                break
+            if total_pages and current_page >= total_pages:
+                break
+            current_page += 1
+            time.sleep(REQUEST_DELAY)
+
+        logger.info(f"📦 {hero} {category}: {len(records)} 个")
+        return records
 
     def fetch_hero_data(self, hero: str = DEFAULT_HERO, max_pages: int = None) -> dict:
         """
