@@ -44,13 +44,16 @@ from rsc_parser import parse_search_content, parse_game_content, extract_total_p
 logger = logging.getLogger(__name__)
 
 
-def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
+def _info_to_record(info: dict, hero: str, category: str = "items",
+                    size: str = "", name_en: str = "") -> dict:
     """把 rsc_parser 的中文键卡片信息映射为 parser.normalize_card 可消费的记录。
 
     Args:
         info: rsc_parser.extract_card_info 的输出（中文键）
         hero: 当前搜索的英雄（作为权威归属，因为使用了 t=t:hero 过滤）
         category: 类别 "items" 或 "skills"，决定 type 字段（Item/Skill）
+        size: 大小（Small/Medium/Large，来自大小标签全局扫描，17.0 卡面不再渲染）
+        name_en: 英文名（来自 en-US 双语拉取按卡片ID合并，17.0 slug 中文化后必须这样恢复）
     """
     card_id = info.get("卡片ID") or ""
     name = info.get("名称") or ""
@@ -79,11 +82,11 @@ def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
     # type 沿用历史契约（Item/Skill），供前端 typeZh 映射为 物品/技能；
     # 具体品类（Weapon/Tool/... ）已保留在 display_tags 中，不放入 type，
     # 否则前端会把英文品类原样显示在大小徽标右侧。
-    return {
+    rec = {
         "id": card_id,
         "name": name,
         "type": "Skill" if category == "skills" else "Item",
-        "size": "",  # 新版全量 SSR 页面不再以文本形式渲染大小
+        "size": size,
         "base_tier": base_tier,
         "heroes": heroes,
         "tags": tags,
@@ -99,6 +102,9 @@ def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
         "_cooldown": info.get("冷却"),
         "_multicast": info.get("多重释放"),
     }
+    if name_en:
+        rec["_originalTitleText"] = name_en
+    return rec
 
 
 def _is_package_card(name: str) -> bool:
@@ -129,18 +135,18 @@ def _strip_art_blur(mm: dict) -> dict:
     return mm
 
 
-def _game_info_to_record(info: dict, category: str) -> Optional[dict]:
+def _game_info_to_record(info: dict, category: str, en_slug: str = "") -> Optional[dict]:
     """把 parse_game_content 的卡片信息映射为 parser.normalize_card 可消费的记录。
 
-    17.0 站点不再提供游戏卡的英文名，英文名退化为 href slug
-    （英文页为英文连字符名，中文页为中文名）。
+    17.0 站点不再直接提供游戏卡的英文名，英文名恢复途径：
+    en-US 双语拉取后按卡片ID配对英文 slug（英文连字符名），失败时退化为中文名。
     """
     card_id = info.get("卡片ID") or ""
     name = info.get("名称") or info.get("slug") or ""
     if not name:
         return None
 
-    slug = info.get("slug") or ""
+    slug = en_slug or info.get("slug") or ""
     name_en = slug.replace("-", " ") if slug and slug.isascii() else name
 
     icon = info.get("图标") or ""
@@ -190,6 +196,8 @@ class BazaarDBFetcher:
         """
         self.method = method
         self.session = None
+        # 大小标签全局扫描缓存（卡片ID -> Small/Medium/Large），懒加载
+        self.size_map = None
 
     def _init_session_cloudscraper(self):
         """初始化 cloudscraper 会话"""
@@ -265,13 +273,15 @@ class BazaarDBFetcher:
         if self.session:
             self.session.close()
 
-    def _fetch_rsc_page(self, url: str, retries: int = MAX_RETRIES) -> Optional[str]:
+    def _fetch_rsc_page(self, url: str, retries: int = MAX_RETRIES,
+                        lang: str = "zh-CN,zh;q=0.9,en;q=0.8") -> Optional[str]:
         """
         获取 RSC 页面数据
 
         Args:
             url: 目标 URL
             retries: 最大重试次数
+            lang: Accept-Language 头；zh-CN 拿中文名，en-US 拿英文名（17.0 双语能力）
 
         Returns:
             RSC 响应文本
@@ -281,8 +291,7 @@ class BazaarDBFetcher:
             "RSC": "1",
             "Next-Url": url.replace(BASE_URL, ""),
             "User-Agent": HEADERS["User-Agent"],
-            # 使用中文获取中文物品名
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+            "Accept-Language": lang,
         }
 
         def _decode(resp):
@@ -447,6 +456,82 @@ class BazaarDBFetcher:
         logger.warning("_search_cards_raw 已弃用：17.0 站点不再返回 pageCards 格式")
         return []
 
+    def fetch_size_map(self) -> dict:
+        """全局扫描大小标签，构建 卡片ID -> Small/Medium/Large 映射。
+
+        17.0 起搜索页卡面不再渲染大小文本，但大小仍是可过滤标签：
+        search?c=items&t=t:small / t:medium / t:large 各返回对应大小的全部物品。
+        全量拉取三组标签（约 133 页）即可回填每张卡的大小。
+        结果缓存在 self.size_map，整个会话只扫一次。
+        """
+        if self.size_map is not None:
+            return self.size_map
+
+        size_map = {}
+        for size_en in ("Small", "Medium", "Large"):
+            tag = f"t:{size_en.lower()}"
+            base_url = f"{SEARCH_URL}?{urlencode({'c': CATEGORY_ITEMS, 't': tag})}"
+            page = 1
+            total_pages = None
+            while True:
+                rsc_content = self._fetch_rsc_page(f"{base_url}&page={page}")
+                if not rsc_content:
+                    logger.warning(f"大小扫描 {tag} 第 {page} 页失败，跳过该组剩余页")
+                    break
+                infos, _, tp = parse_search_content(rsc_content)
+                if total_pages is None and tp:
+                    total_pages = tp
+                    logger.info(f"📏 大小扫描 {size_en}: 总页数={total_pages}")
+                if not infos:
+                    break
+                for info in infos:
+                    cid = info.get("卡片ID")
+                    if cid:
+                        size_map[cid] = size_en
+                if total_pages and page >= total_pages:
+                    break
+                page += 1
+                time.sleep(REQUEST_DELAY)
+
+        logger.info(f"📏 大小映射构建完成: {len(size_map)} 张卡")
+        self.size_map = size_map
+        return size_map
+
+    def _fetch_en_name_map(self, base_search_url: str, total_pages: int) -> dict:
+        """en-US 二遍拉取：按卡片ID累积英文名映射。
+
+        zh/en 同一 page 参数的卡片集合不对齐（实测深页零交集），
+        必须各自拉完全部分页后在 ID 空间整体配对（跨页配对率实测 100%）。
+        单页失败重试一次后跳过，不阻断；缺失时英文名退化为中文名。
+        """
+        en_names = {}
+        failed_pages = []
+        for page in range(1, total_pages + 1):
+            page_url = f"{base_search_url}&page={page}"
+            content = self._fetch_rsc_page(page_url, lang="en-US,en;q=0.9")
+            if content:
+                infos, _, _ = parse_search_content(content)
+                for i in infos:
+                    cid = i.get("卡片ID")
+                    if cid:
+                        en_names[cid] = i.get("名称")
+            else:
+                failed_pages.append(page)
+            time.sleep(REQUEST_DELAY)
+        # 失败页重试一次
+        for page in failed_pages:
+            page_url = f"{base_search_url}&page={page}"
+            content = self._fetch_rsc_page(page_url, lang="en-US,en;q=0.9")
+            if content:
+                infos, _, _ = parse_search_content(content)
+                for i in infos:
+                    cid = i.get("卡片ID")
+                    if cid:
+                        en_names[cid] = i.get("名称")
+            time.sleep(REQUEST_DELAY)
+        logger.info(f"  英文名累积: {len(en_names)} 张卡")
+        return en_names
+
     def search_cards(self, category: str, hero: str = DEFAULT_HERO, max_pages: int = None) -> list:
         """搜索指定英雄 + 分类的卡片数据（使用 t=t:{hero} 标签过滤，自动分页）。
 
@@ -467,11 +552,15 @@ class BazaarDBFetcher:
 
         logger.info(f"🔍 搜索 {hero} {category}（过滤 {tag_value}）...")
 
+        # 物品才需要大小回填；大小映射懒加载（全会话只扫一次）
+        size_map = self.fetch_size_map() if category == CATEGORY_ITEMS else {}
+
         seen_ids = set()
         records = []
         current_page = 1
         total_pages = None
 
+        # 第一遍：zh-CN 拉全部分页
         while True:
             page_url = f"{base_search_url}&page={current_page}"
             rsc_content = self._fetch_rsc_page(page_url)
@@ -494,7 +583,11 @@ class BazaarDBFetcher:
                 if _is_package_card(info.get("名称")):
                     page_skipped_pkg += 1
                     continue
-                rec = _info_to_record(info, hero, category)
+                cid0 = info.get("卡片ID") or ""
+                rec = _info_to_record(
+                    info, hero, category,
+                    size=size_map.get(cid0, ""),
+                )
                 cid = rec["id"] or rec["name"]
                 if not cid or cid in seen_ids:
                     continue
@@ -511,6 +604,19 @@ class BazaarDBFetcher:
                 break
             current_page += 1
             time.sleep(REQUEST_DELAY)
+
+        # 第二遍：en-US 拉全部分页按 ID 累积英文名，回填记录
+        # （17.0 slug 中文化后的唯一恢复途径；zh/en 分页不对齐，必须跨页合并）
+        if records and total_pages:
+            en_pages = max_pages if max_pages else total_pages
+            en_names = self._fetch_en_name_map(base_search_url, en_pages)
+            filled = 0
+            for rec in records:
+                en_name = en_names.get(rec["id"], "")
+                if en_name:
+                    rec["_originalTitleText"] = en_name
+                    filled += 1
+            logger.info(f"  英文名回填: {filled}/{len(records)}")
 
         logger.info(f"📦 {hero} {category}: {len(records)} 个")
         return records
@@ -557,6 +663,39 @@ class BazaarDBFetcher:
     def fetch_all_karnok_data(self, **kwargs):
         """已弃用：请使用 fetch_hero_data"""
         return self.fetch_hero_data(**kwargs)
+
+    def _fetch_en_slug_map(self, category: str, total_pages: int) -> dict:
+        """en-US 二遍拉取：按卡片ID累积游戏卡英文 slug 映射。
+
+        与职业卡同理，zh/en 分页不对齐，必须跨页累积后按 ID 配对。
+        单页失败重试一次后跳过，不阻断。
+        """
+        en_slugs = {}
+        failed_pages = []
+        for page in range(1, total_pages + 1):
+            page_url = f"{SEARCH_URL}?{urlencode({'c': category})}&page={page}"
+            content = self._fetch_rsc_page(page_url, lang="en-US,en;q=0.9")
+            if content:
+                infos, _, _ = parse_game_content(content)
+                for i in infos:
+                    cid = i.get("卡片ID")
+                    if cid and i.get("slug"):
+                        en_slugs[cid] = i["slug"]
+            else:
+                failed_pages.append(page)
+            time.sleep(REQUEST_DELAY)
+        for page in failed_pages:
+            page_url = f"{SEARCH_URL}?{urlencode({'c': category})}&page={page}"
+            content = self._fetch_rsc_page(page_url, lang="en-US,en;q=0.9")
+            if content:
+                infos, _, _ = parse_game_content(content)
+                for i in infos:
+                    cid = i.get("卡片ID")
+                    if cid and i.get("slug"):
+                        en_slugs[cid] = i["slug"]
+            time.sleep(REQUEST_DELAY)
+        logger.info(f"  英文 slug 累积: {len(en_slugs)} 张卡")
+        return en_slugs
 
     def fetch_game_data(self, category: str) -> list:
         """
@@ -625,6 +764,18 @@ class BazaarDBFetcher:
                 break
             current_page += 1
             time.sleep(REQUEST_DELAY)
+
+        # 第二遍：en-US 拉全部分页按 ID 累积英文 slug，回填英文名
+        # （zh/en 分页不对齐，必须跨页合并；slug 中文化时退化为中文名）
+        if records and total_pages:
+            en_slugs = self._fetch_en_slug_map(category, total_pages)
+            filled = 0
+            for rec in records:
+                slug = en_slugs.get(rec["id"], "")
+                if slug and slug.isascii():
+                    rec["_originalTitleText"] = slug.replace("-", " ")
+                    filled += 1
+            logger.info(f"  英文名回填: {filled}/{len(records)}")
 
         logger.info(f"📦 {name}: {len(records)} 个")
         return records
