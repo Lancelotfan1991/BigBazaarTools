@@ -38,9 +38,10 @@ HERO_NAMES = [h for h in HEROES if h != "Common"]
 
 # 职业 → 搜索标签覆盖映射。
 # 默认标签为 hero 名小写（t=t:vanessa），此处仅登记例外：
-# 双龙的过滤标签是 t=t:dragon，而非 t:the dragons。
+# 双龙是多词英雄名，搜索引擎要求多词标签加引号：t:"the dragons"。
+# （无引号的 t:the+dragons 返回 0 条；t:dragon 仅命中带 Dragon 标签的卡，不是职业池）
 HERO_TAG_MAP = {
-    "The Dragons": "dragon",
+    "The Dragons": '"the dragons"',
 }
 
 # 中文职业名映射
