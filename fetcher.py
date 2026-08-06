@@ -101,6 +101,16 @@ def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
     }
 
 
+def _is_package_card(name: str) -> bool:
+    """判断是否为商人包裹卡（如 "Hef's Package" / "托克钟表店的包裹"）。
+
+    这类卡会被 t:hero 标签过滤命中（每个英雄池里都混入 60~90 张），
+    严重污染职业卡池，按用户要求统一剔除。
+    """
+    n = (name or "").strip().lower()
+    return n.endswith("package") or n.endswith("包裹")
+
+
 # 游戏数据类别 → 记录类型映射（沿用历史契约，与 16.2 输出一致）
 _GAME_TYPE_MAP = {
     CATEGORY_EVENTS: "EventEncounter",
@@ -479,7 +489,11 @@ class BazaarDBFetcher:
                 break
 
             page_new = 0
+            page_skipped_pkg = 0
             for info in infos:
+                if _is_package_card(info.get("名称")):
+                    page_skipped_pkg += 1
+                    continue
                 rec = _info_to_record(info, hero, category)
                 cid = rec["id"] or rec["name"]
                 if not cid or cid in seen_ids:
@@ -488,7 +502,8 @@ class BazaarDBFetcher:
                 records.append(rec)
                 page_new += 1
 
-            logger.info(f"  第 {current_page}/{total_pages or '?'} 页: +{page_new}（累计 {len(records)}）")
+            pkg_note = f"，剔除包裹卡 {page_skipped_pkg}" if page_skipped_pkg else ""
+            logger.info(f"  第 {current_page}/{total_pages or '?'} 页: +{page_new}（累计 {len(records)}{pkg_note}）")
 
             if max_pages and current_page >= max_pages:
                 break
