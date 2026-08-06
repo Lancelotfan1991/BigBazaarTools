@@ -33,12 +33,13 @@ from config import (
     HEADERS,
     HERO_NAMES,
     HERO_NAMES_ZH,
+    HERO_TAG_MAP,
     MAX_RETRIES,
     OUTPUT_DIR,
     REQUEST_DELAY,
     SEARCH_URL,
 )
-from rsc_parser import parse_search_content, extract_total_pages
+from rsc_parser import parse_search_content, parse_game_content, extract_total_pages
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,71 @@ def _info_to_record(info: dict, hero: str, category: str = "items") -> dict:
         "_cooldown": info.get("冷却"),
         "_multicast": info.get("多重释放"),
     }
+
+
+# 游戏数据类别 → 记录类型映射（沿用历史契约，与 16.2 输出一致）
+_GAME_TYPE_MAP = {
+    CATEGORY_EVENTS: "EventEncounter",
+    CATEGORY_MONSTERS: "CombatEncounter",
+    CATEGORY_TRAINERS: "EventEncounter",
+    CATEGORY_MERCHANTS: "EventEncounter",
+}
+
+
+def _strip_art_blur(mm: dict) -> dict:
+    """去掉 mm 里的 artBlur base64（数百 KB/页，下游不消费）"""
+    for key in ("board", "skills"):
+        for item in mm.get(key) or []:
+            if isinstance(item, dict):
+                item.pop("artBlur", None)
+    return mm
+
+
+def _game_info_to_record(info: dict, category: str) -> Optional[dict]:
+    """把 parse_game_content 的卡片信息映射为 parser.normalize_card 可消费的记录。
+
+    17.0 站点不再提供游戏卡的英文名，英文名退化为 href slug
+    （英文页为英文连字符名，中文页为中文名）。
+    """
+    card_id = info.get("卡片ID") or ""
+    name = info.get("名称") or info.get("slug") or ""
+    if not name:
+        return None
+
+    slug = info.get("slug") or ""
+    name_en = slug.replace("-", " ") if slug and slug.isascii() else name
+
+    icon = info.get("图标") or ""
+
+    rec = {
+        "id": card_id,
+        "name": name,
+        "_originalTitleText": name_en,
+        "Type": _GAME_TYPE_MAP.get(category, "EventEncounter"),
+        "Size": "Medium",
+        "BaseTier": info.get("品质") or "Bronze",
+        "Heroes": ["Common"],
+        "Tags": [],
+        "DisplayTags": [],
+        "BaseAttributes": {},
+        "Tooltips": [],
+        "Enchantments": {},
+        "Art": icon,
+        "ArtLarge": icon,
+        "Uri": f"/card/{card_id}" if card_id else "",
+        "Description": {"Text": info.get("描述") or ""} if category != CATEGORY_MONSTERS else {},
+    }
+
+    if category == CATEGORY_MONSTERS:
+        mm = info.get("mm")
+        if mm:
+            rec["MonsterMetadata"] = _strip_art_blur(mm)
+        if info.get("金币") is not None:
+            rec["RewardCombatGold"] = info["金币"]
+        if info.get("经验") is not None:
+            rec["RewardCombatXp"] = info["经验"]
+
+    return rec
 
 
 class BazaarDBFetcher:
@@ -366,52 +432,10 @@ class BazaarDBFetcher:
         return cards, total, page
 
     def _search_cards_raw(self, category: str, query: str, max_pages: int = None) -> list:
-        """
-        用指定搜索词获取卡片数据（自动分页）
-
-        Args:
-            category: 类别 "items" 或 "skills"
-            query: 搜索关键词
-            max_pages: 最大页数限制
-
-        Returns:
-            卡片数据列表（不做 Heroes 过滤）
-        """
-        params = {
-            "q": query,
-            "c": category,
-        }
-        base_search_url = f"{SEARCH_URL}?{urlencode(params)}"
-
-        all_cards = []
-        current_page = 1
-        empty_pages = 0
-
-        while True:
-            page_url = f"{base_search_url}&page={current_page}"
-            logger.info(f"获取第 {current_page} 页: {page_url}")
-
-            rsc_content = self._fetch_rsc_page(page_url)
-            if not rsc_content:
-                logger.warning(f"第 {current_page} 页获取失败，停止分页")
-                break
-
-            cards, total, page_idx = self._parse_rsc_page_cards(rsc_content)
-
-            if not cards:
-                logger.info(f"第 {current_page} 页无数据，停止分页 (共 {total} 条)")
-                break
-
-            all_cards.extend(cards)
-            logger.info(f"  获取到 {len(cards)} 张（总计: {len(all_cards)}/{total}）")
-
-            if max_pages and current_page >= max_pages:
-                break
-
-            current_page += 1
-            time.sleep(REQUEST_DELAY)
-
-        return all_cards
+        """已弃用（17.0 起 pageCards/"cards":[ 格式不存在），保留仅为兼容；
+        游戏数据请走 fetch_game_data → parse_game_content。"""
+        logger.warning("_search_cards_raw 已弃用：17.0 站点不再返回 pageCards 格式")
+        return []
 
     def search_cards(self, category: str, hero: str = DEFAULT_HERO, max_pages: int = None) -> list:
         """搜索指定英雄 + 分类的卡片数据（使用 t=t:{hero} 标签过滤，自动分页）。
@@ -427,7 +451,7 @@ class BazaarDBFetcher:
         Returns:
             标准化记录列表（可直接交给 parser.normalize_card）
         """
-        tag_value = f"t:{hero.lower()}"
+        tag_value = f"t:{HERO_TAG_MAP.get(hero, hero.lower())}"
         params = {"c": category, "t": tag_value}
         base_search_url = f"{SEARCH_URL}?{urlencode(params)}"
 
@@ -521,13 +545,20 @@ class BazaarDBFetcher:
 
     def fetch_game_data(self, category: str) -> list:
         """
-        获取游戏数据（事件/怪物/训练师）
+        获取游戏数据（事件/怪物/训练师/商人）
+
+        17.0 起游戏数据改为 RSC 卡片组件树渲染：
+        - monsters 为单页全量，卡片内含 mm 元数据块（day/health/board/skills）
+          与 '2 Gold'/'3 XP' 战斗奖励文本
+        - events/trainers/merchants 按 totalPages 分页
+        - 站点已不提供事件选项（EventOptionPoolTemplates）与英文名，
+          事件选项字段输出为空列表
 
         Args:
-            category: "events", "monsters", 或 "trainers"
+            category: "events", "monsters", "trainers" 或 "merchants"
 
         Returns:
-            卡片数据列表
+            parser.normalize_card 可消费的记录列表
         """
         category_names = {
             CATEGORY_EVENTS: "事件",
@@ -540,20 +571,45 @@ class BazaarDBFetcher:
         logger.info(f"开始获取{name}数据...")
         logger.info("=" * 50)
 
-        if category == CATEGORY_MONSTERS:
-            # monsters 一次返回全部，只需 page=1
-            raw_cards = self._search_cards_raw(category, "", max_pages=1)
-        else:
-            raw_cards = self._search_cards_raw(category, "")
-
-        # 去重
         seen_ids = set()
-        unique_cards = []
-        for card in raw_cards:
-            card_id = card.get("Id") or card.get("id") or card.get("Name") or card.get("name")
-            if card_id and card_id not in seen_ids:
-                seen_ids.add(card_id)
-                unique_cards.append(card)
+        records = []
+        current_page = 1
+        total_pages = 1 if category == CATEGORY_MONSTERS else None
 
-        logger.info(f"📦 {name}: {len(unique_cards)} 个")
-        return unique_cards
+        while True:
+            page_url = f"{SEARCH_URL}?{urlencode({'c': category})}&page={current_page}"
+            rsc_content = self._fetch_rsc_page(page_url)
+            if not rsc_content:
+                logger.warning(f"第 {current_page} 页获取失败，停止分页")
+                break
+
+            infos, version, tp = parse_game_content(rsc_content)
+            if total_pages is None and tp:
+                total_pages = tp
+                logger.info(f"  数据版本={version}, 总页数={total_pages}")
+
+            if not infos:
+                logger.info(f"第 {current_page} 页无卡片，停止分页")
+                break
+
+            page_new = 0
+            for info in infos:
+                rec = _game_info_to_record(info, category)
+                if rec is None:
+                    continue
+                cid = rec["id"]
+                if not cid or cid in seen_ids:
+                    continue
+                seen_ids.add(cid)
+                records.append(rec)
+                page_new += 1
+
+            logger.info(f"  第 {current_page}/{total_pages or '?'} 页: +{page_new}（累计 {len(records)}）")
+
+            if total_pages and current_page >= total_pages:
+                break
+            current_page += 1
+            time.sleep(REQUEST_DELAY)
+
+        logger.info(f"📦 {name}: {len(records)} 个")
+        return records

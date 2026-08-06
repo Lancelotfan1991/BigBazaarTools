@@ -1,0 +1,1814 @@
+{
+  "职业": "双龙",
+  "英文名": "The Dragons",
+  "获取时间": "2026-08-06 10:02:43",
+  "物品数量": 30,
+  "技能数量": 14,
+  "物品": [
+    {
+      "名称": "Dragon Lighter",
+      "英文名": "Dragon Lighter",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Tool",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成4 » 8 » 12 » 16灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "2 : This and adjacent items gain 1 » 2 » 3 » 4",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/121a6c9541d1ce49199c1a734e683c4bfa334365@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/11zvx751vtgpsp831bfm30bz7mn",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragon Statue",
+      "英文名": "Dragon Statue",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Property"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use an adjacent item, Heal 10 » 20 » 40 » 80",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "当敌人将要摧毁己方物品时，则改为摧毁此物品。",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/a777c28728a3b60c27f10a4c1dbe0adc406be6a0@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/66y559ffjy4wdssbm3g48n4zs",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragon's Breath Mints",
+      "英文名": "Dragon's Breath Mints",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Food",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "3.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成3 » 6 » 9 » 12灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "5 : Freeze 3 items 1 second(s)",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/e1cfa4832eb3f4683d55bbd5a9121a412e4ce0b6@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/1691wm13xglxnzt10xywfgv76x3",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragonheart Pendant",
+      "英文名": "Dragonheart Pendant",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "7.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得5 » 10 » 20 » 40护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "造成1 » 2 » 3 » 4灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "This has +1 Multicast for each adjacent Dragon item",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/3efe5acadf5336f3ceb5a1fcbadab7b56c22a2ce@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/10htny624wqnvcwnbhg9td3bn95",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Hairpins",
+      "英文名": "Hairpins",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Weapon",
+        "Apparel",
+        "Tool",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得20 » 40 » 80 » 160护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you Crit with this, Deal Damage equal to triple its Shield",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/503feab938104482581cd15116ca83b2fe222e92@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/6h83tqtvpk35zqzxnl162pqwvc",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Hoodie",
+      "英文名": "Hoodie",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Weapon",
+        "Dragon"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use an Instrument, deal 25 » 50 Damage",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use an Apparel, Shield 25 » 50",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use a Friend, Heal 25 » 50",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/414adfc71a3bcccca89a03797b552f7f490fbf20@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/g3c89ng02q6clxl0zws8sxlg4z",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Jin Chibi",
+      "英文名": "Jin Chibi",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Toy",
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得10 » 20 » 40 » 80护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "Adjacent items have +10 » +20 » +30 » +40 and +10 » +20 » +30 » +40",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/c8ac823d2e5069172c07449bb31190b2a87f1893@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/t68zy5phw3wcjyqtj4t9vwmndm",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Keytar",
+      "英文名": "Keytar",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Instrument",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "2 : Haste your Instruments 1 second(s)",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use an Instrument, Burn 4 » 8 » 12",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/e67f71d003860a8e42247e85fa2afd38fa3bb7ab@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/15qv5ggfx7zchw09y816ftbwc88",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Kicks",
+      "英文名": "Kicks",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "治疗10生命值",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "获得10护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use another Dragon or Apparel item, this gains 5 » 10 » 20 » 40 and 5 » 10 » 20 » 40",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/b67acec44b1bba13e672b0da109e06a91276a03b@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/19vm31v4xpp1vhdx251sydbqbz6",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Patch",
+      "英文名": "Patch",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "治疗30 » 60 » 120 » 240生命值",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you Heal or Slow, an item gains 3% » 6% » 9% » 12% Crit Chance",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/52e2f4a6f555367b2daaefc0b20843f7dc5bd8f5@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/133wn7wj5jh8pvsd0w5kf72v74f",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Rin Chibi",
+      "英文名": "Rin Chibi",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Toy",
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "治疗10 » 20 » 40 » 80生命值",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "Adjacent items have +10 » +20 » +30 » +40 and +10 » +20 » +30 » +40",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/b1ecb62fb9cf270f406d6b3d3b5902388b1a8374@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/119y4xwppfb04dbhvpzjx0f59g",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Rings",
+      "英文名": "Rings",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "6.0 » 5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Gain 1 Tempo",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "If you have another item with Burn, Slow, Shield, or Haste, this has +1 Multicast for each",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/8eb7686df2f646d69691c76a806dee2d12bae4bf@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/n0pksvz1n15hqtlf1118xd6cxp",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Scaled Jacket",
+      "英文名": "Scaled Jacket",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "6.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得100 » 200护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use an adjacent Flying or Dragon item, Burn equal to 10% of this item's Shield",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/2da028c9e4f50aedb32fe2b611f5431621c248ec@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/vv70gz9dgyxd7xyw9qh9bxx0vw",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Scorch",
+      "英文名": "Scorch",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "6.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成4 » 8 » 12灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use a Dragon or Burn item, this gains 4 » 8 » 12 Burn",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/abe07f7693d8e31c5111d184b0ec984a0bed9573@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/sv1c0p2jdh325w52tpjbbjlj96",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Smoke Machine",
+      "英文名": "Smoke Machine",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Tool",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成3 » 6 » 9灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you Burn, Shield 15 » 30 » 60",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/dd7c8b1d5fbb96b2f51955f68e51edfde6654030@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/g3d8wpzyvpxk7fd9ks277pv7pv",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Smokey",
+      "英文名": "Smokey",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Friend"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Slow an item 1 » 2 » 3 second(s)",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "9 : Burn 33 » 66 » 99",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/f511d811b3cb4ea1f41cdb94e4f8bcfe9b937420@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/110g2sbhjghphqwt9b9nqnqd8m6",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Talon Earrings",
+      "英文名": "Talon Earrings",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Apparel"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0 » 4.0 » 3.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "充能左侧相邻的物品1秒",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "If the item to the left is a Dragon, this has double Charge",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/568fa75c5bb89330fae2a5c6bf70ee533a34f792@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/j0p0019fdkcs3g4fx5p30g1p0f",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Whistling Glaive",
+      "英文名": "Whistling Glaive",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Weapon",
+        "Instrument"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "10.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Spend All Tempo:\nDeal 100 » 150 Damage for each Tempo spent",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When this becomes Frozen or Slowed, spend 1 Tempo and remove it",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/c703089b04b63547388afa801d59ed88d56f4c88@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/by0t0m2h64wv7qnst05782xmq5",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Wings",
+      "英文名": "Wings",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "3.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Haste your other Flying items 2 second(s)",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "相邻物品开始飞行",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use a Flying item, Heal 20 » 40 » 80",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/42c6861fd701c42e8e8536181bcf29b1cb9eee3e@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/9k5wzvfqt6l4b1yt6mg1pw627s",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "活动海报",
+      "英文名": "活动海报",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Charge 1 » 2 » 3 other Dragon(s) 1 second",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "相邻物品视为巨龙",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/fbf5af02157767b6743a7038a219842c529a589e@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/c7q0yvk7cssmfp50z6235bnc3w",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "风之巨龙",
+      "英文名": "风之巨龙",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Friend",
+        "Dragon",
+        "Weapon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0 » 4.0 » 3.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "此物品和另一件物品开始飞行",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use a Dragon or Flying item, Haste it 1 second(s) and deal 10 » 15 » 20 Damage",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/777755e4dd823bec4656129d2e5cd3b0f42d5e1f@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/8kn50s4vyycdkwddc18x0j7cqz",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "空惧巨龙",
+      "英文名": "空惧巨龙",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Friend",
+        "Weapon",
+        "Dragon",
+        "Vehicle"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "此物品开始或停止飞行",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "此物品开始飞行时，造成10 » 20 » 30灼烧，且此物品获得100 » 200 » 400",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "此物品停止飞行时，造成100 » 200 » 400伤害，且此物品获得10 » 20 » 30",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/f248eb0979c58e1b514e397d5f4794593c1ff146@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/22nq8smvlw9f5q74gnsy59zp2q",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨魔龙",
+      "英文名": "巨魔龙",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Dinosaur",
+        "Weapon",
+        "Friend"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "9.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成50 » 100 » 200伤害",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "造成灼烧，等量于此物品伤害的10%",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "每场战斗中首次有任意玩家的生命值降至一半以下时，摧毁一件小型物品。",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "当你摧毁物品时，使用此物品。",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/520e1e87cf88c327465f543981c6477b9a016a36@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/13zdtx9wmnmgtmy5xh0c5zj55c2",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙吐息",
+      "英文名": "巨龙吐息",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Potion",
+        "Relic"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "8.0 » 7.0 » 6.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成10灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "使用相邻物品或飞行物品时，此物品获得5 » 10 » 15",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "当你购买此物品时，获得一件来自任意英雄的小型灼烧物品",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/dd1bac91c5038c69c634b45ef8a6ba07a5dc4f96@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/g698j0v3hlh14hfmzqngx42m93",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙崽崽",
+      "英文名": "巨龙崽崽",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Weapon",
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "9.0 » 8.0 » 7.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "此物品开始飞行",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "造成5伤害",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "造成灼烧，等量于此物品伤害",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/1cb8388323e7d203a2352f4eafdf462117ebbabd@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/50dcy1f5m47wy1jv8vf557d6mk",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙心",
+      "英文名": "巨龙心",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "传说",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Relic"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "11.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "使一件物品的灼烧翻倍",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "当你触发灼烧或使用飞行物品时，充能此物品2秒",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/279aecf5a7d771f53e5f170f337d4d11b55f17a5@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/7dgplj2z199bnk5wy0f9v0vb25",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙牙",
+      "英文名": "巨龙牙",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Weapon",
+        "Dragon",
+        "Relic"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成10伤害",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "At the start of each fight with Dragon Tooth, spend 3 Gold and your items permanently gain 4 » 8 » 12 Damage",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/bc6da79b4467dd3604762ae373756d8ca730d058@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/98l0y73j695tfx7cqfsyg9l1xf",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙翼",
+      "英文名": "巨龙翼",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "6.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "一件物品开始飞行",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "获得40 » 80 » 160护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "触发灼烧时，充能此物品2秒",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/aefa24d0a117394689e14f48066d7c0552a0fb46@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/6fk3sqmq5262tlc0z8dck0dwk9",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙肉排",
+      "英文名": "巨龙肉排",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Food",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "7.0 » 5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成灼烧，等量于此物品的暴击率",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "高温时：己方其他物品+25% » +50%暴击率",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/5da57ffaf292f19bd2067eec0eb738eb22ca04a9@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/11j2vc3p63cvh86t7gg471yb353",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "火龙瓜",
+      "英文名": "火龙瓜",
+      "类型": "Item",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Food",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "8.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得护盾，等量于你最大生命值的15% » 20%",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "霜冻时：你+25%最大生命值",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/7fb1cde52bf43a261dbfec454433356af5e5e6e0@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/nj624b7bvmng3yjhpjcg9g75jq",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    }
+  ],
+  "技能": [
+    {
+      "名称": "Draconic Might",
+      "英文名": "Draconic Might",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Weapon"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use a Flying or Dragon item, your items gain 3 » 6 » 9 Damage",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/0e8c0714e12ffbc14284553fc2b861d63c870663@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/k0tjgc4kzmc693hzj9mj4l2y1w",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Draconic Passion",
+      "英文名": "Draconic Passion",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use a Flying or Dragon item, your items gain 1 » 2 » 3 Burn",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/e486af9516943e1ba196a6a517aed7b6fe3d8e80@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/159p9txj6f804zzsp0g49syn562",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Draconic Resolve",
+      "英文名": "Draconic Resolve",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use a Flying or Dragon item, your items gain 3 » 6 » 9 Shield",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/fdcd0534a5ddd295276ea7f36acde22f86b01900@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/qbmzgw9h4h6xq3x64qp1vdl578",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Honorary Dragons",
+      "英文名": "Honorary Dragons",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "钻石",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Drone"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "Your Drones are Dragons",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/19fcee4da92c365409f03082d8c1d821e9eb3325@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/w9ltq0mnzzqbl3kfxxp7qd9b6m",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragon Lighter",
+      "英文名": "Dragon Lighter",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Tool",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成4 » 8 » 12 » 16灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "2 : This and adjacent items gain 1 » 2 » 3 » 4",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/121a6c9541d1ce49199c1a734e683c4bfa334365@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/11zvx751vtgpsp831bfm30bz7mn",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragon Statue",
+      "英文名": "Dragon Statue",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Dragon",
+        "Property"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use an adjacent item, Heal 10 » 20 » 40 » 80",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "当敌人将要摧毁己方物品时，则改为摧毁此物品。",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/a777c28728a3b60c27f10a4c1dbe0adc406be6a0@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/66y559ffjy4wdssbm3g48n4zs",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragon's Breath Mints",
+      "英文名": "Dragon's Breath Mints",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Food",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "3.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "造成3 » 6 » 9 » 12灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "5 : Freeze 3 items 1 second(s)",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/e1cfa4832eb3f4683d55bbd5a9121a412e4ce0b6@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/1691wm13xglxnzt10xywfgv76x3",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Dragonheart Pendant",
+      "英文名": "Dragonheart Pendant",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "7.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得5 » 10 » 20 » 40护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "造成1 » 2 » 3 » 4灼烧",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "This has +1 Multicast for each adjacent Dragon item",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/3efe5acadf5336f3ceb5a1fcbadab7b56c22a2ce@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/10htny624wqnvcwnbhg9td3bn95",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Hairpins",
+      "英文名": "Hairpins",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Weapon",
+        "Apparel",
+        "Tool",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得20 » 40 » 80 » 160护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you Crit with this, Deal Damage equal to triple its Shield",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/503feab938104482581cd15116ca83b2fe222e92@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/6h83tqtvpk35zqzxnl162pqwvc",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Hoodie",
+      "英文名": "Hoodie",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "金",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Weapon",
+        "Dragon"
+      ],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "When you use an Instrument, deal 25 » 50 Damage",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use an Apparel, Shield 25 » 50",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use a Friend, Heal 25 » 50",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/414adfc71a3bcccca89a03797b552f7f490fbf20@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/g3c89ng02q6clxl0zws8sxlg4z",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Jin Chibi",
+      "英文名": "Jin Chibi",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Toy",
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "4.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "获得10 » 20 » 40 » 80护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "Adjacent items have +10 » +20 » +30 » +40 and +10 » +20 » +30 » +40",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/c8ac823d2e5069172c07449bb31190b2a87f1893@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/t68zy5phw3wcjyqtj4t9vwmndm",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Keytar",
+      "英文名": "Keytar",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "银",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Instrument",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "2 : Haste your Instruments 1 second(s)",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use an Instrument, Burn 4 » 8 » 12",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/e67f71d003860a8e42247e85fa2afd38fa3bb7ab@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/15qv5ggfx7zchw09y816ftbwc88",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Kicks",
+      "英文名": "Kicks",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Apparel",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "治疗10生命值",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "获得10护盾",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you use another Dragon or Apparel item, this gains 5 » 10 » 20 » 40 and 5 » 10 » 20 » 40",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/b67acec44b1bba13e672b0da109e06a91276a03b@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/19vm31v4xpp1vhdx251sydbqbz6",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    },
+    {
+      "名称": "Patch",
+      "英文名": "Patch",
+      "类型": "Skill",
+      "大小": "",
+      "基础品质": "铜",
+      "所属职业": [
+        "双龙"
+      ],
+      "显示标签": [
+        "Friend",
+        "Dragon"
+      ],
+      "基础属性": {
+        "冷却时间(秒)": "5.0"
+      },
+      "品质层级": {},
+      "效果说明": [
+        {
+          "text": "治疗30 » 60 » 120 » 240生命值",
+          "type": "",
+          "condition": ""
+        },
+        {
+          "text": "When you Heal or Slow, an item gains 3% » 6% » 9% » 12% Crit Chance",
+          "type": "",
+          "condition": ""
+        }
+      ],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/52e2f4a6f555367b2daaefc0b20843f7dc5bd8f5@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/133wn7wj5jh8pvsd0w5kf72v74f",
+      "描述": "",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "",
+      "事件选项": []
+    }
+  ]
+}

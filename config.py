@@ -30,10 +30,18 @@ HEROES = [
     "Mak",         # 马克
     "Stelle",      # 斯特尔
     "Jules",       # 朱尔斯
+    "The Dragons", # 双龙（S17 新职业）
 ]
 
 # 纯英雄列表（不含 Common 和 All）
 HERO_NAMES = [h for h in HEROES if h != "Common"]
+
+# 职业 → 搜索标签覆盖映射。
+# 默认标签为 hero 名小写（t=t:vanessa），此处仅登记例外：
+# 双龙的过滤标签是 t=t:dragon，而非 t:the dragons。
+HERO_TAG_MAP = {
+    "The Dragons": "dragon",
+}
 
 # 中文职业名映射
 HERO_NAMES_ZH = {
@@ -45,6 +53,7 @@ HERO_NAMES_ZH = {
     "Mak": "马克",
     "Stelle": "斯特尔",
     "Jules": "朱尔斯",
+    "The Dragons": "双龙",
 }
 
 # 全部数据（合并所有分类，不单独获取）
