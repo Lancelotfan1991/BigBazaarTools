@@ -1,7 +1,7 @@
 {
   "职业": "怪物",
   "英文名": "monsters",
-  "获取时间": "2026-08-06 15:12:58",
+  "获取时间": "2026-08-07 15:00:33",
   "物品数量": 143,
   "技能数量": 0,
   "物品": [
@@ -1395,7 +1395,7 @@
         "血量": 450,
         "物品栏": [
           {
-            "名称": "Rin Chibi",
+            "名称": "Q版鳞娃娃",
             "图片": "https://s.bazaardb.gg/v1/z17.0/b1ecb62fb9cf270f406d6b3d3b5902388b1a8374@256.webp?v=8",
             "大小": "Small",
             "品质": "Silver"
@@ -3150,7 +3150,7 @@
         "血量": 900,
         "物品栏": [
           {
-            "名称": "Sparkler",
+            "名称": "烟花棒",
             "图片": "https://s.bazaardb.gg/v1/z17.0/8ab76bd61df1e228966e05d2bd3eb71422fe994d@256.webp?v=8",
             "大小": "Small",
             "品质": "Silver"
@@ -3616,8 +3616,8 @@
             "品质": "Silver"
           },
           {
-            "名称": "闪电蝴蝶",
-            "图片": "https://s.bazaardb.gg/v1/z17.0/40f999a295c28969f0e5cede382d156939acc912@256.webp?v=8",
+            "名称": "烟花无人机",
+            "图片": "https://s.bazaardb.gg/v1/z17.0/e35ff0fe726bd4eee136b0a02f8b2b84384ccc12@256.webp?v=8",
             "大小": "Small",
             "品质": "Silver"
           },
@@ -4966,7 +4966,7 @@
             "品质": "Silver"
           },
           {
-            "名称": "Dragon Lighter",
+            "名称": "巨龙打火机",
             "图片": "https://s.bazaardb.gg/v1/z17.0/121a6c9541d1ce49199c1a734e683c4bfa334365@256.webp?v=8",
             "大小": "Small",
             "品质": "Silver"
@@ -6064,7 +6064,7 @@
         "血量": 1700,
         "物品栏": [
           {
-            "名称": "Dragon's Breath Mints",
+            "名称": "龙息薄荷糖",
             "图片": "https://s.bazaardb.gg/v1/z17.0/e1cfa4832eb3f4683d55bbd5a9121a412e4ce0b6@256.webp?v=8",
             "大小": "Small",
             "品质": "Silver"
@@ -7588,7 +7588,7 @@
             "品质": "Gold"
           },
           {
-            "名称": "Power Bank",
+            "名称": "充电宝",
             "图片": "https://s.bazaardb.gg/v1/z17.0/f71efecdbbcba3aec65e5f58d209a7ed9ff932ac@256.webp?v=8",
             "大小": "Small",
             "品质": "Gold"

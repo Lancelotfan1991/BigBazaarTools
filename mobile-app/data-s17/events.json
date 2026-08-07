@@ -1,106 +1,10 @@
 {
   "职业": "事件",
   "英文名": "events",
-  "获取时间": "2026-08-06 15:11:04",
+  "获取时间": "2026-08-07 15:00:28",
   "物品数量": 326,
   "技能数量": 0,
   "物品": [
-    {
-      "名称": "Dragon Up",
-      "英文名": "Dragon Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "铜",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/16mxfhcj362ndptv57nny1mdhp5",
-      "描述": "Get a Bronze-tier Dragon item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Bronze-tier Dragon item",
-      "事件选项": []
-    },
-    {
-      "名称": "Equipment Van",
-      "英文名": "Equipment Van",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "铜",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/5yc0vtpyxzx34gs44nbv3qwgyp",
-      "描述": "Get a Bronze-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Bronze-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Instrument Up",
-      "英文名": "Instrument Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "铜",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/bs44jlbczglb9tfc924xkm9yj8",
-      "描述": "Get a Bronze-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Bronze-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Tempo Up",
-      "英文名": "Tempo Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "铜",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/1606261x4ltqhtclxs1yshnhspy",
-      "描述": "Get a Bronze-tier Tempo item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Bronze-tier Tempo item",
-      "事件选项": []
-    },
     {
       "名称": "丛林遗迹",
       "英文名": "Jungle Ruins",
@@ -147,6 +51,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件青铜级食物",
+      "事件选项": []
+    },
+    {
+      "名称": "乐器升级",
+      "英文名": "Instrument Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/bs44jlbczglb9tfc924xkm9yj8",
+      "描述": "获得一件青铜级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件青铜级乐器。",
       "事件选项": []
     },
     {
@@ -654,6 +582,30 @@
       "事件选项": []
     },
     {
+      "名称": "巨龙升级",
+      "英文名": "Dragon Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/16mxfhcj362ndptv57nny1mdhp5",
+      "描述": "获得一件青铜级巨龙物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件青铜级巨龙物品",
+      "事件选项": []
+    },
+    {
       "名称": "怒火熔炉",
       "英文名": "Rageforge",
       "类型": "EventEncounter",
@@ -1014,6 +966,30 @@
       "事件选项": []
     },
     {
+      "名称": "节奏升级",
+      "英文名": "Tempo Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/1606261x4ltqhtclxs1yshnhspy",
+      "描述": "获得一件青铜级节奏物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件青铜级节奏物品",
+      "事件选项": []
+    },
+    {
       "名称": "茸茸小怪兽",
       "英文名": "Tiny Furry Monster",
       "类型": "EventEncounter",
@@ -1206,6 +1182,30 @@
       "事件选项": []
     },
     {
+      "名称": "装备车",
+      "英文名": "Equipment Van",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "铜",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/5yc0vtpyxzx34gs44nbv3qwgyp",
+      "描述": "获得一件青铜级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件青铜级乐器。",
+      "事件选项": []
+    },
+    {
       "名称": "赛道",
       "英文名": "Racetrack",
       "类型": "EventEncounter",
@@ -1350,102 +1350,6 @@
       "事件选项": []
     },
     {
-      "名称": "Dragon Up",
-      "英文名": "Dragon Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "银",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/1g3cs6yxlvc3y2n5nths0257fp",
-      "描述": "Get a Silver-tier Dragon item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Silver-tier Dragon item",
-      "事件选项": []
-    },
-    {
-      "名称": "Equipment Van",
-      "英文名": "Equipment Van",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "银",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/ncy5phsw33g3w50yjxwjmt04pf",
-      "描述": "Get a Silver-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Silver-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Instrument Up",
-      "英文名": "Instrument Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "银",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/zlhtsv6mbf98mp9g5qxcs2dcbd",
-      "描述": "Get a Silver-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Silver-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Tempo Up",
-      "英文名": "Tempo Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "银",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/163yp8x3vwftjq685b6dh6pkss2",
-      "描述": "Get a Silver-tier Tempo item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Silver-tier Tempo item",
-      "事件选项": []
-    },
-    {
       "名称": "丰硕收获",
       "英文名": "Bountiful Harvest",
       "类型": "EventEncounter",
@@ -1467,6 +1371,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件白银级食物",
+      "事件选项": []
+    },
+    {
+      "名称": "乐器升级",
+      "英文名": "Instrument Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/zlhtsv6mbf98mp9g5qxcs2dcbd",
+      "描述": "获得一件白银级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件白银级乐器。",
       "事件选项": []
     },
     {
@@ -2019,6 +1947,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件白银级工具",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙升级",
+      "英文名": "Dragon Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/1g3cs6yxlvc3y2n5nths0257fp",
+      "描述": "获得一件白银级巨龙物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件白银级巨龙物品",
       "事件选项": []
     },
     {
@@ -2646,6 +2598,30 @@
       "事件选项": []
     },
     {
+      "名称": "节奏升级",
+      "英文名": "Tempo Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/163yp8x3vwftjq685b6dh6pkss2",
+      "描述": "获得一件白银级节奏物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件白银级节奏物品",
+      "事件选项": []
+    },
+    {
       "名称": "荒废地产",
       "英文名": "Abandoned Property",
       "类型": "EventEncounter",
@@ -2835,6 +2811,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件白银级伙伴",
+      "事件选项": []
+    },
+    {
+      "名称": "装备车",
+      "英文名": "Equipment Van",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "银",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/ncy5phsw33g3w50yjxwjmt04pf",
+      "描述": "获得一件白银级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件白银级乐器。",
       "事件选项": []
     },
     {
@@ -3030,102 +3030,6 @@
       "事件选项": []
     },
     {
-      "名称": "Dragon Up",
-      "英文名": "Dragon Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "金",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/19stdl5626k3vcbqy9tvf45gl49",
-      "描述": "Get a Gold-tier Dragon item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Gold-tier Dragon item",
-      "事件选项": []
-    },
-    {
-      "名称": "Equipment Van",
-      "英文名": "Equipment Van",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "金",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/cbcvbwvfcs755d56g9h28pszdl",
-      "描述": "Get a Gold-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Gold-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Instrument Up",
-      "英文名": "Instrument Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "金",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/15lf24sm16w3plfbts0ks9js8j9",
-      "描述": "Get a Gold-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Gold-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Tempo Up",
-      "英文名": "Tempo Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "金",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/17k73d3kn2msw58tq5t4d3zb95b",
-      "描述": "Get a Gold-tier Tempo item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Gold-tier Tempo item",
-      "事件选项": []
-    },
-    {
       "名称": "丰硕收获",
       "英文名": "Bountiful Harvest",
       "类型": "EventEncounter",
@@ -3147,6 +3051,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件黄金级食物",
+      "事件选项": []
+    },
+    {
+      "名称": "乐器升级",
+      "英文名": "Instrument Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/15lf24sm16w3plfbts0ks9js8j9",
+      "描述": "获得一件黄金级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件黄金级乐器。",
       "事件选项": []
     },
     {
@@ -3819,6 +3747,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件黄金级工具",
+      "事件选项": []
+    },
+    {
+      "名称": "巨龙升级",
+      "英文名": "Dragon Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/19stdl5626k3vcbqy9tvf45gl49",
+      "描述": "获得一件黄金级巨龙物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件黄金级巨龙物品",
       "事件选项": []
     },
     {
@@ -4518,6 +4470,30 @@
       "事件选项": []
     },
     {
+      "名称": "节奏升级",
+      "英文名": "Tempo Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/17k73d3kn2msw58tq5t4d3zb95b",
+      "描述": "获得一件黄金级节奏物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件黄金级节奏物品",
+      "事件选项": []
+    },
+    {
       "名称": "芬恩饱餐餐厅",
       "英文名": "Finn's Big Bite",
       "类型": "EventEncounter",
@@ -4782,6 +4758,30 @@
       "事件选项": []
     },
     {
+      "名称": "装备车",
+      "英文名": "Equipment Van",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "金",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/cbcvbwvfcs755d56g9h28pszdl",
+      "描述": "获得一件黄金级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件黄金级乐器。",
+      "事件选项": []
+    },
+    {
       "名称": "许愿喷泉",
       "英文名": "Wishing Fountain",
       "类型": "EventEncounter",
@@ -4991,10 +4991,10 @@
       "图片链接": "https://s.bazaardb.gg/v1/z17.0/479ac0a493ab8f46ca57cb97e63aff93635783af_p@256.webp?v=8",
       "图标链接": "",
       "详情链接": "https://bazaardb.gg/card/pvzwq5p19kpf63zt7fgw4x8s2d",
-      "描述": "Add Notes to your Board",
+      "描述": "为你的布阵区添加音符",
       "怪物信息": null,
       "战斗奖励": null,
-      "事件描述": "Add Notes to your Board",
+      "事件描述": "为你的布阵区添加音符",
       "事件选项": []
     },
     {
@@ -5070,126 +5070,6 @@
       "事件选项": []
     },
     {
-      "名称": "Dragon Up",
-      "英文名": "Dragon Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "钻石",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/jml0qjsj8b28g6zb4k7qv0p6z2",
-      "描述": "Get a Diamond-tier Dragon item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Diamond-tier Dragon item",
-      "事件选项": []
-    },
-    {
-      "名称": "Equipment Van",
-      "英文名": "Equipment Van",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "钻石",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/n41m50h79f2wyh7j78k87nf382",
-      "描述": "Get a Diamond-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Diamond-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Instrument Up",
-      "英文名": "Instrument Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "钻石",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/11zmd46kgvyf1b7vsm6x30q3szx",
-      "描述": "Get a Diamond-tier Instrument",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Diamond-tier Instrument",
-      "事件选项": []
-    },
-    {
-      "名称": "Mama Bear",
-      "英文名": "Mama Bear",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "钻石",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/ee4f0884afd1e3c21edfb2345e395d9dac93f672_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/8vkb0htg1049vg9z1npv3v50d2",
-      "描述": "Teaches skills unique to The Dragons 1 8 gold",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Teaches skills unique to The Dragons 1 8 gold",
-      "事件选项": []
-    },
-    {
-      "名称": "Tempo Up",
-      "英文名": "Tempo Up",
-      "类型": "EventEncounter",
-      "大小": "中型",
-      "基础品质": "钻石",
-      "所属职业": [
-        "通用"
-      ],
-      "显示标签": [],
-      "基础属性": {},
-      "品质层级": {},
-      "效果说明": [],
-      "附魔": [],
-      "掉落来源": [],
-      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
-      "图标链接": "",
-      "详情链接": "https://bazaardb.gg/card/16qclvgq752f5kmjhthjwff2gsl",
-      "描述": "Get a Diamond-tier Tempo item",
-      "怪物信息": null,
-      "战斗奖励": null,
-      "事件描述": "Get a Diamond-tier Tempo item",
-      "事件选项": []
-    },
-    {
       "名称": "丰硕收获",
       "英文名": "Bountiful Harvest",
       "类型": "EventEncounter",
@@ -5211,6 +5091,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件钻石级食物",
+      "事件选项": []
+    },
+    {
+      "名称": "乐器升级",
+      "英文名": "Instrument Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/11zmd46kgvyf1b7vsm6x30q3szx",
+      "描述": "获得一件钻石级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件钻石级乐器。",
       "事件选项": []
     },
     {
@@ -6054,6 +5958,30 @@
       "事件选项": []
     },
     {
+      "名称": "巨龙升级",
+      "英文名": "Dragon Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/jml0qjsj8b28g6zb4k7qv0p6z2",
+      "描述": "获得一件钻石级巨龙物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件钻石级巨龙物品",
+      "事件选项": []
+    },
+    {
       "名称": "废品回收",
       "英文名": "Scrap Salvage",
       "类型": "EventEncounter",
@@ -6335,10 +6263,10 @@
       "图片链接": "https://s.bazaardb.gg/v1/z17.0/eb3760d61c6ef619896bb80d87adc0768abd4d74_p@256.webp?v=8",
       "图标链接": "",
       "详情链接": "https://bazaardb.gg/card/zz9l6yf8btwgp419gh76qdgz30",
-      "描述": "舍弃世间的一切所有，投入教团的怀抱",
+      "描述": "舍弃你的尘世财产，步入教团的怀抱",
       "怪物信息": null,
       "战斗奖励": null,
-      "事件描述": "舍弃世间的一切所有，投入教团的怀抱",
+      "事件描述": "舍弃你的尘世财产，步入教团的怀抱",
       "事件选项": []
     },
     {
@@ -6702,6 +6630,30 @@
       "事件选项": []
     },
     {
+      "名称": "熊妈妈",
+      "英文名": "Mama Bear",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/ee4f0884afd1e3c21edfb2345e395d9dac93f672_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/8vkb0htg1049vg9z1npv3v50d2",
+      "描述": "传授双龙独有的技能 1 8 gold",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "传授双龙独有的技能 1 8 gold",
+      "事件选项": []
+    },
+    {
       "名称": "熔岩巨釜",
       "英文名": "Burning Caldera",
       "类型": "EventEncounter",
@@ -7062,6 +7014,30 @@
       "事件选项": []
     },
     {
+      "名称": "节奏升级",
+      "英文名": "Tempo Up",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/248faebfd896ae9b0adb68babf8a276dddf43567_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/16qclvgq752f5kmjhthjwff2gsl",
+      "描述": "获得一件钻石级节奏物品",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件钻石级节奏物品",
+      "事件选项": []
+    },
+    {
       "名称": "荒废地产",
       "英文名": "Abandoned Property",
       "类型": "EventEncounter",
@@ -7247,10 +7223,10 @@
       "图片链接": "https://s.bazaardb.gg/v1/z17.0/d6c151ff4b7862812e7c4ad01bc962581571e135_p@256.webp?v=8",
       "图标链接": "",
       "详情链接": "https://bazaardb.gg/card/149n48fn9plsfpntzjh6sw11d01",
-      "描述": "Improve your Friends",
+      "描述": "强化你的伙伴",
       "怪物信息": null,
       "战斗奖励": null,
-      "事件描述": "Improve your Friends",
+      "事件描述": "强化你的伙伴",
       "事件选项": []
     },
     {
@@ -7275,6 +7251,30 @@
       "怪物信息": null,
       "战斗奖励": null,
       "事件描述": "获得一件钻石级伙伴",
+      "事件选项": []
+    },
+    {
+      "名称": "装备车",
+      "英文名": "Equipment Van",
+      "类型": "EventEncounter",
+      "大小": "中型",
+      "基础品质": "钻石",
+      "所属职业": [
+        "通用"
+      ],
+      "显示标签": [],
+      "基础属性": {},
+      "品质层级": {},
+      "效果说明": [],
+      "附魔": [],
+      "掉落来源": [],
+      "图片链接": "https://s.bazaardb.gg/v1/z17.0/793afb84feef0c9d2e8df98aa6d8928d3c09e0f9_p@256.webp?v=8",
+      "图标链接": "",
+      "详情链接": "https://bazaardb.gg/card/n41m50h79f2wyh7j78k87nf382",
+      "描述": "获得一件钻石级乐器。",
+      "怪物信息": null,
+      "战斗奖励": null,
+      "事件描述": "获得一件钻石级乐器。",
       "事件选项": []
     },
     {
@@ -7343,10 +7343,10 @@
       "图片链接": "https://s.bazaardb.gg/v1/z17.0/7ae6da3e2d424f2203b9320d05f48f0a9d4bb58d_p@256.webp?v=8",
       "图标链接": "",
       "详情链接": "https://bazaardb.gg/card/x7ytfwj702pwgmdf2979yq81xz",
-      "描述": "Improve your Properties",
+      "描述": "强化你的地产",
       "怪物信息": null,
       "战斗奖励": null,
-      "事件描述": "Improve your Properties",
+      "事件描述": "强化你的地产",
       "事件选项": []
     },
     {
@@ -7758,7 +7758,7 @@
       "事件选项": []
     },
     {
-      "名称": "耶塔里亚炸弹",
+      "名称": "耶塔里亚古墓",
       "英文名": "Yetarian Tomb",
       "类型": "EventEncounter",
       "大小": "中型",
