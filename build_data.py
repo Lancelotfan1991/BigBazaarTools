@@ -106,6 +106,90 @@ def sync_to_vue(data_dir: Path, season_label: str):
         logger.error("Windows 下需要管理员权限或开启开发者模式")
 
 
+def fix_shared_card_attribution(data_dir: Path):
+    """将跨英雄池共享卡的所属职业修正为 ['通用']
+
+    英雄数据抓取时所属职业按抓取标签打印（fetcher.py），
+    共享技能（多英雄可获得）会被误标为抓取英雄专属。
+    以"出现在 ≥2 个英雄池"判共享，将其所属职业改为 ['通用']，
+    使前端"仅专属"过滤在英雄页/All 页能正确排除共享卡。
+    需在 build_all_data 之前调用，保证 All.json 合并到修正后的数据。
+    """
+    pool_files = {}
+    for hero in HEROES:
+        fp = data_dir / f"{hero}.json"
+        if fp.exists():
+            pool_files[hero] = json.load(open(fp, "r", encoding="utf-8"))
+
+    # 成员索引：(分类, 英文名) -> 出现过的英雄池集合
+    membership = {}
+    for hero, d in pool_files.items():
+        for kind in ("物品", "技能"):
+            for card in d.get(kind, []):
+                en = card.get("英文名", "")
+                if en:
+                    membership.setdefault((kind, en), set()).add(hero)
+
+    total_fixed = 0
+    for hero, d in pool_files.items():
+        changed = False
+        for kind in ("物品", "技能"):
+            for card in d.get(kind, []):
+                en = card.get("英文名", "")
+                if en and len(membership.get((kind, en), set())) > 1:
+                    if card.get("所属职业") != ["通用"]:
+                        card["所属职业"] = ["通用"]
+                        changed = True
+                        total_fixed += 1
+        if changed:
+            with open(data_dir / f"{hero}.json", "w", encoding="utf-8") as f:
+                json.dump(d, f, ensure_ascii=False, indent=2)
+
+    logger.info(f"🔧 归属修正: {total_fixed} 处跨池共享卡所属职业 -> ['通用']")
+
+
+def fix_shared_card_attribution(data_dir: Path):
+    """将跨英雄池共享卡的所属职业修正为 ['通用']
+
+    英雄数据抓取时所属职业按抓取标签打印（fetcher.py），
+    共享技能（多英雄可获得）会被误标为抓取英雄专属。
+    以"出现在 ≥2 个英雄池"判共享，将其所属职业改为 ['通用']，
+    使前端"仅专属"过滤在英雄页/All 页能正确排除共享卡。
+    需在 build_all_data 之前调用，保证 All.json 合并到修正后的数据。
+    """
+    pool_files = {}
+    for hero in HEROES:
+        fp = data_dir / f"{hero}.json"
+        if fp.exists():
+            pool_files[hero] = json.load(open(fp, "r", encoding="utf-8"))
+
+    # 成员索引：(分类, 英文名) -> 出现过的英雄池集合
+    membership = {}
+    for hero, d in pool_files.items():
+        for kind in ("物品", "技能"):
+            for card in d.get(kind, []):
+                en = card.get("英文名", "")
+                if en:
+                    membership.setdefault((kind, en), set()).add(hero)
+
+    total_fixed = 0
+    for hero, d in pool_files.items():
+        changed = False
+        for kind in ("物品", "技能"):
+            for card in d.get(kind, []):
+                en = card.get("英文名", "")
+                if en and len(membership.get((kind, en), set())) > 1:
+                    if card.get("所属职业") != ["通用"]:
+                        card["所属职业"] = ["通用"]
+                        changed = True
+                        total_fixed += 1
+        if changed:
+            with open(data_dir / f"{hero}.json", "w", encoding="utf-8") as f:
+                json.dump(d, f, ensure_ascii=False, indent=2)
+
+    logger.info(f"🔧 归属修正: {total_fixed} 处跨池共享卡所属职业 -> ['通用']")
+
+
 def build_all_data(data_dir: Path):
     """合并所有分类数据生成"全部"分类"""
     out_path = data_dir / f"{ALL_CATEGORY}.json"
@@ -324,7 +408,8 @@ def main():
 
         total_elapsed = time.time() - total_start
 
-        # 合并全部数据
+        # 修正跨池共享卡归属后合并全部数据
+        fix_shared_card_attribution(data_dir)
         all_result = build_all_data(data_dir)
 
         # 获取游戏数据
